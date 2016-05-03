@@ -21,9 +21,10 @@
 <script src="scripts/bootstrap.min.js"></script>
 <!--<script src="js/sample.js"></script> -->
 <script type="text/javascript">
-	var baseUrl = "https://test.authorize.net/customer/";
+	var baseUrl = "https://securecad.labwebapp.com/customer/";
 	var onLoad = true;
 	var target;
+	tab = null;
 
 	function returnLoaded() {
 		showTab(target);
@@ -56,48 +57,24 @@
 
 		switch(params['action']){
 			case "resizeWindow" : if( parentFrame== "manage" && parseInt(params['height'])<1140) params['height']=1150;$frame.outerHeight(parseInt(params['height'])); break;
-			case "successfulSave" : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();break;
+			case "successfulSave" : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); location.reload();break;
 			case "cancel" : switch(parentFrame){
-							case "addPayment": $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); break; 
-							case "addShipping" : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); break;
+							case "addPayment": $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
+							case "addShipping" : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); break;
 							case "manage": $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
 							}
 			 				break;
 		}
 	}
 
-	function getToken(){
-		$.get('config.xml',function(xmlReq) {
-			$req = (new XMLSerializer()).serializeToString(xmlReq);
-			$.ajax({
-				type : "POST" ,
-				async: false,
-				url : "https://apitest.authorize.net/xml/v1/request.api",
-				data : $req ,
-				success : function(response){
-					$token = $(response).find("token").text();
-					console.log($token);
-					$("#send_token [name=token]").attr("value",$token);
-					sessionStorage.setItem("lastTokenTime", Date.now());
-					sessionStorage.setItem("token", $token);
-				},
-				error : function(errors){
-					console.log(errors);
-				},
-				dataType : "xml"
-			});
-		});
-	}
-
 	function showTab(target){
 		//onLoad = true;
 		var currTime = sessionStorage.getItem("lastTokenTime");
 		if (currTime === null || (Date.now()-currTime)/60000 > 15){
-			getToken();
 			onLoad = true;
 		}
 		if (onLoad) {
-			$("#send_token [name=token]").attr("value",sessionStorage.getItem("token"));
+			//$("#send_token [name=token]").attr("value",sessionStorage.getItem("token"));
 			setTimeout(function(){ 
 				$("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();
 				$("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit();
@@ -107,7 +84,9 @@
 		}
 
 		$("#iframe_holder iframe").hide();
+		$("#home").hide();
 		switch(target){
+			case "#home" : $("#home").show();break;
 			case "#profile" : //$("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();
 								setTimeout(function(){$("#load_profile").show();},100);
 								break;
@@ -121,16 +100,26 @@
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 			target = $(e.target).attr("href") // activated tab
 			showTab(target);
+			sessionStorage.setItem("tab",target);
 		});
 		onLoad = true;
-		showTab("#profile");
+		/*tab = sessionStorage.getItem("tab");
+		if (tab === null) {
+			showTab("#profile");
+		}
+		else{
+			showTab(tab);
+		}*/
+		showTab("#home");
 		//$('#load_profile').on('click', function(event) { console.log("Logged : "+event.currentTarget.URL);} );
 
-		$("#editPaymentButton").click(function() {
-			$("#send_token [name=paymentProfileId]").attr("value",$("#paymentId").val());
+		$(".editPay").click(function(e) {
+			$ppid = $(this).attr("value");
+			$("#send_token [name=paymentProfileId]").attr("value",$ppid);
 			$("#add_payment").hide();
 			$("#send_token").attr({"action":baseUrl+"editPayment","target":"edit_payment"}).submit();
 			$("#edit_payment").show().focus();
+			$("#send_token [name=paymentProfileId]").attr("value","");
 		});
 
 		$("#addPaymentButton").click(function() {
@@ -138,11 +127,13 @@
 			$("#add_payment").show().focus();
 		});
 
-		$("#editShippingButton").click(function() {
-			$("#send_token [name=shippingAddressId]").attr("value",$("#shippingId").val());
+		$(".editShip").click(function() {
+			$shid = $(this).attr("value");
+			$("#send_token [name=shippingAddressId]").attr("value",$shid);
 			$("#add_shipping").hide();
 			$("#send_token").attr({"action":baseUrl+"editShipping","target":"edit_shipping"}).submit();
 			$("#edit_shipping").show().focus();
+			$("#send_token [name=shippingAddressId]").attr("value","");
 		});
 
 		$("#addShippingButton").click(function() {
@@ -162,7 +153,8 @@
 		<div class="header clearfix" style="background:#D0DEEC">
 			<nav>
 				<ul class="nav nav-pills pull-right">
-					<li role="presentation" class="active"><a href="#profile" data-toggle="tab">Manage Profiles</a></li>
+					<li role="presentation" class="active"><a href="#home" data-toggle="tab">Home</a></li>
+					<li role="presentation" ><a href="#profile" data-toggle="tab">Manage Profiles</a></li>
 					<li role="presentation"><a href="#payment" data-toggle="tab">Payment</a></li>
 					<li role="presentation"><a href="#shipping" data-toggle="tab">Shipping</a></li>
 				</ul>
@@ -170,22 +162,125 @@
 		</div>
 		<br/>
 
-		<div class="tab-content">
+<?php
+error_reporting(E_ERROR);
+$param = parse_ini_file("config.txt");
+$xmlStr = <<<XML
+﻿<?xml version="1.0" encoding="utf-8"?>
+<getHostedProfilePageRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+<merchantAuthentication></merchantAuthentication>
+<customerProfileId></customerProfileId>
+<hostedProfileSettings>
+<setting><settingName>hostedProfileReturnUrl</settingName></setting>
+<setting><settingName>hostedProfileIFrameCommunicatorUrl</settingName></setting>
+<setting><settingName>hostedProfileReturnUrlText</settingName><settingValue>Back to Confirmation Page</settingValue></setting>
+<setting><settingName>hostedProfilePageBorderVisible</settingName><settingValue>false</settingValue></setting>
+</hostedProfileSettings>
+</getHostedProfilePageRequest>
+XML;
+$xml = new SimpleXMLElement($xmlStr);
+$xml->merchantAuthentication->addChild('name',$param['name']);
+$xml->merchantAuthentication->addChild('transactionKey',$param['transactionKey']);
+$xml->customerProfileId = $param['customerProfileId'];
+
+$xml->hostedProfileSettings->setting[0]->addChild('settingValue','https://localhost/hostedpages/return.html');
+$xml->hostedProfileSettings->setting[1]->addChild('settingValue','https://localhost/hostedpages/iCommunicator.html');
+
+$url = "https://downloadvposcad.labwebapp.com/xml/v1/request.api";
+
+    try{	//setting the curl parameters.
+        $ch = curl_init();
+        if (FALSE === $ch)
+        	throw new Exception('failed to initialize');
+        curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml->asXML());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        //curl_setopt($ch, CURLOPT_PROXY, "http://internet.visa.com:80");
+        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
+        $content = curl_exec($ch);
+        $response = new SimpleXMLElement($content);
+        if (FALSE === $content)
+        	throw new Exception(curl_error($ch), curl_errno($ch));
+        curl_close($ch);
+
+    }catch(Exception $e) {
+    	trigger_error(sprintf('Curl failed with error #%d: %s', $e->getCode(), $e->getMessage()), E_USER_ERROR);
+	}
+?>
+
+<?php
+$profileReq = <<<XML
+<?xml version="1.0" encoding="utf-8"?>
+<getCustomerProfileRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+<merchantAuthentication></merchantAuthentication>
+<customerProfileId></customerProfileId>
+</getCustomerProfileRequest>
+XML;
+$xml = new SimpleXMLElement($profileReq);
+$xml->merchantAuthentication->addChild('name',$param['name']);
+$xml->merchantAuthentication->addChild('transactionKey',$param['transactionKey']);
+$xml->customerProfileId = $param['customerProfileId'];
+
+try{	//setting the curl parameters.
+        $ch = curl_init();
+        if (FALSE === $ch)
+        	throw new Exception('failed to initialize');
+        curl_setopt($ch, CURLOPT_URL, $url);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $xml->asXML());
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        //curl_setopt($ch, CURLOPT_PROXY, "http://internet.visa.com:80");
+        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
+        $content = curl_exec($ch);
+        $profileResponse = new SimpleXMLElement($content);
+        if (FALSE === $content)
+        	throw new Exception(curl_error($ch), curl_errno($ch));
+        curl_close($ch);
+
+    }catch(Exception $e) {
+    	trigger_error(sprintf('Curl failed with error #%d: %s', $e->getCode(), $e->getMessage()), E_USER_ERROR);
+	}
+
+?>
+
+			<div class="tab-content">
+			<div class="tab-pane" id="home" >
+				<div class="container col-centered text-center" >
+			      <h1 style="background:#F1DDDD; font-family: Georgia">Coffee Shop</h1><hr/><hr/>
+			      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" width="800" height="500" /> 
+			    </div>
+			</div>
 			<div class="tab-pane" id="profile" hidden="true"></div>
 
-			<div class="panel panel-info tab-pane" id="payment" style="width: 82%;margin-left: 9%">
+			<div class="panel panel-info tab-pane" id="payment" style="width: 80%;margin-left: 10%">
 				<div class="panel-heading">
 					<h2 class="panel-title"><b>Edit Payment Profile</b></h2>
 				</div>
 				<div class="panel-body">
-					<form class="form">
-						<div class="form-group">
-							<label for="exampleInputName2">Payment Profile Id</label>
-							<input type="text" class="form-control" id="paymentId" placeholder="36694109">
+				<hr/><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment Method</button><p><hr/>
+				<div class="row">
+				<?php foreach ($profileResponse->profile->paymentProfiles as $item) {
+				?>				
+					<div class="col-sm-6 col-md-4 embed-responsive-item">
+						<div class="thumbnail">
+							<div class="caption">
+								<h3><?php echo $item->payment->creditCard->cardNumber ?></h3>
+								<h4><?php echo $item->billTo->firstName ?> &nbsp; <?php echo $item->billTo->lastName ?></h4>
+								<h5><?php echo $item->billTo->address ?> </h5>
+								<h5> <?php echo $item->billTo->city ?></h5>
+								<p><button class="btn btn-primary editPay" role="button" value="<?php echo $item->customerPaymentProfileId ?>" >Edit Details</button></p>
+							</div>
 						</div>
-						<button type="button" id="editPaymentButton" class="btn btn-primary" style="margin: 5px" data-toggle="modal" data-target="#myModal">Edit Payment info</button>
-						<button type="button" id="addPaymentButton" class="btn btn-success" style="margin: 5px">Add New Payment Method</button>
-					</form>
+					</div>
+				<?php } ?>
+				</div>
 				</div>
 			</div>
 
@@ -194,20 +289,33 @@
 					<h3 class="panel-title"><b>Edit Shipping Address</b></h3>
 				</div>
 				<div class="panel-body">
-					<form class="form">
-						<div class="form-group">
-							<label for="exampleInputName2">Shipping Address Id</label>
-							<input type="text" class="form-control" id="shippingId" placeholder="38180870">
-						</div>
-						<button type="button" id="editShippingButton" class="btn btn-primary" style="margin: 5px">Edit Address info</button>
-						<button type="button" id="addShippingButton" class="btn btn-success" style="margin: 5px">Add New Shipping Address</button>
-					</form>
+					<hr/><p><button type="button" id="addShippingButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Shipping Address</button></p><hr/>
+					<div class="row">
+						<?php foreach ($profileResponse->profile->shipToList as $item) {
+						?>				
+							<div class="col-sm-6 col-md-4 embed-responsive-item">
+								<div class="thumbnail">
+									<div class="caption">
+										<h3><?php echo $item->firstName ?> &nbsp; <?php echo $item->lastName ?></h3>
+										<h4><?php echo $item->address ?> </h4>
+										<h5> <?php echo $item->city ?></h5>
+										<h5> <?php echo $item->state ?></h5>
+										<h5> <?php echo $item->zip ?></h5>
+										<p><button class="btn btn-primary editShip" role="button" value="<?php echo $item->customerAddressId ?>" >Edit Details</button></p>
+									</div>
+								</div>
+							</div>
+						<?php } ?>
+					</div>
 				</div>
 			</div>
 		</div>
 
+<!--<textarea rows=30 cols=100 wrap=virtual>
+<?= $profileResponse->asXML() ?>
+</textarea> -->
 		<div class="panel" id="iframe_holder" >
-			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" frameborder="0" scrolling="no" hidden="true">
+			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
 			<iframe id="add_payment" class="embed-responsive-item" name="add_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
@@ -222,11 +330,10 @@
 			<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
-			<form id="send_token" action="https://test.authorize.net/customer/manage" method="post" target="load_profile" >
-				<input type="hidden" name="token" value="" />
+			<form id="send_token" action="" method="post" target="load_profile" >
+				<input type="hidden" name="token" value="<?php echo $response->token ?>" />
 				<input type="hidden" name="paymentProfileId" value="" />
 				<input type="hidden" name="shippingAddressId" value="" />
-				<!--<input type="submit" class="submit" value="Manage my payment and shipping information" align="center"/> -->
 			</form>
 		</div>
 

@@ -1,5 +1,5 @@
 ; *** Enter The Merchant Authentication name and API Transaction Key below ***
 
-name = 5KP3u95bQpv
-transactionKey = 4Ktq966gC55GAX7S
-customerProfileId = 40533397
+name = new-vital-fnbo
+transactionKey = 123abc
+customerProfileId = 389897
