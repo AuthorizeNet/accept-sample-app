@@ -149,7 +149,7 @@
 <body>
 
 	<div class="container">
-		<h4 class="text-muted" style="background: #555; color: orange ; padding: 20px; font-weight: bold;"><b>Manage Your Account</b></h4>
+		<h4 class="text-muted" style="background: #555; color: orange ; padding: 20px; font-weight: bold;"><b>Coffee Shop Web Application</b></h4>
 		<div class="header clearfix" style="background:#D0DEEC">
 			<nav>
 				<ul class="nav nav-pills pull-right">
@@ -250,11 +250,35 @@ try{	//setting the curl parameters.
 
 ?>
 
+		<div class="panel" id="iframe_holder" >
+			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="add_payment" class="embed-responsive-item" name="add_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="edit_payment" class="embed-responsive-item" name="edit_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<form id="send_token" action="" method="post" target="load_profile" >
+				<input type="hidden" name="token" value="<?php echo $response->token ?>" />
+				<input type="hidden" name="paymentProfileId" value="" />
+				<input type="hidden" name="shippingAddressId" value="" />
+			</form>
+		</div>
+
+
 			<div class="tab-content">
-			<div class="tab-pane" id="home" >
+			<div class="tab-pane panel" id="home" >
 				<div class="container col-centered text-center" >
-			      <h1 style="background:#F1DDDD; font-family: Georgia">Coffee Shop</h1><hr/><hr/>
-			      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" width="800" height="500" /> 
+			      <h1 style="background:#F1DDDD; font-family:Algerian">Coffee Shop</h1><hr/><hr/>
+			      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" style ="width:100%" /> 
 			    </div>
 			</div>
 			<div class="tab-pane" id="profile" hidden="true"></div>
@@ -314,28 +338,7 @@ try{	//setting the curl parameters.
 <!--<textarea rows=30 cols=100 wrap=virtual>
 <?= $profileResponse->asXML() ?>
 </textarea> -->
-		<div class="panel" id="iframe_holder" >
-			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="add_payment" class="embed-responsive-item" name="add_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="edit_payment" class="embed-responsive-item" name="edit_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<form id="send_token" action="" method="post" target="load_profile" >
-				<input type="hidden" name="token" value="<?php echo $response->token ?>" />
-				<input type="hidden" name="paymentProfileId" value="" />
-				<input type="hidden" name="shippingAddressId" value="" />
-			</form>
-		</div>
+		
 
 	</div> 
 </body>
