@@ -20,6 +20,7 @@
 <script src="scripts/jquery-2.1.4.min.js"></script>
 <script src="scripts/bootstrap.min.js"></script>
 <!--<script src="js/sample.js"></script> -->
+
 <script type="text/javascript">
 	var baseUrl = "https://securecad.labwebapp.com/customer/";
 	var onLoad = true;
@@ -120,11 +121,13 @@
 			$("#send_token").attr({"action":baseUrl+"editPayment","target":"edit_payment"}).submit();
 			$("#edit_payment").show().focus();
 			$("#send_token [name=paymentProfileId]").attr("value","");
+			$(window).scrollTop($("#edit_payment").offset().top-30);
 		});
 
 		$("#addPaymentButton").click(function() {
 			$("#edit_payment").hide();
-			$("#add_payment").show().focus();
+			$("#add_payment").show();
+			$(window).scrollTop($('#add_payment').offset().top-30);
 		});
 
 		$(".editShip").click(function() {
@@ -134,11 +137,13 @@
 			$("#send_token").attr({"action":baseUrl+"editShipping","target":"edit_shipping"}).submit();
 			$("#edit_shipping").show().focus();
 			$("#send_token [name=shippingAddressId]").attr("value","");
+			$(window).scrollTop($("#edit_shipping").offset().top-30);
 		});
 
 		$("#addShippingButton").click(function() {
 			$("#edit_shipping").hide();
 			$("#add_shipping").show().focus();
+			$(window).scrollTop($("#add_shipping").offset().top-30);
 		});
 
 	});
@@ -174,7 +179,7 @@ $xmlStr = <<<XML
 <setting><settingName>hostedProfileReturnUrl</settingName></setting>
 <setting><settingName>hostedProfileIFrameCommunicatorUrl</settingName></setting>
 <setting><settingName>hostedProfileReturnUrlText</settingName><settingValue>Back to Confirmation Page</settingValue></setting>
-<setting><settingName>hostedProfilePageBorderVisible</settingName><settingValue>false</settingValue></setting>
+<setting><settingName>hostedProfilePageBorderVisible</settingName><settingValue>true</settingValue></setting>
 </hostedProfileSettings>
 </getHostedProfilePageRequest>
 XML;
@@ -249,31 +254,6 @@ try{	//setting the curl parameters.
 	}
 
 ?>
-
-		<div class="panel" id="iframe_holder" >
-			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="add_payment" class="embed-responsive-item" name="add_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="edit_payment" class="embed-responsive-item" name="edit_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<form id="send_token" action="" method="post" target="load_profile" >
-				<input type="hidden" name="token" value="<?php echo $response->token ?>" />
-				<input type="hidden" name="paymentProfileId" value="" />
-				<input type="hidden" name="shippingAddressId" value="" />
-			</form>
-		</div>
-
-
 			<div class="tab-content">
 			<div class="tab-pane panel" id="home" >
 				<div class="container col-centered text-center" >
@@ -338,7 +318,28 @@ try{	//setting the curl parameters.
 <!--<textarea rows=30 cols=100 wrap=virtual>
 <?= $profileResponse->asXML() ?>
 </textarea> -->
-		
+		<div class="panel" id="iframe_holder" >
+			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="add_payment" class="embed-responsive-item" name="add_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="edit_payment" class="embed-responsive-item" name="edit_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+
+			<form id="send_token" action="" method="post" target="load_profile" >
+				<input type="hidden" name="token" value="<?php echo $response->token ?>" />
+				<input type="hidden" name="paymentProfileId" value="" />
+				<input type="hidden" name="shippingAddressId" value="" />
+			</form>
+		</div>
 
 	</div> 
 </body>
