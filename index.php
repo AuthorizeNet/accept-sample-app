@@ -188,8 +188,8 @@ $xml->merchantAuthentication->addChild('name',$param['name']);
 $xml->merchantAuthentication->addChild('transactionKey',$param['transactionKey']);
 $xml->customerProfileId = $param['customerProfileId'];
 
-$xml->hostedProfileSettings->setting[0]->addChild('settingValue','https://localhost/hostedpages/return.html');
-$xml->hostedProfileSettings->setting[1]->addChild('settingValue','https://localhost/hostedpages/iCommunicator.html');
+$xml->hostedProfileSettings->setting[0]->addChild('settingValue',$param['Home']."return.html");
+$xml->hostedProfileSettings->setting[1]->addChild('settingValue',$param['Home']."iCommunicator.html");
 
 $url = "https://downloadvposcad.labwebapp.com/xml/v1/request.api";
 
@@ -256,14 +256,15 @@ try{	//setting the curl parameters.
 ?>
 			<div class="tab-content">
 			<div class="tab-pane panel" id="home" >
-				<div class="container col-centered text-center" >
-			      <h1 style="background:#F1DDDD; font-family:Algerian">Coffee Shop</h1><hr/><hr/>
-			      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" style ="width:100%" /> 
+				<div class="container col-centered text-center" style="background: whitesmoke">
+			      <hr/><h1 style="background:#C3A878; font-family:Algerian">Coffee Shop</h1><hr/>
+			      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" style ="width:60%" /><hr/>
+				  <h3 style="background:#C3A878; font-family:Algerian">Authorize .Net Accept Profiles</h3><hr/>
 			    </div>
 			</div>
 			<div class="tab-pane" id="profile" hidden="true"></div>
 
-			<div class="panel panel-info tab-pane" id="payment" style="width: 80%;margin-left: 10%">
+			<div class="panel panel-info tab-pane" id="payment" style="width: 84%;margin-left: 8%">
 				<div class="panel-heading">
 					<h2 class="panel-title"><b>Edit Payment Profile</b></h2>
 				</div>
@@ -288,7 +289,7 @@ try{	//setting the curl parameters.
 				</div>
 			</div>
 
-			<div class="panel panel-info tab-pane" id="shipping"  style="width: 82%;margin-left: 9%">
+			<div class="panel panel-info tab-pane" id="shipping"  style="width: 84%;margin-left: 8%">
 				<div class="panel-heading">
 					<h3 class="panel-title"><b>Edit Shipping Address</b></h3>
 				</div>

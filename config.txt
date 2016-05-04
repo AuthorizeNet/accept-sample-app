@@ -3,3 +3,4 @@
 name = new-vital-fnbo
 transactionKey = 123abc
 customerProfileId = 389897
+Home = https://localhost/hostedPages/
