@@ -64,13 +64,13 @@
 
 		switch(params['action']){
 			case "resizeWindow" : if( parentFrame== "manage" && parseInt(params['height'])<1140) params['height']=1150;$frame.outerHeight(parseInt(params['height'])); break;
-			case "successfulSave" : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); location.reload(true);break;
+			case "successfulSave" : $frame.hide(); $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); location.reload(true);break;
 			case "cancel" : switch(parentFrame){
-							case "addPayment": $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
-							case "addShipping" : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); break;
+							case "addPayment":  $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
+							case "addShipping" : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
 							case "manage": $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
 							case "editPayment" : $("#payment").show(); break; 
-							case "editShipping" : $("#shipping").show(); break; 
+							case "editShipping" : $("#shipping").show(); $('#myModal').modal('toggle'); break; 
 							}
 			 				break;
 		}
@@ -149,12 +149,14 @@
 			$("#send_token").attr({"action":baseUrl+"editShipping","target":"edit_shipping"}).submit();
 			$("#edit_shipping").show().focus();
 			$("#send_token [name=shippingAddressId]").attr("value","");
+			$("#myModalLabel").text("Edit Shipping Address");
 			$(window).scrollTop($("#edit_shipping").offset().top-30);
 		});
 
 		$("#addShippingButton").click(function() {
+			$("#myModalLabel").text("Add New Shipping Address");
 			$("#edit_shipping").hide();
-			$("#add_shipping").show().focus();
+			$("#add_shipping").show();
 			$(window).scrollTop($("#add_shipping").offset().top-30);
 		});
 
@@ -200,14 +202,14 @@
 			<div class="row">
 			<?php foreach ($profileResponse->profile->paymentProfiles as $item) {
 			?>				
-				<div class="col-sm-6 col-md-4 embed-responsive-item">
+				<div class="col-sm-6 col-md-3 embed-responsive-item">
 					<div class="thumbnail">
 						<div class="caption">
 							<h4><?php echo isset($item->payment->creditCard) ? "Card &nbsp;&nbsp;: &nbsp;".$item->payment->creditCard->cardNumber : "Account : &nbsp;".$item->payment->bankAccount->accountNumber.", ".$item->payment->bankAccount->bankName ?></h4>
 							<h4>Name :&nbsp; <?php echo isset($item->payment->creditCard) ? $item->billTo->firstName." ". $item->billTo->lastName : $item->payment->bankAccount->nameOnAccount ?></h4>
 							<h5>Address : <?php echo $item->billTo->address ?> </h5>
 							<h5>City : <?php echo $item->billTo->city ?></h5>
-							<p><button class="btn btn-primary editPay" role="button" value="<?php echo $item->customerPaymentProfileId ?>" >Edit Details</button></p>
+							<p align="right"><button class="btn btn-primary editPay" role="button" value="<?php echo $item->customerPaymentProfileId ?>" >Edit Details</button></p>
 						</div>
 					</div>
 				</div>
@@ -221,18 +223,18 @@
 				<h3 class="panel-title"><b>Edit Shipping Address</b></h3>
 			</div>
 			<div class="panel-body">
-				<hr/><p><button type="button" id="addShippingButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Address</button></p><hr/>
+				<hr/><p><button type="button" id="addShippingButton" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><hr/>
 				<div class="row">
 					<?php foreach ($profileResponse->profile->shipToList as $item) {
 					?>				
-						<div class="col-sm-6 col-md-4 embed-responsive-item">
+						<div class="col-sm-6 col-md-3 embed-responsive-item">
 							<div class="thumbnail">
 								<div class="caption">
 									<h4>Name &nbsp;  &nbsp;: &nbsp;<?php echo $item->firstName ?> <?php echo $item->lastName ?></h4>
 									<h4>Address : &nbsp;<?php echo $item->address ?> </h4>
 									<h5>City &nbsp;: &nbsp;<?php echo $item->city.", ".$item->state ?></h5>
 									<h5>Zip  &nbsp;: <?php echo $item->zip ?></h5>
-									<p class="float-right"><button class="btn btn-primary editShip" role="button" value="<?php echo $item->customerAddressId ?>" >Edit Details</button></p>
+									<p align="right"><button class="btn btn-primary editShip" role="button" value="<?php echo $item->customerAddressId ?>" data-toggle="modal" data-target="#myModal" >Edit Details</button></p>
 								</div>
 							</div>
 						</div>
@@ -251,14 +253,11 @@
 
 			<iframe id="add_payment" class="embed-responsive-item" name="add_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
 			</iframe>
-
+			<!--
 			<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
 			</iframe>
-
+			-->
 			<iframe id="edit_payment" class="embed-responsive-item" name="edit_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-
-			<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
 			<form id="send_token" action="" method="post" target="load_profile" >
@@ -266,6 +265,21 @@
 				<input type="hidden" name="paymentProfileId" value="" />
 				<input type="hidden" name="shippingAddressId" value="" />
 			</form>
+		</div>
+
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel" style="color: skyblue">Edit Title</h4>
+		      </div>
+		      <div class="modal-body">
+		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe>
+					<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe> 
+		      </div>
+		    </div>
+		  </div>
 		</div>
 
 	</div> 
