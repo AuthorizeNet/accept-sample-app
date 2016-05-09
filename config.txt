@@ -1,6 +1,9 @@
-; *** Enter The Merchant Authentication name and API Transaction Key below ***
-
+; ** Enter The Merchant Authentication name and API Transaction Key below **
 name = new-vital-fnbo
 transactionKey = 123abc
+
+; ** Enter The customer Profile To load details **
 customerProfileId = 389897
-Home = https://localhost/hostedPages/
+
+; ** Enter The virtual directory path where app is hosted **
+Home = https://localhost/AcceptSample/

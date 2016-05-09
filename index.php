@@ -9,14 +9,13 @@
 	<meta name="description" content="">
 	<meta name="author" content="">
 
-	<title>Hosted CIM</title>
+	<title>Accept Sample App</title>
 
 	<!-- Bootstrap core CSS -->
 	<link href="scripts/bootstrap.min.css" rel="stylesheet">
 	<style type="text/css">
 	ul li [data-toggle] {
 		font-size: 15px;
-
 	}
 	</style>
 <!--
@@ -30,49 +29,51 @@
 <script type="text/javascript">
 	var baseUrl = "https://securecad.labwebapp.com/customer/";
 	var onLoad = true;
-	var tab = null;
+	tab = null;
 
 	function returnLoaded() {
 		console.log("Return Page Called ! ");
 		showTab(tab);
 	}
-	window.AuthorizeNetPopup = {};
+	window.CommunicationHandler = {};
 	function parseQueryString(str) {
 		var vars = [];
 		var arr = str.split('&');
 		var pair;
 		for (var i = 0; i < arr.length; i++) {
 			pair = arr[i].split('=');
-			//vars.push(pair[0]);
 			vars[pair[0]] = unescape(pair[1]);
 		}
 		return vars;
 	}
-	AuthorizeNetPopup.onReceiveCommunication = function (argument) {
+	CommunicationHandler.onReceiveCommunication = function (argument) {
 		params = parseQueryString(argument.qstr)
 		parentFrame = argument.parent.split('/')[4];
 		console.log(params);
 		console.log(parentFrame);
 		$frame = null;
 		switch(parentFrame){
-			case "manage" : $frame = $("#load_profile");break;
-			case "addPayment" : $frame = $("#add_payment");break;
-			case "addShipping" : $frame = $("#add_shipping");break;
-			case "editPayment" : $frame = $("#edit_payment");break;
-			case "editShipping" : $frame = $("#edit_shipping");break;
+			case "manage" 		: $frame = $("#load_profile");break;
+			case "addPayment" 	: $frame = $("#add_payment");break;
+			case "addShipping" 	: $frame = $("#add_shipping");break;
+			case "editPayment" 	: $frame = $("#edit_payment");break;
+			case "editShipping"	: $frame = $("#edit_shipping");break;
 		}
 
 		switch(params['action']){
-			case "resizeWindow" : if( parentFrame== "manage" && parseInt(params['height'])<1140) params['height']=1150;$frame.outerHeight(parseInt(params['height'])); break;
-			case "successfulSave" : $('#myModal').modal('hide'); location.reload(false); break;
-			case "cancel" : switch(parentFrame){
-							case "addPayment":  $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
-							case "addShipping" : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
-							case "manage": $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
-							case "editPayment" : $("#payment").show(); break; 
-							case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); break; 
-							}
-			 				break;
+			case "resizeWindow" 	: if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
+										$frame.outerHeight(parseInt(params['height']));
+										$frame.css("border","1px solid #CCC");
+										break;
+			case "successfulSave" 	: $('#myModal').modal('hide'); location.reload(false); break;
+			case "cancel" 			: 	switch(parentFrame){
+										case "addPayment"   : $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
+										case "addShipping"  : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
+										case "manage"       : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
+										case "editPayment"  : $("#payment").show(); break; 
+										case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); break; 
+										}
+						 				break;
 		}
 	}
 
@@ -84,7 +85,6 @@
 			onLoad = true;
 		}
 		if (onLoad) {
-			//$("#send_token [name=token]").attr("value",sessionStorage.getItem("token"));
 			setTimeout(function(){ 
 				$("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();
 				$("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit();
@@ -95,41 +95,39 @@
 
 		$("#iframe_holder iframe").hide();$("#payment").hide();$("#shipping").hide();$("#home").hide();
 		switch(target){
-			case "#home" : $("#home").show();break;
-			case "#profile" : $("#load_profile").show(); break;
-			case "#payment" : $("#payment").show(); break;
-			case "#shipping" : $("#shipping").show(); break;
+			case "#home" 		: $("#home").show();break;
+			case "#profile" 	: $("#load_profile").show(); break;
+			case "#payment" 	: $("#payment").show(); break;
+			case "#shipping" 	: $("#shipping").show(); break;
 		}
 	}
 
 	$(function(){
 
 		$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-			target = $(e.target).attr("href") // activated tab
-			showTab(target);
-			sessionStorage.setItem("tab",target);
+			tab = $(e.target).attr("href") // activated tab
+			sessionStorage.setItem("tab",tab);
+			showTab(tab);
 		});
 		onLoad = true;
 		sessionStorage.setItem("lastTokenTime",Date.now());
 		tab = sessionStorage.getItem("tab");
-		console.log("Tab : "+tab);
 		if (tab === null) {
 			$("[href='#home']").parent().addClass("active");
-			showTab("#home");
+			tab = "#home";
 		}
 		else{
 			$("[href='"+tab+"']").parent().addClass("active");
-			showTab(tab);
 		}
-		//showTab("#home");
-		//$('#load_profile').on('click', function(event) { console.log("Logged : "+event.currentTarget.URL);} );
+		console.log("Tab : "+tab);
+		showTab(tab);
 
 		$(".editPay").click(function(e) {
 			$ppid = $(this).attr("value");
 			$("#send_token [name=paymentProfileId]").attr("value",$ppid);
 			$("#add_payment").hide();
+			$("#edit_payment").show();
 			$("#send_token").attr({"action":baseUrl+"editPayment","target":"edit_payment"}).submit();
-			$("#edit_payment").show().focus();
 			$("#send_token [name=paymentProfileId]").attr("value","");
 			$(window).scrollTop($("#edit_payment").offset().top-30);
 		});
@@ -145,7 +143,7 @@
 			$("#send_token [name=shippingAddressId]").attr("value",$shid);
 			$("#add_shipping").hide();
 			$("#send_token").attr({"action":baseUrl+"editShipping","target":"edit_shipping"}).submit();
-			$("#edit_shipping").show().focus();
+			$("#edit_shipping").show();
 			$("#send_token [name=shippingAddressId]").attr("value","");
 			$("#myModalLabel").text("Edit Shipping Address");
 			$(window).scrollTop($("#edit_shipping").offset().top-30);
@@ -185,7 +183,7 @@
 
 		<div class="tab-pane panel col-centered text-center" id="home" style="background: floralwhite; ">
 	      <h1 style="background:#C3A878; font-family:Algerian">Coffee Shop</h1><hr/>
-	      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" style ="width:50%" /><hr/>
+	      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" style ="width:30%" /><hr/>
 		  <h3 style="background:#C3A878; font-family:Algerian">Authorize .Net Accept Profiles</h3><hr/>
 	    </div>
 
@@ -242,7 +240,7 @@
 		</div>
 	</div>
 
-		<div class="panel" id="iframe_holder" >
+		<div class="panel" id="iframe_holder">
 			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
