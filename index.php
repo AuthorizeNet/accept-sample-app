@@ -30,11 +30,11 @@
 <script type="text/javascript">
 	var baseUrl = "https://securecad.labwebapp.com/customer/";
 	var onLoad = true;
-	var target;
-	tab = null;
+	var tab = null;
 
 	function returnLoaded() {
-		showTab(target);
+		console.log("Return Page Called ! ");
+		showTab(tab);
 	}
 	window.AuthorizeNetPopup = {};
 	function parseQueryString(str) {
@@ -64,13 +64,13 @@
 
 		switch(params['action']){
 			case "resizeWindow" : if( parentFrame== "manage" && parseInt(params['height'])<1140) params['height']=1150;$frame.outerHeight(parseInt(params['height'])); break;
-			case "successfulSave" : $frame.hide(); $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); location.reload(true);break;
+			case "successfulSave" : $('#myModal').modal('hide'); location.reload(false); break;
 			case "cancel" : switch(parentFrame){
 							case "addPayment":  $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
 							case "addShipping" : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
 							case "manage": $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
 							case "editPayment" : $("#payment").show(); break; 
-							case "editShipping" : $("#shipping").show(); $('#myModal').modal('toggle'); break; 
+							case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); break; 
 							}
 			 				break;
 		}
@@ -96,9 +96,7 @@
 		$("#iframe_holder iframe").hide();$("#payment").hide();$("#shipping").hide();$("#home").hide();
 		switch(target){
 			case "#home" : $("#home").show();break;
-			case "#profile" : //$("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();
-								setTimeout(function(){$("#load_profile").show();},100);
-								break;
+			case "#profile" : $("#load_profile").show(); break;
 			case "#payment" : $("#payment").show(); break;
 			case "#shipping" : $("#shipping").show(); break;
 		}
@@ -139,7 +137,7 @@
 		$("#addPaymentButton").click(function() {
 			$("#edit_payment").hide();
 			$("#add_payment").show();
-			$(window).scrollTop($('#add_payment').offset().top-30);
+			$(window).scrollTop($('#add_payment').offset().top-50);
 		});
 
 		$(".editShip").click(function() {
@@ -168,7 +166,7 @@
 <body >
 	<?php include 'getToken.php'; ?>
 	<div class="container" style="width: 100%">
-		<h4 class="text-muted" style="background: #444 ; color: orange; padding: 10px; font-size: 20px; text-align: center; font-style: italic"><b>Have a Cup of Coffee</b></h4>
+		<h4 class="text-muted" style="background: #444 ; color: orange; padding: 10px; font-size: 24px; text-align: center; font-style: oblique; font-family: century"><b>Have a Cup of Coffee</b></h4>
 		<div class="header clearfix" style="background:#D0DEEC">
 			<nav>
 				<ul class="nav nav-pills pull-right">
@@ -244,19 +242,13 @@
 		</div>
 	</div>
 
-<!--<textarea rows=30 cols=100 wrap=virtual>
-<?= $profileResponse->asXML() ?>
-</textarea> -->
 		<div class="panel" id="iframe_holder" >
 			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
 			<iframe id="add_payment" class="embed-responsive-item" name="add_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
 			</iframe>
-			<!--
-			<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true">
-			</iframe>
-			-->
+
 			<iframe id="edit_payment" class="embed-responsive-item" name="edit_payment" width="100%"  frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
@@ -272,7 +264,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="myModalLabel" style="color: skyblue">Edit Title</h4>
+		        <h4 class="modal-title" id="myModalLabel" style="color: teal">Edit Title</h4>
 		      </div>
 		      <div class="modal-body">
 		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe>
