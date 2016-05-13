@@ -1,6 +1,7 @@
-; ** Our public default sandbox credentials **
-name = 
-transactionKey = 
+
+; ** Make sure to add your API credentials as secure enevironment variables **
+; api_login_id   
+; transaction_key
 
 ; ** Enter The customer Profile To load details **
 customerProfileId = 389897
