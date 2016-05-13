@@ -15,8 +15,8 @@ $xmlStr = <<<XML
 </getHostedProfilePageRequest>
 XML;
 $xml = new SimpleXMLElement($xmlStr);
-$xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
-$xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
+$xml->merchantAuthentication->addChild('name',getenv('APPSETTING_api_login_id'));
+$xml->merchantAuthentication->addChild('transactionKey',getenv('APPSETTING_transaction_key'));
 $xml->customerProfileId = $param['customerProfileId'];
 
 $xml->hostedProfileSettings->setting[0]->addChild('settingValue',$_SERVER['HTTP_HOST']."/return.html");
