@@ -27,7 +27,7 @@
 <!--<script src="js/sample.js"></script> -->
 
 <script type="text/javascript">
-	var baseUrl = "https://securecad.labwebapp.com/customer/";
+	var baseUrl = "https://test.authotize.net/customer/";
 	var onLoad = true;
 	tab = null;
 
