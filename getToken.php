@@ -15,14 +15,14 @@ $xmlStr = <<<XML
 </getHostedProfilePageRequest>
 XML;
 $xml = new SimpleXMLElement($xmlStr);
-$xml->merchantAuthentication->addChild('name',$param['name']);
-$xml->merchantAuthentication->addChild('transactionKey',$param['transactionKey']);
+$xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
+$xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
 $xml->customerProfileId = $param['customerProfileId'];
 
 $xml->hostedProfileSettings->setting[0]->addChild('settingValue',$param['Home']."return.html");
 $xml->hostedProfileSettings->setting[1]->addChild('settingValue',$param['Home']."iCommunicator.html");
 
-$url = "https://downloadvposcad.labwebapp.com/xml/v1/request.api";
+$url = "https://apitest.authorize.net/xml/v1/request.api";
 
     try{	//setting the curl parameters.
         $ch = curl_init();
