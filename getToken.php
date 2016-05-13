@@ -19,8 +19,8 @@ $xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
 $xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
 $xml->customerProfileId = $param['customerProfileId'];
 
-$xml->hostedProfileSettings->setting[0]->addChild('settingValue',$param['Home']."return.html");
-$xml->hostedProfileSettings->setting[1]->addChild('settingValue',$param['Home']."iCommunicator.html");
+$xml->hostedProfileSettings->setting[0]->addChild('settingValue',$_SERVER['HTTP_HOST']."/return.html");
+$xml->hostedProfileSettings->setting[1]->addChild('settingValue',$_SERVER['HTTP_HOST']."/iCommunicator.html");
 
 $url = "https://apitest.authorize.net/xml/v1/request.api";
 
