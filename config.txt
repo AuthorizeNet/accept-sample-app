@@ -6,5 +6,4 @@
 ; ** Enter The customer Profile To load details **
 customerProfileId = 389897
 
-; ** Enter The virtual directory path where app is hosted **
-Home = https://localhost/AcceptSample/
+
