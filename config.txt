@@ -1,6 +1,6 @@
-; ** Enter The Merchant Authentication name and API Transaction Key below **
-name = new-vital-fnbo
-transactionKey = 123abc
+; ** Our public default sandbox credentials **
+name = 
+transactionKey = 
 
 ; ** Enter The customer Profile To load details **
 customerProfileId = 389897
