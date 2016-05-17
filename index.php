@@ -191,7 +191,7 @@
 			</iframe>
 
 			<form id="send_token" action="" method="post" target="load_profile" >
-				<input type="hidden" name="token" value="<?php echo $response ?>" />
+				<input type="hidden" name="token" value="<?php echo $response->token ?>" />
 				<input type="hidden" name="paymentProfileId" value="" />
 				<input type="hidden" name="shippingAddressId" value="" />
 			</form>
