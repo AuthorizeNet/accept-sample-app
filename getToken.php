@@ -15,7 +15,7 @@ $xmlStr = <<<XML
 <setting><settingName>hostedProfileReturnUrl</settingName></setting>
 <setting><settingName>hostedProfileIFrameCommunicatorUrl</settingName></setting>
 <setting><settingName>hostedProfileReturnUrlText</settingName><settingValue>Back to Confirmation Page</settingValue></setting>
-<setting><settingName>hostedProfilePageBorderVisible</settingName><settingValue>true</settingValue></setting>
+<setting><settingName>hostedProfilePageBorderVisible</settingName><settingValue>false</settingValue></setting>
 </hostedProfileSettings>
 </getHostedProfilePageRequest>
 XML;
