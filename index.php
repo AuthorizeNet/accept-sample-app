@@ -165,7 +165,6 @@
 <body >
 	<?php include 'getToken.php'; ?>
 	<div class="container" style="width: 100%">
-		<h4 class="text-muted" style="background: #444 ; color: orange; padding: 10px; font-size: 24px; text-align: center; font-style: oblique; font-family: century"><b>Have a Cup of Coffee</b></h4>
 		<div class="header clearfix" style="background:#D0DEEC">
 			<nav>
 				<ul class="nav nav-pills pull-right">
@@ -207,9 +206,7 @@
 		<div class="tab-content">
 
 		<div class="tab-pane panel col-centered text-center" id="home" style="background: floralwhite; ">
-	      <h1 style="background:#C3A878; font-family:Algerian">Coffee Shop</h1><hr/>
-	      <img src="scripts/logo.jpg" class="img-circle" alt="Coffee Shop" style ="width:40%" /><hr/>
-		  <h3 style="background:#C3A878; font-family:Algerian">Authorize .Net Accept Profiles</h3><hr/>
+	      <img src="scripts/background.png"  alt="Spice Girls"/><hr/>
 	    </div>
 
 		<div class="tab-pane" id="profile" hidden="true"></div>
