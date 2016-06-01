@@ -1,6 +1,19 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<?php
+	session_start();
+	include 'getToken.php';
+	if ($response->messages->resultCode != "Ok") {
+			$_SESSION["cpid_error"]='true';
+			setcookie("cpid",'', time() -1, "/");
+			setcookie("temp_cpid",'', time() -1, "/");
+			header('Location: login.php');
+			exit();	
+    }else{
+    	$_SESSION["cpid_error"]='false';
+    }
+?>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,15 +26,7 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="scripts/bootstrap.min.css" rel="stylesheet">
-	<style type="text/css">
-	ul li [data-toggle] {
-		font-size: 15px;
-	}
-	</style>
-<!--
-<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-<link href="jumbotron-narrow.css" rel="stylesheet">
--->
+
 <script src="scripts/jquery-2.1.4.min.js"></script>
 <script src="scripts/bootstrap.min.js"></script>
 <!--<script src="js/sample.js"></script> -->
@@ -162,12 +167,12 @@
 
 </head>
 
-<body >
-	<?php include 'getToken.php'; ?>
-	<div class="container" style="width: 100%">
-		<div class="header clearfix" style="background:#D0DEEC">
+<body style="background: url('scripts/background.png'); padding-top: 50px;">
+	<div class="container-fluid" style="width: 100%; margin: 0; padding:0">
+		
+		<div class="navbar navbar-inverse" role="navigation" >
 			<nav>
-				<ul class="nav nav-pills pull-right">
+				<ul class="nav navbar-nav nav-pills">
 					<li role="presentation" ><a href="#home" data-toggle="tab">Home</a></li>
 					<li role="presentation" ><a href="#profile" data-toggle="tab">Profile</a></li>
 					<li role="presentation"><a href="#payment" data-toggle="tab">Payment</a></li>
@@ -183,7 +188,7 @@
 		</div>
 
 		<div id="addShipDiv">
-			<p><button type="button" id="addShippingButton" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><hr/>
+			<p><button type="button" id="addShippingButton" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><hr>
 		</div>
 
 		<div  id="iframe_holder">
@@ -206,7 +211,7 @@
 		<div class="tab-content">
 
 		<div class="tab-pane panel col-centered text-center" id="home" style="background: floralwhite; ">
-	      <img src="scripts/background.png"  alt="Spice Girls"/><hr/>
+	      <!--<img src="scripts/background.png"  alt="Spice Girls"/><hr/>-->
 	    </div>
 
 		<div class="tab-pane" id="profile" hidden="true"></div>
@@ -279,4 +284,5 @@
 
 	</div> 
 </body>
+
 </html>

@@ -5,7 +5,7 @@ ini_set("log_errors", 1);
 ini_set("error_log", "/tmp/php-error.log");
 
 
-$param = parse_ini_file("config.txt");
+//$param = parse_ini_file("config.txt");
 $xmlStr = <<<XML
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <getHostedProfilePageRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
@@ -16,7 +16,7 @@ $xmlStr = <<<XML
 <setting><settingName>hostedProfileIFrameCommunicatorUrl</settingName></setting>
 <setting><settingName>hostedProfileReturnUrlText</settingName><settingValue>Back to Confirmation Page</settingValue></setting>
 <setting><settingName>hostedProfilePageBorderVisible</settingName><settingValue>false</settingValue></setting>
-<setting><settingName>hostedProfileManageOptions</settingName><settingValue>showPayment</settingValue></setting>
+<!--<setting><settingName>hostedProfileManageOptions</settingName><settingValue>showPayment</settingValue></setting> -->
 </hostedProfileSettings>
 </getHostedProfilePageRequest>
 XML;
@@ -27,9 +27,14 @@ $transactionKey = getenv("TRANSACTION_KEY");
 
 $xml->merchantAuthentication->addChild('name',$loginId);
 $xml->merchantAuthentication->addChild('transactionKey',$transactionKey);
-$xml->customerProfileId = $param['customerProfileId'];
+if (isset($_COOKIE['cpid'])) {
+    $cpid = $_COOKIE['cpid'];
+}
+else if(isset($_COOKIE['temp_cpid'])){
+    $cpid = $_COOKIE['temp_cpid'];
+}
 
-
+$xml->customerProfileId = $cpid;
 $xml->hostedProfileSettings->setting[0]->addChild('settingValue',curPageURL()."return.html");
 $xml->hostedProfileSettings->setting[1]->addChild('settingValue',curPageURL()."iCommunicator.html");
 
@@ -46,6 +51,7 @@ $url = "https://apitest.authorize.net/xml/v1/request.api";
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+		//curl_setopt($ch, CURLOPT_PROXY, "http://internet.visa.com:80");
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
         $content = curl_exec($ch);
         $response = new SimpleXMLElement($content);
