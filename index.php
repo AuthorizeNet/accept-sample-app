@@ -217,8 +217,8 @@
 			<br><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button><p><br>
 		</div>
 
-		<div id="addShipDiv">
-			<p><button type="button" id="addShippingButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p>
+		<div id="addShipDiv" style="margin-left:5%">
+			<br><p><button type="button" id="addShippingButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><br>
 		</div>
 
 		<div  id="iframe_holder" class="center-block" style="width:90%;">
@@ -270,7 +270,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-info tab-pane" id="shipping">
+		<div class="panel panel-info tab-pane center-block" id="shipping" style="width:90%">
 			<div class="panel-heading">
 				<h3 class="panel-title text-center"><b>Shipping Addresses</b></h3>
 			</div>
