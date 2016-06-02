@@ -9,34 +9,16 @@
         <title>Accept Profile Sample App</title>
 
         <!-- CSS -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
-        <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-		<link rel="stylesheet" href="assets/css/form-elements.css">
-        <link rel="stylesheet" href="assets/css/style.css">
+        <link rel="stylesheet" href="scripts/bootstrap.min.css">
+		<link rel="stylesheet" href="scripts/form-elements.css">
+        <link rel="stylesheet" href="scripts/style_sheet.css">
 
 
         <!-- Javascript -->
         <script src="scripts/jquery-2.1.4.min.js"></script>
-        <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/js/jquery.backstretch.min.js"></script>
-        <script src="assets/js/scripts.js"></script>
-        <script src="scripts/jquery.cookie.js"></script>
-
-        <script type="text/javascript">
-        /*$(function(){
-  			$(".btn").click(function(){
-  				if ($("#cookieCheck").is(':checked')){
-  					$.cookie('loggedIn', $("#form-username").val() , {expires: 1});
-  				}else {
-  					$.cookie('loggedIn', 'none', {expires: 1});
-  				}
-  				val = $.cookie('loggedIn');
-  				alert("Status : "+val);
-  			});
-		});
-		*/
-        </script>
+        <script src="scripts/bootstrap.min.js"></script>
+        <script src="scripts/jquery.backstretch.min.js"></script>
+        <script src="scripts/localscripts.js"></script>
 
     </head>
 
@@ -47,11 +29,11 @@
 	if(isset($_POST['submit'])) 
 	{
 		if(isset($_POST['cookieCheck'])){
-			setcookie("cpid",$_POST['form-username'], time() + (86400), "/");
+			setcookie("cpid",$_POST['form-username'], time() + (86400*7), "/");
 			header('Location: '.$newURL);
 		}
 		else{
-			setcookie("temp_cpid",$_POST['form-username'], time() + (86400), "/");
+			setcookie("temp_cpid",$_POST['form-username'], time() + (86400*7), "/");
 			header('Location: '.$newURL);
 		}
 	}
@@ -75,12 +57,10 @@
                         <div class="col-sm-6 col-sm-offset-3 form-box">
                         	<div class="form-top">
                         		<div class="form-top-left">
-                        			<h3>Login to Accept Sample App</h3>
+                        			<h3>Login to the Accept Sample App</h3>
                             		<p>Enter your Customer ID below</p>
                         		</div>
-                        		<div class="form-top-right">
-                        			<i class="fa fa-key"></i>
-                        		</div>
+                        		
                             </div>
                             <div class="form-bottom">
 			                    <form role="form" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" class="login-form">
