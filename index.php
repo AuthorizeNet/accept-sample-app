@@ -32,24 +32,28 @@
 		.navbar {min-height: 0px; margin-bottom: 0px; border: 0px}
 		.nav>li {display: inline-block;}
 		.navbar-centered .nav > li > a {color: white}
-		.navbar-inverse { background-color: #555  } /* #7B7B7B */
+		.navbar-inverse { background-color: #333  } /* #7B7B7B */
 		.navbar-centered .nav > li > a:hover{ background-color: white; color: black }
 		.navbar-centered .nav .active > a,.navbar-centered .navbar-nav > .active > a:focus { background-color: white; color: black; font-weight:bold; }
 		.navbar-centered .navbar-nav { float: none; text-align: center; }
 	    .navbar-centered .navbar-nav > li { float: none; }
 	    .navbar-centered .nav > li { display: inline; }
 	    .navbar-centered .nav > li > a {display: inline-block}
+	    #home { color:ivory; margin-left: 15%; margin-right: 15% }
 
 		@media (min-width: 768px) {
 	    	.navbar-centered .nav > li > a { width:12%; }
+	    	#home { font-size: 30px}
 	    }
 
 	    @media (min-width:360px ) and (max-width: 768px){
 	    	.navbar-centered .nav > li > a {font-size: 12px}
+	    	#home { font-size: 20px}
 	    }
 
 	    @media (max-width: 360px) {
 	    	.navbar-centered .nav > li > a {font-size: 10px}
+	    	#home { font-size: 15px}
 	    }
 
 	</style>
@@ -191,6 +195,8 @@
 			$(window).scrollTop($("#add_shipping").offset().top-30);
 		});
 
+		vph = $(window).height();
+		$("#home").css("margin-top",(vph/4)+'px');
 	});
 </script>
 
@@ -214,7 +220,7 @@
 		<?php include 'getProfiles.php'; ?>
 		
 		<div id="addPayDiv" style="margin-left:5%">
-			<br><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button><p><br>
+			<br><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button></p><br>
 		</div>
 
 		<div id="addShipDiv" style="margin-left:5%">
@@ -240,8 +246,8 @@
 
 		<div class="tab-content panel-group">
 
-		<div class="tab-pane" id="home">
-	      <!--<img src="scripts/background.png"  alt="Spice Girls"/><hr/>-->
+		<div class="tab-pane" id="home" align="center" >
+	      “Our cuisine is handmade with fresh organic and fair-trade spices for an aromatic and succulent dining experience.”
 	    </div>
 
 		<div class="tab-pane" id="profile" hidden="true"></div>
