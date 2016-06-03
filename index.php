@@ -32,7 +32,7 @@
 		.navbar {min-height: 0px; margin-bottom: 0px; border: 0px}
 		.nav>li {display: inline-block;}
 		.navbar-centered .nav > li > a {color: white}
-		.navbar-inverse { background-color: #333  } /* #7B7B7B */
+		.navbar-inverse { background-color: #555  } /* #7B7B7B */
 		.navbar-centered .nav > li > a:hover{ background-color: white; color: black }
 		.navbar-centered .nav .active > a,.navbar-centered .navbar-nav > .active > a:focus { background-color: white; color: black; font-weight:bold; }
 		.navbar-centered .navbar-nav { float: none; text-align: center; }
@@ -227,7 +227,7 @@
 			<br><p><button type="button" id="addShippingButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><br>
 		</div>
 
-		<div  id="iframe_holder" class="center-block" style="width:90%;">
+		<div  id="iframe_holder" class="center-block" style="width:90%;max-width: 1000px">
 			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
