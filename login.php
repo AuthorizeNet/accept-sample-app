@@ -49,18 +49,15 @@
             <div class="inner-bg">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-8 col-sm-offset-2 text">
-                            <h1><strong>Accept </strong> User Login </h1>
-                        </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-6 col-sm-offset-3 form-box">
+                        <div class="col-sm-6 col-sm-offset-3 form-box" >
+                        	<div style="box-shadow: 15px 20px 10px #222;">
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>Login to the Accept Sample App</h3>
                             		<p>Enter your Customer ID below</p>
                         		</div>
-                        		
                             </div>
                             <div class="form-bottom">
 			                    <form role="form" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" class="login-form">
@@ -71,6 +68,7 @@
 			                        </div>
 			                        <button type="submit" name="submit" class="btn">Sign in !</button>
 			                    </form>
+		                    </div>
 		                    </div>
                         </div>
                     </div>
