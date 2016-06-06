@@ -60,6 +60,7 @@
 
 	<script src="scripts/jquery-2.1.4.min.js"></script>
 	<script src="scripts/bootstrap.min.js"></script>
+	<script src="scripts/jquery.cookie.js"></script>
 <!--<script src="js/sample.js"></script> -->
 
 <script type="text/javascript">
@@ -197,7 +198,27 @@
 
 		vph = $(window).height();
 		$("#home").css("margin-top",(vph/4)+'px');
+
+		$(window).resize(function(){
+			$('#home').css({'margin-top':(($(window).height())/4)+'px'});
+		});
+
+		$(window).keydown(function(event) {
+		  if(event.ctrlKey && event.keyCode == 69) { 
+		  	event.preventDefault(); 
+		    logOut();
+		  }
+		});
+
 	});
+
+	function logOut() {
+		console.log("Log Out event Triggered ..!");
+	    $.removeCookie('cpid', { path: '/' });
+	    $.removeCookie('temp_cpid', { path: '/' });
+	    window.location.href = 'login.php';
+	}
+
 </script>
 
 </head>
