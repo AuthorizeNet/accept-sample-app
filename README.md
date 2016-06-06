@@ -1,5 +1,7 @@
-# accept-sample-app
+# Accept Sample Application
 This application provides examples of how to use the Authorize.Net Accept products to integrate secure payment acceptance into your applications.
+
+![alt text](screenshots/AcceptTrioScreenShots.png "Description goes here")
 
 ## How to Use the Sample App
 
