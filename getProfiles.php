@@ -9,7 +9,7 @@ XML;
 $xml = new SimpleXMLElement($profileReq);
 $xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
 $xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
-$xml->customerProfileId = $param['customerProfileId'];
+$xml->customerProfileId = $cpid;
 
 try{	//setting the curl parameters.
         $ch = curl_init();

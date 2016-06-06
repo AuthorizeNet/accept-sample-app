@@ -1,6 +1,19 @@
 
 <!DOCTYPE html>
 <html lang="en">
+<?php
+	session_start();
+	include 'getToken.php';
+	if ($response->messages->resultCode != "Ok") {
+			$_SESSION["cpid_error"]='true';
+			setcookie("cpid",'', time() -1, "/");
+			setcookie("temp_cpid",'', time() -1, "/");
+			header('Location: login.php');
+			exit();	
+    }else{
+    	$_SESSION["cpid_error"]='false';
+    }
+?>
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,17 +26,40 @@
 
 	<!-- Bootstrap core CSS -->
 	<link href="scripts/bootstrap.min.css" rel="stylesheet">
+
 	<style type="text/css">
-	ul li [data-toggle] {
-		font-size: 15px;
-	}
+
+		.navbar {min-height: 0px; margin-bottom: 0px; border: 0px}
+		.nav>li {display: inline-block;}
+		.navbar-centered .nav > li > a {color: white}
+		.navbar-inverse { background-color: #555  } /* #7B7B7B */
+		.navbar-centered .nav > li > a:hover{ background-color: white; color: black }
+		.navbar-centered .nav .active > a,.navbar-centered .navbar-nav > .active > a:focus { background-color: white; color: black; font-weight:bold; }
+		.navbar-centered .navbar-nav { float: none; text-align: center; }
+	    .navbar-centered .navbar-nav > li { float: none; }
+	    .navbar-centered .nav > li { display: inline; }
+	    .navbar-centered .nav > li > a {display: inline-block}
+	    #home { color:ivory; margin-left: 15%; margin-right: 15% }
+
+		@media (min-width: 768px) {
+	    	.navbar-centered .nav > li > a { width:12%; }
+	    	#home { font-size: 30px}
+	    }
+
+	    @media (min-width:360px ) and (max-width: 768px){
+	    	.navbar-centered .nav > li > a {font-size: 12px}
+	    	#home { font-size: 20px}
+	    }
+
+	    @media (max-width: 360px) {
+	    	.navbar-centered .nav > li > a {font-size: 10px}
+	    	#home { font-size: 15px}
+	    }
+
 	</style>
-<!--
-<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-<link href="jumbotron-narrow.css" rel="stylesheet">
--->
-<script src="scripts/jquery-2.1.4.min.js"></script>
-<script src="scripts/bootstrap.min.js"></script>
+
+	<script src="scripts/jquery-2.1.4.min.js"></script>
+	<script src="scripts/bootstrap.min.js"></script>
 <!--<script src="js/sample.js"></script> -->
 
 <script type="text/javascript">
@@ -94,7 +130,9 @@
 			onLoad = false;
 		}
 
-		$("#iframe_holder iframe").hide();$("#payment").hide();$("#shipping").hide();$("#home").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
+		$("#iframe_holder iframe").hide();$("#payment").hide();$("#shipping").hide();
+		$("#home").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
+		//$("body").css("background",""); $("body").css("background","url('scripts/background.png')");
 		switch(target){
 			case "#home" 		: $("#home").show();break;
 			case "#profile" 	: $("#load_profile").show(); break;
@@ -157,36 +195,39 @@
 			$(window).scrollTop($("#add_shipping").offset().top-30);
 		});
 
+		vph = $(window).height();
+		$("#home").css("margin-top",(vph/4)+'px');
 	});
 </script>
 
 </head>
 
-<body >
-	<?php include 'getToken.php'; ?>
-	<div class="container" style="width: 100%">
-		<div class="header clearfix" style="background:#D0DEEC">
-			<nav>
-				<ul class="nav nav-pills pull-right">
-					<li role="presentation" ><a href="#home" data-toggle="tab">Home</a></li>
-					<li role="presentation" ><a href="#profile" data-toggle="tab">Profile</a></li>
-					<li role="presentation"><a href="#payment" data-toggle="tab">Payment</a></li>
-					<li role="presentation"><a href="#shipping" data-toggle="tab">Shipping</a></li>
+<body style=" background: url('scripts/background.png'); padding-top: 50px;">
+	<div class="container-fluid" style="width: 100%; margin: 0; padding:0">
+		
+		<div class="navbar navbar-inverse" role="navigation">
+			<div class="container-fluid navbar-centered">
+				<ul class="nav navbar-nav" style="margin-top: 0px; margin-bottom:0px; margin-left:auto">
+					<li role="presentation"><a href="#home" data-toggle="tab">HOME</a></li>
+					<li role="presentation"><a href="#profile" data-toggle="tab">PROFILE</a></li>
+					<li role="presentation"><a href="#payment" data-toggle="tab">PAYMENT</a></li>
+					<li role="presentation"><a href="#shipping" data-toggle="tab">SHIPPING</a></li>
 				</ul>
-			</nav>
+			</div>
 		</div>
 		<br/>
 
 		<?php include 'getProfiles.php'; ?>
-		<div id="addPayDiv">
-			<p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button><p><hr/>
+		
+		<div id="addPayDiv" style="margin-left:5%">
+			<br><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button></p><br>
 		</div>
 
-		<div id="addShipDiv">
-			<p><button type="button" id="addShippingButton" class="btn btn-success btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><hr/>
+		<div id="addShipDiv" style="margin-left:5%">
+			<br><p><button type="button" id="addShippingButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><br>
 		</div>
 
-		<div  id="iframe_holder">
+		<div  id="iframe_holder" class="center-block" style="width:90%;max-width: 1000px">
 			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
@@ -203,17 +244,17 @@
 			</form>
 		</div>
 
-		<div class="tab-content">
+		<div class="tab-content panel-group">
 
-		<div class="tab-pane panel col-centered text-center" id="home" style="background: floralwhite; ">
-	      <img src="scripts/background.png"  alt="Spice Girls"/><hr/>
+		<div class="tab-pane" id="home" align="center" >
+	      “Our cuisine is handmade with fresh organic and fair-trade spices for an aromatic and succulent dining experience.”
 	    </div>
 
 		<div class="tab-pane" id="profile" hidden="true"></div>
 
-		<div class="panel panel-info tab-pane" id="payment" style="width: 100%;margin-left: 0%; ">
+		<div class="panel panel-info tab-pane center-block" id="payment" style="width:90%">
 			<div class="panel-heading">
-				<h2 class="panel-title"><b>Payment Profiles</b></h2>
+				<h2 class="panel-title text-center"><b>Payment Profiles</b></h2>
 			</div>
 			<div class="panel-body">
 			<div class="row">
@@ -235,9 +276,9 @@
 			</div>
 		</div>
 
-		<div class="panel panel-info tab-pane" id="shipping"  style="width: 100%;margin-left: 0%; ">
+		<div class="panel panel-info tab-pane center-block" id="shipping" style="width:90%">
 			<div class="panel-heading">
-				<h3 class="panel-title"><b>Shipping Addresses</b></h3>
+				<h3 class="panel-title text-center"><b>Shipping Addresses</b></h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -279,4 +320,5 @@
 
 	</div> 
 </body>
+
 </html>
