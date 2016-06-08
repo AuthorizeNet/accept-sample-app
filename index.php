@@ -202,7 +202,7 @@ function acceptJSCaller()
 		
 	</script-->
 	 <!-- *************************************************** -->
-	<!script src="acceptJSCaller.js"></script>
+	<script src="acceptJSCaller.js"></script>
 
 <script type="text/javascript">
 	var baseUrl = "https://test.authorize.net/customer/";
