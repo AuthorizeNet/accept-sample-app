@@ -84,7 +84,8 @@
 	
 	
 	<script src="https://js.authorize.net/v1/Accept.js"></script>
-	<script> <!-- *************************************************** -->
+	 <!-- *************************************************** -->
+	<!--script>
 		
 		
 		
@@ -199,8 +200,9 @@ function acceptJSCaller()
 		
 		
 		
-	</script> <!-- *************************************************** -->
-	<!--script src="acceptJSCaller.js"></script-->
+	</script-->
+	 <!-- *************************************************** -->
+	<!script src="acceptJSCaller.js"></script>
 
 <script type="text/javascript">
 	var baseUrl = "https://test.authorize.net/customer/";
