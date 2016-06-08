@@ -6,9 +6,24 @@ function messageFunc(msg)
 			message="Transaction Successful!<br>Transaction ID: "+responseObj.transactionResponse.transId;
 		}
 		else{
-			message="Transaction Unsuccessful.<br>";//+responseObj.messages.message[0].text;
-			if(responseObj.transactionResponse.errors!=null)//to do: take care of errors[1] array being parsed ino single object
+			message="Transaction Unsuccessful.";//+responseObj.messages.message[0].text;
+			if(responseObj.transactionResponse.errors!=null)//to do: take care of errors[1] array being parsed into single object
+			{
 				message+=responseObj.transactionResponse.errors.error.errorText;
+			}
+			/*else if(responseObj.transactionResponse.errors[0]!=null)
+			{
+				for(i=0;i<responseObj.transactionResponse.errors.length;i++)
+				{
+					message+="<br>";
+					message+=responseObj.transactionResponse.errors[i].error.errorText;
+				}
+			}*/
+			if(responseObj.transactionResponse.transId!=null)
+			{
+				message+="<br>";
+				message+=("Transaction ID: "+responseObj.transactionResponse.transId)
+			}
 		}
 	}
 	catch(error){
