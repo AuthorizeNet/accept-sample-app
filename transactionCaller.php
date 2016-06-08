@@ -27,8 +27,8 @@ XML;
 
 $transRequestXml=new SimpleXMLElement($transRequestXmlStr);
 
-$transRequestXml->merchantAuthentication->name='48uDp4QBA';//getenv('prod_api_login_id');
-$transRequestXml->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('prod_transaction_key');
+$transRequestXml->merchantAuthentication->name=getenv('ACCEPTJS_API_LOGIN_ID');
+$transRequestXml->merchantAuthentication->transactionKey=getenv('ACCEPTJS_TRANSACTION_KEY');
 
 $transRequestXml->transactionRequest->amount=$_POST['amount'];
 $transRequestXml->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
