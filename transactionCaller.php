@@ -21,7 +21,7 @@ try{	//setting the curl parameters.
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_PROXY, "http://internet.visa.com:80");
+        //curl_setopt($ch, CURLOPT_PROXY, "http://internet.visa.com:80");
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
         $content = curl_exec($ch);
         if (FALSE === $content)
