@@ -18,8 +18,8 @@ $transRequestXmlStr=<<<XML
             </opaqueData>
          </payment>
          <retail>
-            <deviceType>0</deviceType>
             <marketType>0</marketType>
+            <deviceType>0</deviceType>
          </retail>
       </transactionRequest>
 </createTransactionRequest>
