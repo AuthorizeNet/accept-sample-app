@@ -89,6 +89,7 @@
 	<!--script src="https://jsCED.labwebapp.com/v1/Accept.js"></script-->
 	
 	<script src="https://js.authorize.net/v1/accept.js"></script>
+	<script src="https://js.authorize.net/v1/acceptCore.js"></script>
 	<script src="acceptJSCaller.js"></script>
 
 <script type="text/javascript">
