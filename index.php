@@ -84,12 +84,12 @@
 	
 	
 	<script src="https://js.authorize.net/v1/Accept.js"></script>
-	<script>
+	<script> <!-- *************************************************** -->
 		
 		
 		
 		
-		function messageFunc(msg)
+function messageFunc(msg)
 {
 	try{
 		responseObj=JSON.parse(msg);
@@ -194,11 +194,12 @@ function acceptJSCaller()
 	Accept.dispatchData(secureData, 'responseHandler');
 }
 
+
 		
 		
 		
 		
-	</script>
+	</script> <!-- *************************************************** -->
 	<!--script src="acceptJSCaller.js"></script-->
 
 <script type="text/javascript">
