@@ -79,8 +79,9 @@ function createTransact(dataObj) {
 
 function  responseHandler(response) {
 	if (response.messages.resultCode === 'Error') {
-		console.log('Error!');
-		console.log(response);
+		for (var i = 0; i < response.messages.message.length; i++) {
+			console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
+		}
 		alert("acceptJS library error!")
 	} else {
 		console.log(response.opaqueData.dataDescriptor);
