@@ -83,7 +83,7 @@
 	<script src="scripts/jquery.cookie.js"></script>
 	
 	
-	<script src="https://js.authorize.net/v1/Accept.js"></script>
+	<script src="https://js.authorize.net/v1/accept.js"></script>
 	 <!-- *************************************************** -->
 	<!--script>
 		
