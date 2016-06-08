@@ -26,7 +26,7 @@ function messageFunc(msg)
 
 function createTransact(dataObj) {
 	
-	//make server put transactionKey, currencyCode, transactionType, dataDescriptor (not!), retail
+	//make server put name, transactionKey, currencyCode, transactionType, retail
 	var transactRequest = {
 		'createTransactionRequest' : {
 			'merchantAuthentication' : {
@@ -34,13 +34,13 @@ function createTransact(dataObj) {
 				'transactionKey' : ''
 			},
 			'transactionRequest' : {
-				'transactionType' : 'authCaptureTransaction',
+				'transactionType' : '',
 				'amount' : document.getElementById('amount').value,
 				'currencyCode' : '',
 				'payment' : {
 					'opaqueData' : {
-						'dataDescriptor' : 'COMMON.ACCEPT.INAPP.PAYMENT',
-						'dataValue' : dataObj
+						'dataDescriptor' : dataObj.dataDescriptor,
+						'dataValue' : dataObj.dataValue
 					}
 				},
 				'retail' : {
@@ -85,7 +85,7 @@ function  responseHandler(response) {
 	} else {
 		console.log(response.opaqueData.dataDescriptor);
 		console.log(response.opaqueData.dataValue);
-		createTransact(response.opaqueData.dataValue);
+		createTransact(response.opaqueData);
 	}
 }
 

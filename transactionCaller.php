@@ -2,11 +2,10 @@
 
 $transReqJson=json_decode($_POST['request']);
 
-$transReqJson->createTransactionRequest->merchantAuthentication->name='48uDp4QBA';
-$transReqJson->createTransactionRequest->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('transaction_key');
+$transReqJson->createTransactionRequest->merchantAuthentication->name='48uDp4QBA';//getenv('prod_api_login_id');
+$transReqJson->createTransactionRequest->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('prod_transaction_key');
 $transReqJson->createTransactionRequest->transactionRequest->currencyCode='USD';
-
-//$url="https://apitest.authorize.net/xml/v1/request.api";
+$transReqJson->createTransactionRequest->transactionRequest->transactionType='authCaptureTransaction';
 
 $url="https://api.authorize.net/xml/v1/request.api";
 //$url="https://downloadvposCED.labwebapp.com/xml/v1/request.api";
