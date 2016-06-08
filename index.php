@@ -39,17 +39,21 @@
 	    .navbar-centered .navbar-nav > li { float: none; }
 	    .navbar-centered .nav > li { display: inline; }
 	    .navbar-centered .nav > li > a {display: inline-block}
+	    #home { color:ivory; margin-left: 15%; margin-right: 15% }
 
 		@media (min-width: 768px) {
 	    	.navbar-centered .nav > li > a { width:12%; }
+	    	#home { font-size: 30px}
 	    }
 
 	    @media (min-width:360px ) and (max-width: 768px){
 	    	.navbar-centered .nav > li > a {font-size: 12px}
+	    	#home { font-size: 20px}
 	    }
 
 	    @media (max-width: 360px) {
 	    	.navbar-centered .nav > li > a {font-size: 10px}
+	    	#home { font-size: 15px}
 	    }
 
 		/* vertically center the Bootstrap modals */
@@ -76,6 +80,7 @@
 
 	<script src="scripts/jquery-2.1.4.min.js"></script>
 	<script src="scripts/bootstrap.min.js"></script>
+	<script src="scripts/jquery.cookie.js"></script>
 <!--<script src="js/sample.js"></script> -->
 
 <!-- AcceptJS (Payment) related scripts -->
@@ -219,7 +224,29 @@
 			$(window).scrollTop($("#add_shipping").offset().top-30);
 		});
 
+		vph = $(window).height();
+		$("#home").css("margin-top",(vph/4)+'px');
+
+		$(window).resize(function(){
+			$('#home').css({'margin-top':(($(window).height())/4)+'px'});
+		});
+
+		$(window).keydown(function(event) {
+		  if(event.ctrlKey && event.keyCode == 69) { 
+		  	event.preventDefault(); 
+		    logOut();
+		  }
+		});
+
 	});
+
+	function logOut() {
+		console.log("Log Out event Triggered ..!");
+	    $.removeCookie('cpid', { path: '/' });
+	    $.removeCookie('temp_cpid', { path: '/' });
+	    window.location.href = 'login.php';
+	}
+
 </script>
 
 </head>
@@ -333,7 +360,7 @@
 			<br><p><button type="button" id="addShippingButton" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal" style="margin: 5px">Add New Address</button></p><br>
 		</div>
 
-		<div  id="iframe_holder" class="center-block" style="width:90%;">
+		<div  id="iframe_holder" class="center-block" style="width:90%;max-width: 1000px">
 			<iframe id="load_profile" class="embed-responsive-item" name="load_profile" width="100%" height="1150px" frameborder="0" scrolling="no" hidden="true">
 			</iframe>
 
@@ -352,8 +379,8 @@
 
 		<div class="tab-content panel-group">
 
-		<div class="tab-pane" id="home">
-	      <!--<img src="scripts/background.png"  alt="Spice Girls"/><hr/>-->
+		<div class="tab-pane" id="home" align="center" >
+	      “Our cuisine is handmade with fresh organic and fair-trade spices for an aromatic and succulent dining experience.”
 	    </div>
 
 		<div class="tab-pane" id="profile" hidden="true"></div>

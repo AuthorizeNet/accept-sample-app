@@ -4,7 +4,7 @@ jQuery(document).ready(function() {
     /*
         Fullscreen background
     */
-    $.backstretch("scripts/1.jpg");
+    $.backstretch("images/background_spice.png");
     
     /*
         Form validation
