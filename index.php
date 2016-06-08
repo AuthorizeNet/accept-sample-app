@@ -81,12 +81,6 @@
 	<script src="scripts/jquery-2.1.4.min.js"></script>
 	<script src="scripts/bootstrap.min.js"></script>
 	<script src="scripts/jquery.cookie.js"></script>
-<!--<script src="js/sample.js"></script> -->
-
-<!-- AcceptJS (Payment) related scripts -->
-	<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script-->
-	
-	<!--script src="https://jsCED.labwebapp.com/v1/Accept.js"></script-->
 	
 	<script src="https://js.authorize.net/v1/accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
