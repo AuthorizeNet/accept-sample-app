@@ -7,8 +7,8 @@ function messageFunc(msg)
 		}
 		else{
 			message="Transaction Unsuccessful.<br>";//+responseObj.messages.message[0].text;
-			if(responseObj.transactionResponse.errors[0]!=null)
-				message+=responseObj.transactionResponse.errors[0].errorText;
+			if(responseObj.transactionResponse.errors!=null)//to do: take care of errors[1] array being parsed ino single object
+				message+=responseObj.transactionResponse.errors.error.errorText;
 		}
 	}
 	catch(error){
