@@ -1,11 +1,38 @@
 <?php
 
-$transReqJson=json_decode($_POST['request']);
+$transRequestXml=<<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<createTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
+   <createTransactionRequest>
+      <merchantAuthentication>
+         <name>assignAPI_LOGIN_ID</name>
+         <transactionKey>assignAPI_TRANSACTION_KEY</transactionKey>
+      </merchantAuthentication>
+      <transactionRequest>
+         <amount>assignAMOUNT</amount>
+         <currencyCode>USD</currencyCode>
+         <payment>
+            <opaqueData>
+               <dataDescriptor>assignDD</dataDescriptor>
+               <dataValue>assignDV</dataValue>
+            </opaqueData>
+         </payment>
+         <retail>
+            <deviceType>0</deviceType>
+            <marketType>0</marketType>
+         </retail>
+         <transactionType>authCaptureTransaction</transactionType>
+      </transactionRequest>
+   </createTransactionRequest>
+</createTransactionRequest>
+XML;
 
-$transReqJson->createTransactionRequest->merchantAuthentication->name='48uDp4QBA';//getenv('prod_api_login_id');
-$transReqJson->createTransactionRequest->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('prod_transaction_key');
-$transReqJson->createTransactionRequest->transactionRequest->currencyCode='USD';
-$transReqJson->createTransactionRequest->transactionRequest->transactionType='authCaptureTransaction';
+$transRequestXml->createTransactionRequest->merchantAuthentication->name='48uDp4QBA';//getenv('prod_api_login_id');
+$transRequestXml->createTransactionRequest->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('prod_transaction_key');
+
+$transRequestXml->createTransactionRequest->transactionRequest->amount=$_POST['amount'];
+$transRequestXml->createTransactionRequest->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
+$transRequestXml->createTransactionRequest->transactionRequest->payment->opaqueData->dataValue=$_POST['dataValue'];
 
 $url="https://api.authorize.net/xml/v1/request.api";
 

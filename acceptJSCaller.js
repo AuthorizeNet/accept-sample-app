@@ -26,35 +26,10 @@ function messageFunc(msg)
 
 function createTransact(dataObj) {
 	
-	//make server put name, transactionKey, currencyCode, transactionType, (retail too)
-	var transactRequest = {
-		'createTransactionRequest' : {
-			'merchantAuthentication' : {
-				'name' : '',
-				'transactionKey' : ''
-			},
-			'transactionRequest' : {
-				'transactionType' : '',
-				'amount' : document.getElementById('amount').value,
-				'currencyCode' : '',
-				'payment' : {
-					'opaqueData' : {
-						'dataDescriptor' : dataObj.dataDescriptor,
-						'dataValue' : dataObj.dataValue
-					}
-				},
-				'retail' : {
-					'marketType' : '0',
-					'deviceType' : '0'
-				}
-			}
-		}
-	}
-	
 	$.ajax({
 		
 		url: "transactionCaller.php",
-		data: {request: JSON.stringify(transactRequest)},
+		data: {amount: document.getElementById('amount').value, dataDesc: dataObj.dataDescriptor, dataValue: dataObj.dataValue},
 		method: 'POST',
 		timeout: 5000
 		
