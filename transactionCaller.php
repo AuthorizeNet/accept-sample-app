@@ -3,7 +3,6 @@
 $transRequestXml=<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <createTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-   <createTransactionRequest>
       <merchantAuthentication>
          <name>assignAPI_LOGIN_ID</name>
          <transactionKey>assignAPI_TRANSACTION_KEY</transactionKey>
@@ -23,7 +22,6 @@ $transRequestXml=<<<XML
          </retail>
          <transactionType>authCaptureTransaction</transactionType>
       </transactionRequest>
-   </createTransactionRequest>
 </createTransactionRequest>
 XML;
 
