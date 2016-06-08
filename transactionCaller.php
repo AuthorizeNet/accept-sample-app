@@ -1,6 +1,6 @@
 <?php
 
-$transRequestXml=<<<XML
+$transRequestXmlStr=<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <createTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
       <merchantAuthentication>
@@ -25,6 +25,8 @@ $transRequestXml=<<<XML
 </createTransactionRequest>
 XML;
 
+$transRequestXml=new SimpleXMLElement($transRequestXmlStr);
+
 $transRequestXml->createTransactionRequest->merchantAuthentication->name='48uDp4QBA';//getenv('prod_api_login_id');
 $transRequestXml->createTransactionRequest->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('prod_transaction_key');
 
@@ -39,8 +41,8 @@ try{	//setting the curl parameters.
         if (FALSE === $ch)
         	throw new Exception('failed to initialize');
         curl_setopt($ch, CURLOPT_URL, $url);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($transReqJson));
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($transRequestXml->asXML()));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
