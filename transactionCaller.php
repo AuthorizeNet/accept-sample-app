@@ -42,7 +42,7 @@ try{	//setting the curl parameters.
         	throw new Exception('failed to initialize');
         curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/xml'));
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($transRequestXml->asXML()));
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $transRequestXml->asXML());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
