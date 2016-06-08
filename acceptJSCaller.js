@@ -26,7 +26,7 @@ function messageFunc(msg)
 
 function createTransact(dataObj) {
 	
-	//make server put name, transactionKey, currencyCode, transactionType, retail
+	//make server put name, transactionKey, currencyCode, transactionType, (retail too)
 	var transactRequest = {
 		'createTransactionRequest' : {
 			'merchantAuthentication' : {
@@ -51,7 +51,6 @@ function createTransact(dataObj) {
 		}
 	}
 	
-	//https://downloadvposCED.labwebapp.com/xml/v1/request.api
 	$.ajax({
 		
 		url: "transactionCaller.php",

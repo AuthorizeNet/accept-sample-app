@@ -8,7 +8,6 @@ $transReqJson->createTransactionRequest->transactionRequest->currencyCode='USD';
 $transReqJson->createTransactionRequest->transactionRequest->transactionType='authCaptureTransaction';
 
 $url="https://api.authorize.net/xml/v1/request.api";
-//$url="https://downloadvposCED.labwebapp.com/xml/v1/request.api";
 
 try{	//setting the curl parameters.
         $ch = curl_init();
@@ -21,7 +20,6 @@ try{	//setting the curl parameters.
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        //curl_setopt($ch, CURLOPT_PROXY, "http://internet.visa.com:80");
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
         $content = curl_exec($ch);
         if (FALSE === $content)
