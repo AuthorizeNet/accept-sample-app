@@ -1,7 +1,7 @@
 function messageFunc(msg)
 {
 	try{
-		responseObj=jQuery.parseXML(msg);
+		responseObj=JSON.parse(msg);
 		if(responseObj.transactionResponse.responseCode=='1'){
 			message="Transaction Successful!<br>Transaction ID: "+responseObj.transactionResponse.transId;
 		}

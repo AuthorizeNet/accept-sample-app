@@ -52,7 +52,12 @@ try{	//setting the curl parameters.
         if (FALSE === $content)
         	throw new Exception(curl_error($ch), curl_errno($ch));
         curl_close($ch);
-		echo $content;
+		
+		$xmlResult=simplexml_load_string($content);
+		$jsonResult=json_encode($xmlResult);
+		
+		echo $jsonResult;
+		
     }catch(Exception $e) {
     	trigger_error(sprintf('Curl failed with error #%d: %s', $e->getCode(), $e->getMessage()), E_USER_ERROR);
 	}
