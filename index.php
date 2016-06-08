@@ -52,11 +52,39 @@
 	    	.navbar-centered .nav > li > a {font-size: 10px}
 	    }
 
+		/* vertically center the Bootstrap modals */
+		.modal {
+			text-align: center;
+			padding: 0!important;
+		}
+
+		.modal:before {
+			content: '';
+			display: inline-block;
+			height: 100%;
+			vertical-align: middle;
+			margin-right: -4px;
+		}
+
+		.modal-dialog {
+			display: inline-block;
+			text-align: left;
+			vertical-align: middle;
+		}
+
 	</style>
 
 	<script src="scripts/jquery-2.1.4.min.js"></script>
 	<script src="scripts/bootstrap.min.js"></script>
 <!--<script src="js/sample.js"></script> -->
+
+<!-- AcceptJS (Payment) related scripts -->
+	<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script-->
+	
+	<!--script src="https://jsCED.labwebapp.com/v1/Accept.js"></script-->
+	
+	<script src="https://js.authorize.net/v1/accept.js"></script>
+	<script src="acceptJSCaller.js"></script>
 
 <script type="text/javascript">
 	var baseUrl = "https://test.authorize.net/customer/";
@@ -127,10 +155,10 @@
 		}
 
 		$("#iframe_holder iframe").hide();$("#payment").hide();$("#shipping").hide();
-		$("#home").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
+		$("#home").hide();$("#acceptJSPayDiv").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
 		//$("body").css("background",""); $("body").css("background","url('scripts/background.png')");
 		switch(target){
-			case "#home" 		: $("#home").show();break;
+			case "#home" 		: $("#home").show();$("#acceptJSPayDiv").show();break;
 			case "#profile" 	: $("#load_profile").show(); break;
 			case "#payment" 	: $("#payment").show(); $("#addPayDiv").show(); break;
 			case "#shipping" 	: $("#shipping").show(); $("#addShipDiv").show(); break;
@@ -213,8 +241,92 @@
 
 		<?php include 'getProfiles.php'; ?>
 		
+		<div id="acceptJSPayDiv" style="position:absolute; bottom:15%; width: 100%; text-align:center">
+			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-5 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 30px;" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button></p><br>
+		</div>
+
+		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
+			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">Accept.js Example</h4>
+					</div>
+					<div class="modal-body" id="acceptJSReceiptBody">
+					</div>
+				</div></div>
+			</div>
+		</div>
+		
+		<!-- Modal -->
+		<div id="acceptJSPayModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+			<!-- Modal content-->
+			<div class="modal-content">
+				
+				<div class="modal-header">
+					<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
+				</div>
+				
+				<div class="modal-body" id="acceptJSPayBody">
+					<!--form role="form"-->
+					
+					
+					
+					
+						<div class="form-group col-xs-8">
+							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
+							<input type="tel" class="form-control" id="creditCardNumber" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
+						</div>
+						<div class="form-group col-xs-4">
+							<label for="cvv">CVV</label>
+							<input type="text" class="form-control" id="cvv" placeholder="123" autocomplete="off"/>
+						</div>
+						
+						
+						
+						
+						<!--div class="form-group col-xs-6 col-xs-offset-1" style="margin-bottom: 2px; border: 2px solid; border-color: #ccc; border-radius: 3px">
+							<span style="color: #999; font-weight: 550;">Expiry Date</span>
+						</div>
+						<div class="form-group col-xs-5" style="margin-bottom: 7px;">
+							<span style="opacity: 0">Filler</span>
+						</div-->
+						
+						
+						
+					<div>
+					
+						<div class="form-group col-xs-5">
+							<label for="expiryDateYY">EXP. DATE</label>
+							<input type="text" class="form-control" id="expiryDateYY" placeholder="YYYY"/>
+						</div>
+						
+						<div class="form-group col-xs-3">
+							<label for="expiryDateMM" style="opacity: 0">MONTH</label>
+							<input type="text" class="form-control" id="expiryDateMM" placeholder="MM"/>
+						</div>
+
+					
+						<div class="form-group col-xs-4">
+						<label for="amount">AMOUNT</label>
+							<input type="text" class="form-control" id="amount" placeholder="0.5"/>
+						</div>
+						
+					</div>
+						
+					<!--/form-->
+					<div style="text-align: center; margin-top: 20%;">
+						<button type="button" id="submitButton" class="btn btn-primary" style="width: 95%;">SUBMIT</button>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+		</div>
+		
 		<div id="addPayDiv" style="margin-left:5%">
-			<br><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button><p><br>
+			<br><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button></p><br>
 		</div>
 
 		<div id="addShipDiv" style="margin-left:5%">
@@ -314,5 +426,15 @@
 
 	</div> 
 </body>
+
+<script>
+	$('#acceptJSPayButton').click(function(e){
+		e.preventDefault();
+	});
+	$('#submitButton').click(function(e){
+		e.preventDefault();
+		acceptJSCaller();
+	});
+</script>
 
 </html>
