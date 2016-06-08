@@ -27,12 +27,12 @@ XML;
 
 $transRequestXml=new SimpleXMLElement($transRequestXmlStr);
 
-$transRequestXml->createTransactionRequest->merchantAuthentication->name='48uDp4QBA';//getenv('prod_api_login_id');
-$transRequestXml->createTransactionRequest->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('prod_transaction_key');
+$transRequestXml->merchantAuthentication->name='48uDp4QBA';//getenv('prod_api_login_id');
+$transRequestXml->merchantAuthentication->transactionKey='947j5q7tBgmAS378';//getenv('prod_transaction_key');
 
-$transRequestXml->createTransactionRequest->transactionRequest->amount=$_POST['amount'];
-$transRequestXml->createTransactionRequest->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
-$transRequestXml->createTransactionRequest->transactionRequest->payment->opaqueData->dataValue=$_POST['dataValue'];
+$transRequestXml->transactionRequest->amount=$_POST['amount'];
+$transRequestXml->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
+$transRequestXml->transactionRequest->payment->opaqueData->dataValue=$_POST['dataValue'];
 
 $url="https://api.authorize.net/xml/v1/request.api";
 
