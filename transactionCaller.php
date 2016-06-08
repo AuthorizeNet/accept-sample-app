@@ -8,6 +8,7 @@ $transRequestXmlStr=<<<XML
          <transactionKey>assignAPI_TRANSACTION_KEY</transactionKey>
       </merchantAuthentication>
       <transactionRequest>
+         <transactionType>authCaptureTransaction</transactionType>
          <amount>assignAMOUNT</amount>
          <currencyCode>USD</currencyCode>
          <payment>
@@ -20,7 +21,6 @@ $transRequestXmlStr=<<<XML
             <deviceType>0</deviceType>
             <marketType>0</marketType>
          </retail>
-         <transactionType>authCaptureTransaction</transactionType>
       </transactionRequest>
 </createTransactionRequest>
 XML;
