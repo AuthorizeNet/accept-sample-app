@@ -3,10 +3,7 @@
 $transRequestXmlStr=<<<XML
 <?xml version="1.0" encoding="UTF-8"?>
 <createTransactionRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-      <merchantAuthentication>
-         <name>assignAPI_LOGIN_ID</name>
-         <transactionKey>assignAPI_TRANSACTION_KEY</transactionKey>
-      </merchantAuthentication>
+      <merchantAuthentication></merchantAuthentication>
       <transactionRequest>
          <transactionType>authCaptureTransaction</transactionType>
          <amount>assignAMOUNT</amount>
@@ -27,8 +24,11 @@ XML;
 
 $transRequestXml=new SimpleXMLElement($transRequestXmlStr);
 
-$transRequestXml->merchantAuthentication->name=getenv('API_LOGIN_ID');
-$transRequestXml->merchantAuthentication->transactionKey=getenv('TRANSACTION_KEY');
+$loginId = getenv("API_LOGIN_ID");
+$transactionKey = getenv("TRANSACTION_KEY");
+
+$transRequestXml->merchantAuthentication->addChild('name',$loginId);
+$transRequestXml->merchantAuthentication->addChild('transactionKey',$transactionKey);
 
 $transRequestXml->transactionRequest->amount=$_POST['amount'];
 $transRequestXml->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
