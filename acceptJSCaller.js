@@ -1,7 +1,6 @@
 function messageFunc(msg)
 {
 	try{
-		console.log(msg);
 		responseObj=JSON.parse(msg);
 		if(responseObj.transactionResponse.responseCode=='1'){
 			message="Transaction Successful!<br>Transaction ID: "+responseObj.transactionResponse.transId;
@@ -52,7 +51,6 @@ function createTransact(dataObj) {
 	}).done(function(data){
 		
 		console.log('Success');
-		console.log(data);
 		
 	}).fail(function(){
 		
