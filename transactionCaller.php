@@ -27,14 +27,14 @@ XML;
 
 $transRequestXml=new SimpleXMLElement($transRequestXmlStr);
 
-$transRequestXml->merchantAuthentication->name=getenv('ACCEPTJS_API_LOGIN_ID');
-$transRequestXml->merchantAuthentication->transactionKey=getenv('ACCEPTJS_TRANSACTION_KEY');
+$transRequestXml->merchantAuthentication->name=getenv('API_LOGIN_ID');
+$transRequestXml->merchantAuthentication->transactionKey=getenv('TRANSACTION_KEY');
 
 $transRequestXml->transactionRequest->amount=$_POST['amount'];
 $transRequestXml->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
 $transRequestXml->transactionRequest->payment->opaqueData->dataValue=$_POST['dataValue'];
 
-$url="https://api.authorize.net/xml/v1/request.api";
+$url="https://apitest.authorize.net/xml/v1/request.api";
 
 try{	//setting the curl parameters.
         $ch = curl_init();
