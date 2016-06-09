@@ -36,7 +36,6 @@ $transRequestXml->transactionRequest->payment->opaqueData->dataValue=$_POST['dat
 
 $url="https://apitest.authorize.net/xml/v1/request.api";
 
-echo $transRequestXml->asXML();
 
 try{	//setting the curl parameters.
         $ch = curl_init();
@@ -56,7 +55,7 @@ try{	//setting the curl parameters.
         curl_close($ch);
 		
 		$xmlResult=simplexml_load_string($content);
-		console.log($xmlResult);
+
 		$jsonResult=json_encode($xmlResult);
 		
 		echo $jsonResult;
