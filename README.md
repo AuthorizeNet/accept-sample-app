@@ -28,7 +28,7 @@ The sample application shows how to:
   
   
 ### Accept.js
-Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI burden of credit card information hitting your servers.  Documentation coming soon.  
+Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI burden of credit card information hitting your servers.  See our [developer documentation](http://developer.authorize.net/api/reference/features/acceptjs.html) for more details.  
   
 The sample application shows how to:  
 1.  Incorporate the Accept.js library into your existing payment flow (Home page, PAY button)
