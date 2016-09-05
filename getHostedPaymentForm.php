@@ -97,7 +97,7 @@ $xmlStr = <<<XML
         </setting>
         <setting>
             <settingName>hostedPaymentOrderOptions</settingName>
-            <settingValue>{"show": true}</settingValue>
+            <settingValue>{"show": false}</settingValue>
         </setting>
         <setting>
             <settingName>hostedPaymentPaymentOptions</settingName>
@@ -105,7 +105,7 @@ $xmlStr = <<<XML
         </setting>
         <setting>
             <settingName>hostedPaymentShippingAddressOptions</settingName>
-            <settingValue>{"show": true, "required":true}</settingValue>
+            <settingValue>{"show": false, "required":true}</settingValue>
         </setting>
         <setting>
             <settingName>hostedPaymentBillingAddressOptions</settingName>
@@ -128,13 +128,7 @@ $xmlStr = <<<XML
 </getHostedPaymentPageRequest>
 XML;
 $xml = new SimpleXMLElement($xmlStr);
-/*
-$loginId = "5KP3u95bQpv"; //getenv("API_LOGIN_ID");
-$transactionKey = "346HZ32z3fP4hTG2";//getenv("TRANSACTION_KEY");
 
-$xml->merchantAuthentication->addChild('name',$loginId);
-$xml->merchantAuthentication->addChild('transactionKey',$transactionKey);
-*/
 $commUrl = json_encode(array('url' => curPageURL()."iCommunicator.html" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[0]->addChild('settingValue',$commUrl);
 
