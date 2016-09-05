@@ -119,6 +119,7 @@
 			case "addShipping" 	: $frame = $("#add_shipping");break;
 			case "editPayment" 	: $frame = $("#edit_payment");break;
 			case "editShipping"	: $frame = $("#edit_shipping");break;
+			case "payment"		: $frame = $("#HostedPayment");break;
 		}
 
 		switch(params['action']){
@@ -126,13 +127,14 @@
 										$frame.outerHeight(parseInt(params['height']));
 										//$frame.css("border","1px double #CCC");
 										break;
-			case "successfulSave" 	: $('#myModal').modal('hide'); location.reload(false); break;
+			case "successfulSave" 	: $('#myModal').modal('hide');$("#HPModal").modal('hide'); location.reload(false); break;
 			case "cancel" 			: 	switch(parentFrame){
 										case "addPayment"   : $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
 										case "addShipping"  : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
 										case "manage"       : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
 										case "editPayment"  : $("#payment").show(); $("#addPayDiv").show(); break; 
-										case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); $("#addShipDiv").show(); break; 
+										case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); $("#addShipDiv").show(); break;
+										case "payment"		: $("#HPModal").modal('toggle');sessionStorage.removeItem("HPTokenTime"); break; 
 										}
 						 				break;
 		}
@@ -150,6 +152,7 @@
 				$("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();
 				$("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit();
 				$("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit();
+				sessionStorage.removeItem("HPTokenTime");
 			} ,100);
 			onLoad = false;
 		}
@@ -219,6 +222,15 @@
 			$(window).scrollTop($("#add_shipping").offset().top-30);
 		});
 
+		$("#hostedPayButton").click(function(){
+			var currHPTime = sessionStorage.getItem("HPTokenTime");
+			if (currHPTime === null || (Date.now()-currHPTime)/60000 > 5){
+				sessionStorage.setItem("HPTokenTime",Date.now());
+				$("#sendHPToken").submit();
+			}
+			$("#HPModal").modal('toggle');
+		});
+
 		vph = $(window).height();
 		$("#home").css("margin-top",(vph/4)+'px');
 
@@ -262,9 +274,11 @@
 		<br/>
 
 		<?php include 'getProfiles.php'; ?>
+		<?php include 'getHostedPaymentForm.php'; ?>
 		
 		<div id="acceptJSPayDiv" style="position:absolute; bottom:15%; width: 100%; text-align:center">
-			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-5 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 30px;" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button></p><br>
+			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 25px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
+			<button type="button" id="hostedPayButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 25px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="myModal">Hosted Pay</button></p><br>
 		</div>
 
 		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
@@ -291,10 +305,7 @@
 				
 				<div class="modal-body" id="acceptJSPayBody">
 					<!--form role="form"-->
-					
-					
-					
-					
+
 						<div class="form-group col-xs-8">
 							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
 							<input type="tel" class="form-control" id="creditCardNumber" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
@@ -303,19 +314,14 @@
 							<label for="cvv">CVV</label>
 							<input type="text" class="form-control" id="cvv" placeholder="123" autocomplete="off"/>
 						</div>
-						
-						
-						
-						
+
 						<!--div class="form-group col-xs-6 col-xs-offset-1" style="margin-bottom: 2px; border: 2px solid; border-color: #ccc; border-radius: 3px">
 							<span style="color: #999; font-weight: 550;">Expiry Date</span>
 						</div>
 						<div class="form-group col-xs-5" style="margin-bottom: 7px;">
 							<span style="opacity: 0">Filler</span>
 						</div-->
-						
-						
-						
+	
 					<div>
 					
 						<div class="form-group col-xs-5">
@@ -441,6 +447,23 @@
 		      <div class="modal-body">
 		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe>
 					<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe> 
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal fade" id="HPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Make Payment</h4>
+		      </div>
+		      <div class="modal-body" >
+					<iframe id="HostedPayment" class="embed-responsive-item" width="100%" name="HostedPayment" frameborder="0" scrolling="no" ></iframe>
+					<form id="sendHPToken" action="https://secureumb.labwebapp.com/payment/payment" method="post" target="HostedPayment" >
+						<input type="hidden" name="token" value="<?php echo $hostedPaymentResponse->token ?>" />
+					</form>
 		      </div>
 		    </div>
 		  </div>
