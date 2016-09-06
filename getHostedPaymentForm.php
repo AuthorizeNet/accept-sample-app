@@ -1,7 +1,5 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ERROR);
+
 $xmlStr = <<<XML
 <?xml version="1.0" encoding="utf-8"?>
 <getHostedPaymentPageRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
@@ -132,7 +130,7 @@ $xml = new SimpleXMLElement($xmlStr);
 $commUrl = json_encode(array('url' => curPageURL()."iCommunicator.html" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[0]->addChild('settingValue',$commUrl);
 
-$retUrl = json_encode(array('url' => curPageURL()."return.html","urlText"=>"Continue to site", "cancelUrl" => curPageURL()."return.html", "cancelUrlText" => "Cancel"),JSON_UNESCAPED_SLASHES);
+$retUrl = json_encode(array("showReceipt" => false ,'url' => curPageURL()."return.html","urlText"=>"Continue to site", "cancelUrl" => curPageURL()."return.html", "cancelUrlText" => "Cancel" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[2]->addChild('settingValue',$retUrl);
 
 $url = "https://downloadvposumb.labwebapp.com/xml/v1/request.api";
