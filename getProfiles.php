@@ -7,8 +7,8 @@ $profileReq = <<<XML
 </getCustomerProfileRequest>
 XML;
 $xml = new SimpleXMLElement($profileReq);
-$xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
-$xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
+$xml->merchantAuthentication->addChild('name',$loginId);
+$xml->merchantAuthentication->addChild('transactionKey',$transactionKey);
 $xml->customerProfileId = $cpid;
 
 try{	//setting the curl parameters.
