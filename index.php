@@ -56,6 +56,11 @@
 	    	#home { font-size: 15px}
 	    }
 
+	    @media (min-width: 1022px) {
+	    	.modal-dialog { width: 850px}
+	    	#add_shipping { height: 300px }
+	    }
+
 		/* vertically center the Bootstrap modals */
 		.modal {
 			text-align: center;
@@ -87,6 +92,7 @@
 	<script src="acceptJSCaller.js"></script>
 
 <script type="text/javascript">
+
 	var baseUrl = "https://test.authorize.net/customer/";
 	var onLoad = true;
 	tab = null;
@@ -124,6 +130,7 @@
 
 		switch(params['action']){
 			case "resizeWindow" 	: 	if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
+										if(parentFrame=="addShipping" && $(window).width() > 1021) params['height']= 350;
 										$frame.outerHeight(parseInt(params['height']));
 										//$frame.css("border","1px double #CCC");
 										break;
@@ -141,8 +148,8 @@
 										$('#HostedPayment').attr('src','about:blank');
 										$("#HPModal").modal('toggle');
 										var transResponse = JSON.parse(params['response']);
-										$("#HPConfirmation p").html("<strong> Success.. !! </strong> <br><br> Your payment of <b>$"+transResponse.totalAmount+"</b> for <b>"+transResponse.orderDescription+"</b> has been Processed Successfully on <b>"+transResponse.dateTime+"</b>.<br><br>Generated Order Invoice Number is :  <b>"+transResponse.orderInvoiceNumber+"</b><br><br> Happy Shopping with us ..");
-										$("#HPConfirmation p b").css("color","black");
+										$("#HPConfirmation p").html("<strong><b> Success.. !! </b></strong> <br><br> Your payment of <b>$"+transResponse.totalAmount+"</b> for <b>"+transResponse.orderDescription+"</b> has been Processed Successfully on <b>"+transResponse.dateTime+"</b>.<br><br>Generated Order Invoice Number is :  <b>"+transResponse.orderInvoiceNumber+"</b><br><br> Happy Shopping with us ..");
+										$("#HPConfirmation p b").css({"font-size":"22px", "color":"green"});
 										$("#HPConfirmation").modal("toggle");
 		}
 	}
@@ -454,10 +461,10 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Edit Title</h4>
+		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Edit </h4>
 		      </div>
 		      <div class="modal-body">
-		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe>
+		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true" ></iframe>
 					<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe> 
 		      </div>
 		    </div>
@@ -465,14 +472,14 @@
 		</div>
 
 		<div class="modal fade" id="HPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		  <div class="modal-dialog">
+		  <div class="modal-dialog" >
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Make Payment</h4>
 		      </div>
 		      <div class="modal-body" >
-					<iframe id="HostedPayment" class="embed-responsive-item" width="100%" name="HostedPayment" frameborder="0" scrolling="no" ></iframe>
+					<iframe id="HostedPayment" class="embed-responsive-item" width="100%" name="HostedPayment" frameborder="0" scrolling="no"></iframe>
 					<form id="sendHPToken" action="https://secureumb.labwebapp.com/payment/payment" method="post" target="HostedPayment" >
 						<input type="hidden" name="token" value="<?php echo $hostedPaymentResponse->token ?>" />
 					</form>
@@ -489,7 +496,7 @@
 		          <h4 class="modal-title"><b>Payment Confirmation</b></h4>
 		        </div>
 			        <div class="modal-body" style="background-color: antiquewhite">
-			          	<p style="font-size: 18px; font-style: italic; padding:10px; color: #444; text-align: center"></p>
+			          	<p style="font-size: 16px; font-style: italic; padding:10px; color: #444; text-align: center"></p>
 			        </div>
 		        <div class="modal-footer">
 		          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
