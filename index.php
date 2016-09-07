@@ -132,10 +132,17 @@
 			case "resizeWindow" 	: 	if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
 										if(parentFrame=="addShipping" && $(window).width() > 1021) params['height']= 350;
 										$frame.outerHeight(parseInt(params['height']));
-										//$frame.css("border","1px double #CCC");
 										break;
+
 			case "successfulSave" 	: 	$('#myModal').modal('hide');$("#HPModal").modal('hide'); location.reload(false); break;
-			case "cancel" 			: 	switch(parentFrame){
+
+			case "cancel" 			: 	
+										var currTime = sessionStorage.getItem("lastTokenTime");
+										if (currTime === null || (Date.now()-currTime)/60000 > 15){
+											location.reload(true);
+											onLoad = true;
+										}
+										switch(parentFrame){
 										case "addPayment"   : $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
 										case "addShipping"  : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
 										case "manage"       : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
@@ -144,6 +151,7 @@
 										case "payment"		: $("#HPModal").modal('toggle');sessionStorage.removeItem("HPTokenTime"); $('#HostedPayment').attr('src','about:blank'); break; 
 										}
 						 				break;
+
 			case "transactResponse"	: 	sessionStorage.removeItem("HPTokenTime");
 										$('#HostedPayment').attr('src','about:blank');
 										$("#HPModal").modal('toggle');
@@ -207,6 +215,7 @@
 			$("#send_token [name=paymentProfileId]").attr("value",$ppid);
 			$("#add_payment").hide();
 			$("#edit_payment").show();
+			$("#edit_payment").css({"height": "300px","background":"url(images/loader.gif) center center no-repeat"});
 			$("#send_token").attr({"action":baseUrl+"editPayment","target":"edit_payment"}).submit();
 			$("#send_token [name=paymentProfileId]").attr("value","");
 			$(window).scrollTop($("#edit_payment").offset().top-30);
@@ -222,6 +231,7 @@
 			$shid = $(this).attr("value");
 			$("#send_token [name=shippingAddressId]").attr("value",$shid);
 			$("#add_shipping").hide();
+			$("#edit_shipping").css({"height": "300px","background":"url(images/loader.gif) center center no-repeat"});
 			$("#send_token").attr({"action":baseUrl+"editShipping","target":"edit_shipping"}).submit();
 			$("#edit_shipping").show();
 			$("#send_token [name=shippingAddressId]").attr("value","");
