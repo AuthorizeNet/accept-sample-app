@@ -85,6 +85,7 @@
 	
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
+	<script src="applePayCaller.js"></script>
 
 <script type="text/javascript">
 	var baseUrl = "https://test.authorize.net/customer/";
@@ -264,7 +265,9 @@
 		<?php include 'getProfiles.php'; ?>
 		
 		<div id="acceptJSPayDiv" style="position:absolute; bottom:15%; width: 100%; text-align:center">
-			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-5 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 30px;" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button></p><br>
+			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
+			<button type="button" id="applePayButton" class="btn btn-default btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#ApplePayModal" >Apple Pay</button></p>
+			<br>
 		</div>
 
 		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
@@ -456,6 +459,10 @@
 	$('#submitButton').click(function(e){
 		e.preventDefault();
 		acceptJSCaller();
+	});
+	$('#applePayButton').click(function(e){
+		e.preventDefault();
+		applePayButtonClicked();
 	});
 </script>
 
