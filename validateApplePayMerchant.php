@@ -1,9 +1,13 @@
 <?php
 
-// Validation URL is passed in the request
-$validationUrl=$_POST['validationUrl'];;
+error_reporting(E_ERROR);
+ini_set("log_errors", 1);
+ini_set("error_log", "/tmp/php-error.log");
 
-echo $validationUrl
+// Validation URL is passed in the request
+$validationUrl=$_POST['validationUrl'];
+
+echo $validationUrl;
 
 // JSON Payload 
 $validationPayload = '{"merchantIdentifier":"merchant.authorize.net.test.dev15","domainName":"applepay-sample.azurewebsites.net","displayName":"MyStore"}';
@@ -27,7 +31,8 @@ try{	//setting the curl parameters.
 		
 		// $content is the Apple Response, it should be a merchant session object
 		// but may need to do some manipulation here
-		
+	echo $content;
+	
     }catch(Exception $e) {
     	trigger_error(sprintf('Curl failed with error #%d: %s', $e->getCode(), $e->getMessage()), E_USER_ERROR);
 	}
