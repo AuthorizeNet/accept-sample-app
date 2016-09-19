@@ -3,6 +3,8 @@
 // Validation URL is passed in the request
 $validationUrl=$_POST['validationUrl'];;
 
+echo $validationUrl
+
 // JSON Payload 
 $validationPayload = '{"merchantIdentifier":"merchant.authorize.net.test.dev15","domainName":"applepay-sample.azurewebsites.net","displayName":"MyStore"}';
 
