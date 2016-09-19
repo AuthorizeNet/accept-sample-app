@@ -24,7 +24,6 @@ try{	//setting the curl parameters.
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
         $content = curl_exec($ch);
-        $response = new SimpleXMLElement($content);
         if (FALSE === $content)
         	throw new Exception(curl_error($ch), curl_errno($ch));
         curl_close($ch);
