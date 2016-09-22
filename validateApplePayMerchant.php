@@ -5,7 +5,7 @@ $validationUrl=$_POST['validationUrl'];
 
 // JSON Payload 
 $validationPayload = '{"merchantIdentifier":"merchant.authorize.net.test.dev15","domainName":"applepay-sample.azurewebsites.net","displayName":"MyStore"}';
-print_r($validationUrl);
+
 try{	//setting the curl parameters.
         $ch = curl_init();
         if (FALSE === $ch)
