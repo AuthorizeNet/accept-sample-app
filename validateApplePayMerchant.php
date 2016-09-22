@@ -23,7 +23,7 @@ try{	//setting the curl parameters.
         if (FALSE === $content)
         	throw new Exception(curl_error($ch), curl_errno($ch));
         curl_close($ch);
-		echo $content;
+        print_r($content);
 		// $content is the Apple Response, it should be a merchant session object
 		// but may need to do some manipulation here
 		
