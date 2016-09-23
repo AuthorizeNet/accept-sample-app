@@ -54,33 +54,7 @@ $xmlStr = <<<XML
             <country>USA</country>
             <phoneNumber>1231231234</phoneNumber>
         </billTo>
-        <shipTo>
-            <firstName>China</firstName>
-            <lastName>Bayles</lastName>
-            <company>Thyme for Tea</company>
-            <address>12 Main Street</address>
-            <city>Pecan Springs</city>
-            <state>TX</state>
-            <zip>44628</zip>
-            <country>USA</country>
-        </shipTo>
         <customerIP>192.168.1.1</customerIP>
-        <transactionSettings>
-            <setting>
-                <settingName>testRequest</settingName>
-                <settingValue>false</settingValue>
-            </setting>
-        </transactionSettings>
-        <userFields>
-            <userField>
-                <name>MerchantDefinedFieldName1</name>
-                <value>MerchantDefinedFieldValue1</value>
-            </userField>
-            <userField>
-                <name>favorite_color</name>
-                <value>blue</value>
-            </userField>
-        </userFields>
     </transactionRequest>
     <hostedPaymentSettings>
         <setting>
@@ -133,7 +107,7 @@ $xml->hostedPaymentSettings->setting[0]->addChild('settingValue',$commUrl);
 $retUrl = json_encode(array("showReceipt" => false ,'url' => curPageURL()."return.html","urlText"=>"Continue to site", "cancelUrl" => curPageURL()."return.html", "cancelUrlText" => "Cancel" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[2]->addChild('settingValue',$retUrl);
 
-$url = "https://downloadvposumb.labwebapp.com/xml/v1/request.api";
+$url = "https://apitest.authorize.net/xml/v1/request.api";
 
     try{	//setting the curl parameters.
         $ch = curl_init();
