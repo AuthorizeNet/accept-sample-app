@@ -3,10 +3,7 @@
 $xmlStr = <<<XML
 <?xml version="1.0" encoding="utf-8"?>
 <getHostedPaymentPageRequest xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd">
-    <merchantAuthentication>
-        <name>mbld_api_-I8l6318</name>
-        <transactionKey>123abc</transactionKey>
-    </merchantAuthentication>
+    <merchantAuthentication></merchantAuthentication>
     <transactionRequest>
         <transactionType>authCaptureTransaction</transactionType>
         <amount>0.50</amount>
@@ -100,6 +97,8 @@ $xmlStr = <<<XML
 </getHostedPaymentPageRequest>
 XML;
 $xml = new SimpleXMLElement($xmlStr);
+$xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
+$xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
 
 $commUrl = json_encode(array('url' => curPageURL()."iCommunicator.html" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[0]->addChild('settingValue',$commUrl);
