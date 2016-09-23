@@ -490,7 +490,7 @@
 		      </div>
 		      <div class="modal-body" >
 					<iframe id="HostedPayment" class="embed-responsive-item" width="100%" name="HostedPayment" frameborder="0" scrolling="no"></iframe>
-					<form id="sendHPToken" action="https://secureumb.labwebapp.com/payment/payment" method="post" target="HostedPayment" >
+					<form id="sendHPToken" action="https://test.authorize.net/payment" method="post" target="HostedPayment" >
 						<input type="hidden" name="token" value="<?php echo $hostedPaymentResponse->token ?>" />
 					</form>
 		      </div>
