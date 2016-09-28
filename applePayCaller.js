@@ -83,7 +83,8 @@ function applePayButtonClicked(){
 			console.log(paymentToken);
 			
 			/* Send Payment token to Payment Gateway, here its defaulting to True just to mock that part */
-				returnFromGateway = true;
+			createTransaction(paymentToken.paymentData);	
+			returnFromGateway = true;
 			/*-----------------------*/
 
 			console.log("defaulting to successfull payment by the Token");
@@ -95,12 +96,40 @@ function applePayButtonClicked(){
 		});
 	}
 
+	function createTransaction(dataObj) {
+	
+	$.ajax({
+		
+		url: "transactionCaller.php",
+		data: {amount: document.getElementById('amount').value, dataDesc: 'COMMON.APPLE.INAPP.PAYMENT', dataValue: dataObj.data},
+		method: 'POST',
+		timeout: 5000
+		
+	}).done(function(data){
+		
+		console.log('Success');
+		
+	}).fail(function(){
+		
+		console.log('Error');
+		
+	}).always(function(textStatus){
+		
+		console.log(textStatus);
+		messageFunc(textStatus);
+		
+	})
+	
 	session.oncancel = function(event) {
 		console.log('starting session.cancel');
 		console.log(event);
 	}
 	
 	session.begin();
+
+	
+	
+}
 
 }
 
