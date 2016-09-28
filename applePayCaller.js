@@ -83,7 +83,7 @@ function applePayButtonClicked(){
 			console.log(paymentToken);
 			
 			/* Send Payment token to Payment Gateway, here its defaulting to True just to mock that part */
-			createTransaction(paymentToken.paymentData);	
+			//createTransaction(paymentToken.paymentData);	
 			returnFromGateway = true;
 			/*-----------------------*/
 
@@ -96,7 +96,7 @@ function applePayButtonClicked(){
 		});
 	}
 
-	function createTransaction(dataObj) {
+/*	function createTransaction(dataObj) {
 	
 	let objJsonStr = JSON.stringify(dataObj);
         let objJsonB64 = new Buffer(objJsonStr).toString("base64");
@@ -122,6 +122,7 @@ function applePayButtonClicked(){
 		messageFunc(textStatus);
 		
 	})
+*/
 	
 	session.oncancel = function(event) {
 		console.log('starting session.cancel');
