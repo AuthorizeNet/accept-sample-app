@@ -133,9 +133,6 @@ function applePayButtonClicked(){
 	
 	session.begin();
 
-	
-	
-}
 
 }
 
