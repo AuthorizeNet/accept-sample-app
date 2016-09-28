@@ -98,7 +98,7 @@ function applePayButtonClicked(){
 		});
 	}
 
-	function createTransaction(dataObj) {
+/*	function createTransaction(dataObj) {
 	
 	let objJsonStr = JSON.stringify(dataObj);
         let objJsonB64 = new Buffer(objJsonStr).toString("base64");
@@ -124,7 +124,7 @@ function applePayButtonClicked(){
 		messageFunc(textStatus);
 		
 	})
-
+*/
 	
 	session.oncancel = function(event) {
 		console.log('starting session.cancel');
