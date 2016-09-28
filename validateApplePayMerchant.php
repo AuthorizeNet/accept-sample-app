@@ -13,13 +13,15 @@ try{	//setting the curl parameters.
         if (FALSE === $ch)
         	throw new Exception('failed to initialize');
         curl_setopt($ch, CURLOPT_URL, $validationUrl);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+	curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $validationPayload);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	curl_setopt($ch, CURLOPT_SSLCERT, './certs/apple-pay-test-cert.pem');
+        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, 'YOUWOULDNEVERDOTHISRIGHT?');
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );        
         $content = curl_exec($ch);
         if (FALSE === $content)
