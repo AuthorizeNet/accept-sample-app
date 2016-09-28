@@ -21,7 +21,7 @@ try{	//setting the curl parameters.
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
 	curl_setopt($ch, CURLOPT_SSLCERT, './certs/apple-pay-test-cert.pem');
-        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, 'YOUWOULDNEVERDOTHISRIGHT?');
+        curl_setopt($ch, CURLOPT_SSLCERTPASSWD, 'BadIdea!');
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );        
         $content = curl_exec($ch);
         if (FALSE === $content)
