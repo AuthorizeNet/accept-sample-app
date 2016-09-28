@@ -68,7 +68,6 @@ function applePayButtonClicked(){
 			var status;
 			if (success){
 				status = ApplePaySession.STATUS_SUCCESS;
-				alert('Apple Pay Payment done successfully ');
 				console.log('Apple Pay Payment SUCCESS ');
 			} else {
 				status = ApplePaySession.STATUS_FAILURE;
