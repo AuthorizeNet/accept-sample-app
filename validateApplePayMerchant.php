@@ -1,7 +1,9 @@
 <?php
 
 // Validation URL is passed in the request
-$validationUrl=$_POST['validationUrl'];
+// Sandbox is https://apple-pay-gateway-cert.apple.com/paymentservices/startSession 
+//$validationUrl=$_POST['validationUrl'];
+$validationUrl="https://apple-pay-gateway-cert.apple.com/paymentservices/startSession";
 
 // JSON Payload 
 $validationPayload = '{"merchantIdentifier":"merchant.authorize.net.test.dev15","domainName":"applepay-sample.azurewebsites.net","displayName":"MyStore"}';
