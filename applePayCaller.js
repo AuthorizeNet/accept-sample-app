@@ -98,10 +98,13 @@ function applePayButtonClicked(){
 
 	function createTransaction(dataObj) {
 	
+	let objJsonStr = JSON.stringify(dataObj);
+        let objJsonB64 = new Buffer(objJsonStr).toString("base64");
+		
 	$.ajax({
 		
 		url: "transactionCaller.php",
-		data: {amount: document.getElementById('amount').value, dataDesc: 'COMMON.APPLE.INAPP.PAYMENT', dataValue: dataObj.data},
+		data: {amount: document.getElementById('amount').value, dataDesc: 'COMMON.APPLE.INAPP.PAYMENT', dataValue: objJsonB64},
 		method: 'POST',
 		timeout: 5000
 		
