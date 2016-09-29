@@ -34,16 +34,12 @@ function createTransaction(dataObj) {
 	}).done(function(data){
 		
 		console.log('Success');
+		return true;
 		
 	}).fail(function(){
 		
 		console.log('Error');
-		
-	}).always(function(textStatus){
-		
-		console.log(textStatus);
-		messageFunc(textStatus);
-		
+		return false;
 	})
 }
 
@@ -117,10 +113,7 @@ function applePayButtonClicked(){
 			
 			/* Send Payment token to Payment Gateway, here its defaulting to True just to mock that part */
 			
-			createTransaction(paymentToken.paymentData);	
-			
-			returnFromGateway = true;
-			/*-----------------------*/
+			var returnFromGateway = createTransaction(paymentToken.paymentData);	
 
 			console.log("defaulting to successfull payment by the Token");
 
