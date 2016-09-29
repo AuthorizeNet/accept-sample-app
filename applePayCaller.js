@@ -21,7 +21,7 @@ function createTransaction(dataObj) {
 	
 	let objJsonStr = JSON.stringify(dataObj);
 	console.log(objJsonStr);
-        let objJsonB64 = new Buffer(objJsonStr).toString("base64");
+        let objJsonB64 = window.btoa(objJsonStr);
 	console.log(objJsonB64);
 	
 	$.ajax({
