@@ -16,9 +16,14 @@ else{
 
 function createTransaction(dataObj) {
 	
+	console.log('starting createTransaction');
+	console.log(dataObj);
+	
 	let objJsonStr = JSON.stringify(dataObj);
+	console.log(objJsonStr);
         let objJsonB64 = new Buffer(objJsonStr).toString("base64");
-		
+	console.log(objJsonB64);
+	
 	$.ajax({
 		
 		url: "transactionCaller.php",
