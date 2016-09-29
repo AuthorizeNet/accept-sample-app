@@ -34,13 +34,13 @@ function createTransaction(dataObj) {
 	}).done(function(data){
 		console.log(data);
 		console.log('Success');
-		return true;
 		
 	}).fail(function(){
 		
 		console.log('Error');
-		return false;
 	})
+	
+	return true;
 }
 
 function applePayButtonClicked(){
