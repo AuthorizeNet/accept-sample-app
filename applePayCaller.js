@@ -14,6 +14,34 @@ else{
 	console.log("Apple pay not Available in this browser");
 }
 
+function createTransaction(dataObj) {
+	
+	let objJsonStr = JSON.stringify(dataObj);
+        let objJsonB64 = new Buffer(objJsonStr).toString("base64");
+		
+	$.ajax({
+		
+		url: "transactionCaller.php",
+		data: {amount: document.getElementById('amount').value, dataDesc: 'COMMON.APPLE.INAPP.PAYMENT', dataValue: objJsonB64},
+		method: 'POST',
+		timeout: 5000
+		
+	}).done(function(data){
+		
+		console.log('Success');
+		
+	}).fail(function(){
+		
+		console.log('Error');
+		
+	}).always(function(textStatus){
+		
+		console.log(textStatus);
+		messageFunc(textStatus);
+		
+	})
+}
+
 function applePayButtonClicked(){
 
 	console.log('Apple Pay Initiated');
@@ -98,33 +126,6 @@ function applePayButtonClicked(){
 		});
 	}
 
-/*	function createTransaction(dataObj) {
-	
-	let objJsonStr = JSON.stringify(dataObj);
-        let objJsonB64 = new Buffer(objJsonStr).toString("base64");
-		
-	$.ajax({
-		
-		url: "transactionCaller.php",
-		data: {amount: document.getElementById('amount').value, dataDesc: 'COMMON.APPLE.INAPP.PAYMENT', dataValue: objJsonB64},
-		method: 'POST',
-		timeout: 5000
-		
-	}).done(function(data){
-		
-		console.log('Success');
-		
-	}).fail(function(){
-		
-		console.log('Error');
-		
-	}).always(function(textStatus){
-		
-		console.log(textStatus);
-		messageFunc(textStatus);
-		
-	})
-*/
 	
 	session.oncancel = function(event) {
 		console.log('starting session.cancel');
