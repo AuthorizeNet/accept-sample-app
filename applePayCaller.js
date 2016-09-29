@@ -113,7 +113,7 @@ function applePayButtonClicked(){
 			
 			/* Send Payment token to Payment Gateway, here its defaulting to True just to mock that part */
 			
-			var returnFromGateway = createTransaction(paymentToken.paymentData);	
+			returnFromGateway = createTransaction(paymentToken.paymentData);	
 			console.log(returnFromGateway);
 			console.log("defaulting to successful payment by the Token");
 
