@@ -112,7 +112,7 @@ function applePayButtonClicked(){
 			
 			/* Send Payment token to Payment Gateway, here its defaulting to True just to mock that part */
 			
-			//createTransaction(paymentToken.paymentData);	
+			createTransaction(paymentToken.paymentData);	
 			
 			returnFromGateway = true;
 			/*-----------------------*/
