@@ -318,12 +318,12 @@
 		<?php include 'getProfiles.php'; ?>
 		
 		<div id="acceptJSPayDiv" style="position:absolute; bottom:15%; width: 100%; text-align:center">
-			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
-			<!--<button type="button" id="applePayButton" class="btn btn-default btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#ApplePayModal">Apple Pay</button></p> -->
-			<div id="applePayButton" class="apple-pay-button-with-text apple-pay-button-white-with-text col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6">
+			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px; min-height: 50px; max-height: 50px " data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
+			<input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden></input></p>
+			<!--<div id="applePayButton" class="apple-pay-button-with-text apple-pay-button-white-with-text col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6">
 			  <span class="text">Apple Pay</span>
 			  <span class="logo"></span>
-			</div>
+			</div>-->
 			<br>
 
 		</div>
