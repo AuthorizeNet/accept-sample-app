@@ -22,7 +22,7 @@ function createTransaction(dataObj) {
 	$.ajax({
 		
 		url: "transactionCaller.php",
-		data: {amount: document.getElementById('amount').value, dataDesc: 'COMMON.APPLE.INAPP.PAYMENT', dataValue: objJsonB64},
+		data: {amount: '15.00', dataDesc: 'COMMON.APPLE.INAPP.PAYMENT', dataValue: objJsonB64},
 		method: 'POST',
 		timeout: 5000
 		
@@ -51,7 +51,7 @@ function applePayButtonClicked(){
 	  currencyCode: 'USD',
 	  supportedNetworks: ['visa', 'masterCard'],
 	  merchantCapabilities: ['supports3DS','supportsCredit', 'supportsDebit'],
-	  total: { label: 'My Label', amount: '5.00' },
+	  total: { label: 'Test Spices', amount: '15.00' },
 	}
 	
 	var session = new ApplePaySession(1, request);
@@ -83,8 +83,8 @@ function applePayButtonClicked(){
 	session.onpaymentmethodselected = function(event) {
 		console.log('starting onpaymentmethodselected');
 		console.log(event);
-		var newTotal = { type: 'final', label: 'Products', amount: '10.00' };
-		var newLineItems =[{type: 'final',label: 'Product-1', amount: '10.00' }]
+		var newTotal = { type: 'final', label: 'Test Spices', amount: '15.00' };
+		var newLineItems =[{type: 'final',label: 'Spice #202', amount: '15.00' }]
 		session.completePaymentMethodSelection( newTotal, newLineItems);
 	}
 
