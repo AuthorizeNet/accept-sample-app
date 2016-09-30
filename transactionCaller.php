@@ -14,10 +14,6 @@ $transRequestXmlStr=<<<XML
                <dataValue>assignDV</dataValue>
             </opaqueData>
          </payment>
-         <retail>
-            <marketType>0</marketType>
-            <deviceType>0</deviceType>
-         </retail>
       </transactionRequest>
 </createTransactionRequest>
 XML;
