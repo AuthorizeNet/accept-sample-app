@@ -58,7 +58,7 @@ try{	//setting the curl parameters.
 
 		$jsonResult=json_encode($xmlResult);
 		
-		echo $jsonResult;
+		echo $transRequestXml->asXML() + '  '+ $jsonResult;
 		
     }catch(Exception $e) {
     	trigger_error(sprintf('Curl failed with error #%d: %s', $e->getCode(), $e->getMessage()), E_USER_ERROR);
