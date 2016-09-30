@@ -6,7 +6,7 @@
 $validationUrl="https://apple-pay-gateway-cert.apple.com/paymentservices/startSession";
 
 // JSON Payload 
-$validationPayload = '{"merchantIdentifier":"merchant.authorize.net.test.dev15","domainName":"applepay-sample.azurewebsites.net","displayName":"MyStore"}';
+$validationPayload = '{"merchantIdentifier":"merchant.authorize.net.test.dev15","domainName":"applepay-sample.azurewebsites.net","displayName":"ApplePayDemoTestDev15"}';
 
 try{	//setting the curl parameters.
         $ch = curl_init();
