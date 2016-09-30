@@ -36,6 +36,7 @@ $transRequestXml->transactionRequest->payment->opaqueData->dataValue=$_POST['dat
 
 $url="https://apitest.authorize.net/xml/v1/request.api";
 
+print_r($transRequestXml->asXML());
 
 try{	//setting the curl parameters.
         $ch = curl_init();
@@ -58,7 +59,7 @@ try{	//setting the curl parameters.
 
 		$jsonResult=json_encode($xmlResult);
 		
-		echo $transRequestXml->asXML() + '  '+ $jsonResult;
+		echo $jsonResult;
 		
     }catch(Exception $e) {
     	trigger_error(sprintf('Curl failed with error #%d: %s', $e->getCode(), $e->getMessage()), E_USER_ERROR);
