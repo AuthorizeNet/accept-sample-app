@@ -56,6 +56,11 @@
 	    	#home { font-size: 15px}
 	    }
 
+	    @media (min-width: 1022px) {
+	    	.modal-dialog { width: 850px}
+	    	#add_shipping { height: 300px }
+	    }
+
 		/* vertically center the Bootstrap modals */
 		.modal {
 			text-align: center;
@@ -141,6 +146,7 @@
 	<script src="applePayCaller.js"></script>
 
 <script type="text/javascript">
+
 	var baseUrl = "https://test.authorize.net/customer/";
 	var onLoad = true;
 	tab = null;
@@ -173,22 +179,40 @@
 			case "addShipping" 	: $frame = $("#add_shipping");break;
 			case "editPayment" 	: $frame = $("#edit_payment");break;
 			case "editShipping"	: $frame = $("#edit_shipping");break;
+			case "payment"		: $frame = $("#HostedPayment");break;
 		}
 
 		switch(params['action']){
-			case "resizeWindow" 	: if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
+			case "resizeWindow" 	: 	if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
+										if(parentFrame=="addShipping" && $(window).width() > 1021) params['height']= 350;
 										$frame.outerHeight(parseInt(params['height']));
-										//$frame.css("border","1px double #CCC");
 										break;
-			case "successfulSave" 	: $('#myModal').modal('hide'); location.reload(false); break;
-			case "cancel" 			: 	switch(parentFrame){
+
+			case "successfulSave" 	: 	$('#myModal').modal('hide');$("#HPModal").modal('hide'); location.reload(false); break;
+
+			case "cancel" 			: 	
+										var currTime = sessionStorage.getItem("lastTokenTime");
+										if (currTime === null || (Date.now()-currTime)/60000 > 15){
+											location.reload(true);
+											onLoad = true;
+										}
+										switch(parentFrame){
 										case "addPayment"   : $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
 										case "addShipping"  : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
 										case "manage"       : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
 										case "editPayment"  : $("#payment").show(); $("#addPayDiv").show(); break; 
-										case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); $("#addShipDiv").show(); break; 
+										case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); $("#addShipDiv").show(); break;
+										case "payment"		: $("#HPModal").modal('toggle');sessionStorage.removeItem("HPTokenTime"); $('#HostedPayment').attr('src','about:blank'); break; 
 										}
 						 				break;
+
+			case "transactResponse"	: 	sessionStorage.removeItem("HPTokenTime");
+										$('#HostedPayment').attr('src','about:blank');
+										$("#HPModal").modal('toggle');
+										var transResponse = JSON.parse(params['response']);
+										$("#HPConfirmation p").html("<strong><b> Success.. !! </b></strong> <br><br> Your payment of <b>$"+transResponse.totalAmount+"</b> for <b>"+transResponse.orderDescription+"</b> has been Processed Successfully on <b>"+transResponse.dateTime+"</b>.<br><br>Generated Order Invoice Number is :  <b>"+transResponse.orderInvoiceNumber+"</b><br><br> Happy Shopping with us ..");
+										$("#HPConfirmation p b").css({"font-size":"22px", "color":"green"});
+										$("#HPConfirmation").modal("toggle");
 		}
 	}
 
@@ -204,6 +228,7 @@
 				$("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();
 				$("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit();
 				$("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit();
+				sessionStorage.removeItem("HPTokenTime");
 			} ,100);
 			onLoad = false;
 		}
@@ -244,6 +269,7 @@
 			$("#send_token [name=paymentProfileId]").attr("value",$ppid);
 			$("#add_payment").hide();
 			$("#edit_payment").show();
+			$("#edit_payment").css({"height": "300px","background":"url(images/loader.gif) center center no-repeat"});
 			$("#send_token").attr({"action":baseUrl+"editPayment","target":"edit_payment"}).submit();
 			$("#send_token [name=paymentProfileId]").attr("value","");
 			$(window).scrollTop($("#edit_payment").offset().top-30);
@@ -259,6 +285,7 @@
 			$shid = $(this).attr("value");
 			$("#send_token [name=shippingAddressId]").attr("value",$shid);
 			$("#add_shipping").hide();
+			$("#edit_shipping").css({"height": "300px","background":"url(images/loader.gif) center center no-repeat"});
 			$("#send_token").attr({"action":baseUrl+"editShipping","target":"edit_shipping"}).submit();
 			$("#edit_shipping").show();
 			$("#send_token [name=shippingAddressId]").attr("value","");
@@ -271,6 +298,17 @@
 			$("#edit_shipping").hide();
 			$("#add_shipping").show();
 			$(window).scrollTop($("#add_shipping").offset().top-30);
+		});
+
+		$("#hostedPayButton").click(function(){
+			var currHPTime = sessionStorage.getItem("HPTokenTime");
+			if (currHPTime === null || (Date.now()-currHPTime)/60000 > 5){
+				sessionStorage.setItem("HPTokenTime",Date.now());
+				$("#getHPToken").load("getHostedPaymentForm.php");
+				$("#HostedPayment").css({"height": "300px","background":"url(images/loader.gif) center center no-repeat"});
+				$("#sendHPToken").submit();
+			}
+			$("#HPModal").modal('toggle');
 		});
 
 		vph = $(window).height();
@@ -316,16 +354,15 @@
 		<br/>
 
 		<?php include 'getProfiles.php'; ?>
+		<div id="getHPToken">
+			<?php include 'getHostedPaymentForm.php'; ?>
+		</div>
 		
+		<!-- <textarea><?php echo $xml->AsXML()?></textarea> -->
 		<div id="acceptJSPayDiv" style="position:absolute; bottom:15%; width: 100%; text-align:center">
-			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px; min-height: 50px; max-height: 50px " data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
-			<input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden></input></p>
-			<!--<div id="applePayButton" class="apple-pay-button-with-text apple-pay-button-white-with-text col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6">
-			  <span class="text">Apple Pay</span>
-			  <span class="logo"></span>
-			</div>-->
-			<br>
-
+			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
+			<button type="button" id="hostedPayButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="myModal">Hosted Pay</button></p><br>
+            <input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden></input></p><br>
 		</div>
 
 		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
@@ -352,10 +389,7 @@
 				
 				<div class="modal-body" id="acceptJSPayBody">
 					<!--form role="form"-->
-					
-					
-					
-					
+
 						<div class="form-group col-xs-8">
 							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
 							<input type="tel" class="form-control" id="creditCardNumber" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
@@ -364,19 +398,14 @@
 							<label for="cvv">CVV</label>
 							<input type="text" class="form-control" id="cvv" placeholder="123" autocomplete="off"/>
 						</div>
-						
-						
-						
-						
+
 						<!--div class="form-group col-xs-6 col-xs-offset-1" style="margin-bottom: 2px; border: 2px solid; border-color: #ccc; border-radius: 3px">
 							<span style="color: #999; font-weight: 550;">Expiry Date</span>
 						</div>
 						<div class="form-group col-xs-5" style="margin-bottom: 7px;">
 							<span style="opacity: 0">Filler</span>
 						</div-->
-						
-						
-						
+	
 					<div>
 					
 						<div class="form-group col-xs-5">
@@ -497,15 +526,49 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Edit Title</h4>
+		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Edit </h4>
 		      </div>
 		      <div class="modal-body">
-		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe>
+		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true" ></iframe>
 					<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe> 
 		      </div>
 		    </div>
 		  </div>
 		</div>
+
+		<div class="modal fade" id="HPModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog" >
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Make Payment</h4>
+		      </div>
+		      <div class="modal-body" >
+					<iframe id="HostedPayment" class="embed-responsive-item" width="100%" name="HostedPayment" frameborder="0" scrolling="no"></iframe>
+					<form id="sendHPToken" action="https://test.authorize.net/payment/payment" method="post" target="HostedPayment" >
+						<input type="hidden" name="token" value="<?php echo $hostedPaymentResponse->token ?>" />
+					</form>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+		<div class="modal fade" id="HPConfirmation" role="dialog">
+		    <div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+		      <div class="modal-content">
+		        <div class="modal-header">
+		          <button type="button" class="close" data-dismiss="modal">&times;</button>
+		          <h4 class="modal-title"><b>Payment Confirmation</b></h4>
+		        </div>
+			        <div class="modal-body" style="background-color: antiquewhite">
+			          	<p style="font-size: 16px; font-style: italic; padding:10px; color: #444; text-align: center"></p>
+			        </div>
+		        <div class="modal-footer">
+		          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+		        </div>
+		      </div> 
+    		</div>
+  		</div>
 
 	</div> 
 </body>
