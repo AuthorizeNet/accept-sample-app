@@ -81,6 +81,59 @@
 			vertical-align: middle;
 		}
 
+	.apple-pay-button-with-text {
+	    --apple-pay-scale: 1; /* (height / 32) */
+	    display: inline-flex;
+	    justify-content: center;
+	    font-size: 12px;
+	    border-radius: 5px;
+	    padding: 0px;
+	    box-sizing: border-box;
+	    min-width: 200px;
+	    min-height: 32px;
+	    max-height: 64px;
+	    cursor: pointer;
+	}
+
+	.apple-pay-button-white-with-text {
+	    background-color: white;
+	    color: black;
+	}
+
+	.apple-pay-button-white-with-line-with-text {
+	    background-color: white;
+	    color: black;
+	    border: .5px solid black;
+	}
+
+	.apple-pay-button-with-text.apple-pay-button-white-with-text > .logo {
+	    background-image: -webkit-named-image(apple-pay-logo-black);
+	    background-color: white;
+	}
+
+	.apple-pay-button-with-text.apple-pay-button-white-with-line-with-text > .logo {
+	    background-image: -webkit-named-image(apple-pay-logo-black);
+	    background-color: white;
+	}
+
+	.apple-pay-button-with-text > .text {
+	    font-family: -apple-system;
+	    font-size: calc(1em * var(--apple-pay-scale));
+	    font-weight: 300;
+	    align-self: center;
+	    margin-right: calc(2px * var(--apple-pay-scale));
+	}
+
+	.apple-pay-button-with-text > .logo {
+	    width: calc(35px * var(--scale));
+	    height: 100%;
+	    background-size: 100% 60%;
+	    background-repeat: no-repeat;
+	    background-position: 0 50%;
+	    margin-left: calc(2px * var(--apple-pay-scale));
+	    border: none;
+	}
+
 	</style>
 
 	<script src="scripts/jquery-2.1.4.min.js"></script>
@@ -90,6 +143,7 @@
 	
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
+	<script src="applePayCaller.js"></script>
 
 <script type="text/javascript">
 
@@ -308,6 +362,7 @@
 		<div id="acceptJSPayDiv" style="position:absolute; bottom:15%; width: 100%; text-align:center">
 			<br><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
 			<button type="button" id="hostedPayButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="myModal">Hosted Pay</button></p><br>
+            <input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden></input></p><br>
 		</div>
 
 		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
@@ -525,6 +580,10 @@
 	$('#submitButton').click(function(e){
 		e.preventDefault();
 		acceptJSCaller();
+	});
+	$('#applePayButton').click(function(e){
+		e.preventDefault();
+		applePayButtonClicked();
 	});
 </script>
 
