@@ -36,7 +36,9 @@ The sample application shows how to:
 1.  Incorporate the Accept.js library into your existing payment flow (Home page, PAY button)
 
 ### Accept Hosted
-Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  More details will be posted shortly on developer.authorize.net  
+Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  More details will be posted shortly on developer.authorize.net.
+
+![Accept Hosted Screenshot](screenshots/accept-hosted.png "Screenshots showing Accept Hosted.")
   
 The sample application shows how to:  
 1.  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)
@@ -44,7 +46,11 @@ The sample application shows how to:
 3.  Display a custom receipt using the transaction response.
 
 ### Apple Pay On The Web
-Authorize.Net supports Apple Pay on the Web in addition to our inapp Apple Pay Support.  In this sample we demonstrate how to:
+Authorize.Net supports Apple Pay on the Web in addition to our inapp Apple Pay Support.  
+
+![Apple Pay Screenshot](screenshots/apple-pay.png "Screenshots showing Apple Pay on the Web.")
+
+In this sample we demonstrate how to:
    
 1.  Integrate with the ApplePay.js library
 2.  Validate your merchant identity from your server.
