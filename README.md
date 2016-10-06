@@ -33,28 +33,30 @@ The sample application shows how to:
 Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI burden of credit card information hitting your servers.  See our [developer documentation](http://developer.authorize.net/api/reference/features/acceptjs.html) for more details.  
   
 The sample application shows how to:  
-1.  Incorporate the Accept.js library into your existing payment flow (Home page, PAY button)
+1.  Incorporate the Accept.js library into your existing payment flow (Home page, PAY button)  
 
 ### Accept Hosted
-Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  More details will be posted shortly on developer.authorize.net.
+Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  More details will be posted shortly on developer.authorize.net.  
 
 ![Accept Hosted Screenshot](screenshots/accept-hosted.png "Screenshots showing Accept Hosted.")
   
-The sample application shows how to:  
-1.  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)
-2.  Incorporate Accept Hosted into your existing payment flow (Home page, Hosted Pay button)
-3.  Display a custom receipt using the transaction response.
+  
+The sample application shows how to:    
+1.  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)  
+2.  Incorporate Accept Hosted into your existing payment flow (Home page, Hosted Pay button)  
+3.  Display a custom receipt using the transaction response.  
+  
 
 ### Apple Pay On The Web
 Authorize.Net supports Apple Pay on the Web in addition to our inapp Apple Pay Support.  
 
 ![Apple Pay Screenshot](screenshots/apple-pay.png "Screenshots showing Apple Pay on the Web.")
 
-In this sample we demonstrate how to:
+In this sample we demonstrate how to:  
    
-1.  Integrate with the ApplePay.js library
-2.  Validate your merchant identity from your server.
-3.  Complete the transaction by passing the Apple Pay payment data in the Authorize.Net createTransaction API.
+1.  Integrate with the ApplePay.js library  
+2.  Validate your merchant identity from your server.  
+3.  Complete the transaction by passing the Apple Pay payment data in the Authorize.Net createTransaction API.  
 
 Please note that you will need to have a merchant ID set up with Apple as described in the Apple Pay documentation https://developer.apple.com/reference/applepayjs/
 
