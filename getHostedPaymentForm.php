@@ -52,6 +52,12 @@ $xmlStr = <<<XML
             <phoneNumber>1231231234</phoneNumber>
         </billTo>
         <customerIP>192.168.1.1</customerIP>
+	<userFields>
+          <userField>
+             <name>sessionID</name>
+             <value>ABC123</value>
+          </userField>
+        </userFields>
     </transactionRequest>
     <hostedPaymentSettings>
         <setting>
