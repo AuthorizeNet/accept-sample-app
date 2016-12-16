@@ -70,6 +70,7 @@ function applePayButtonClicked(){
 		return new Promise(function(resolve, reject) {
 			var xhr = new XMLHttpRequest();
 			xhr.onload = function() {
+				console.log(this.responseText);
 				var data = JSON.parse(this.responseText);
 				console.log(data);
 				resolve(data);
