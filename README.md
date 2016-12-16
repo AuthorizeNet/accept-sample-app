@@ -15,8 +15,8 @@ For IIS, you could set these in FastCGI Settings -> Environment Variables
 
 + Browse the application (**index.php**) over HTTPS connection.
 + To "login" use an existing customer profile ID or create a new one (http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile)
-+ Payment forms are shown in the same page and Shipping forms are handled in a separate  modal popup. Any of the types can be choosen to display the forms.
-+ 
++ Payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. Any of the types can be chosen to display the forms.
+
   
 ## Examples Included
 
@@ -41,19 +41,19 @@ Accept Hosted provides a fully hosted payment transaction solution, Authorize.Ne
 ![Accept Hosted Screenshot](screenshots/accept-hosted.png "Screenshots showing Accept Hosted.")
   
   
-The sample application shows how to:    
+The sample application shows how to:
 1.  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)  
 2.  Incorporate Accept Hosted into your existing payment flow (Home page, Hosted Pay button)  
 3.  Display a custom receipt using the transaction response.  
   
 
 ### Apple Pay On The Web
-Authorize.Net supports Apple Pay on the Web in addition to our inapp Apple Pay Support.  
+Authorize.Net supports Apple Pay on the Web in addition to our in-app Apple Pay Support.  
 
 ![Apple Pay Screenshot](screenshots/apple-pay.png "Screenshots showing Apple Pay on the Web.")
 
 In this sample we demonstrate how to:  
-   
+
 1.  Integrate with the ApplePay.js library  
 2.  Validate your merchant identity from your server.  
 3.  Complete the transaction by passing the Apple Pay payment data in the Authorize.Net createTransaction API.  
