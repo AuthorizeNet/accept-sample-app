@@ -1,5 +1,5 @@
 
-; ** Make sure to add your API credentials as secure enevironment variables **
+; ** Make sure to add your API credentials as secure environment variables **
 ; APPSETTING_api_login_id   
 ; APPSETTING_transaction_key
 
