@@ -35,11 +35,11 @@ Accept.js is a new integration option which allows you to leverage the full powe
 The sample application shows how to:  
 1.  Incorporate the Accept.js library into your existing payment flow (Home page, PAY button)  
 
+
 ### Accept Hosted
-Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  More details will be posted shortly on developer.authorize.net.  
+Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.
 
 ![Accept Hosted Screenshot](screenshots/accept-hosted.png "Screenshots showing Accept Hosted.")
-  
   
 The sample application shows how to:
 1.  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)  
