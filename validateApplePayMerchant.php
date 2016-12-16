@@ -11,7 +11,7 @@ $merchantId = getenv("MERCHANT_ID");
 
 
 // JSON Payload 
-$validationPayload = '{"merchantIdentifier": "75EB20DC9B90325F01EED14EB1F1A761A00B17D6D53FC071D5FBC3698EA0F204","domainName": "accept-sample.azurewebsites.net","displayName":"ApplePayDemoTestDev15"}';
+$validationPayload = '{"merchantIdentifier": "merchant.authorize.net.test.dev15","domainName": "accept-sample.azurewebsites.net","displayName":"ApplePayDemoTestDev15"}';
 
 try{	//setting the curl parameters.
         $ch = curl_init();
