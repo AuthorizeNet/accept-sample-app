@@ -9,9 +9,6 @@ $pemPwd = getenv("PEM_PWD");
 $domainName = getenv("DOMAIN_NAME");
 $merchantId = getenv("MERCHANT_ID");
 
-print_r($pemPwd);
-print_r($domainName);
-print_r($domainName);
 
 // JSON Payload 
 $validationPayload = '{"merchantIdentifier":$merchantId,"domainName":$domainName,"displayName":"ApplePayDemoTestDev15"}';
