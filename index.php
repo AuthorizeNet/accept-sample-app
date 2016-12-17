@@ -348,6 +348,7 @@
 					<li role="presentation"><a href="#profile" data-toggle="tab">PROFILE</a></li>
 					<li role="presentation"><a href="#payment" data-toggle="tab">PAYMENT</a></li>
 					<li role="presentation"><a href="#shipping" data-toggle="tab">SHIPPING</a></li>
+				<!--	<li role="presentation"><a href="" onclick="logOut()" >LOGOUT</a></li> -->
 				</ul>
 			</div>
 		</div>
@@ -363,6 +364,8 @@
 			<br/><br/><br/><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
 			<button type="button" id="hostedPayButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="myModal">Hosted Pay</button></p><br>
             <input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden></input></p><br>
+<!--			<button type="button" id="logOutButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" onclick="logOut()">Logout</button></p><br> -->
+            
 		</div>
 
 		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
@@ -570,7 +573,7 @@
     		</div>
   		</div>
 
-	</div> 
+	</div>
 </body>
 
 <script>
