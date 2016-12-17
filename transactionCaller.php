@@ -46,7 +46,6 @@ try{	//setting the curl parameters.
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
-        curl_setopt($ch, CURLOPT_PROXY, 'userproxy.visa.com:80');
         $content = curl_exec($ch);
         if (FALSE === $content)
         	throw new Exception(curl_error($ch), curl_errno($ch));
