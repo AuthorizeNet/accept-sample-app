@@ -15,8 +15,8 @@ For IIS, you could set these in FastCGI Settings -> Environment Variables
 
 + Browse the application (**index.php**) over HTTPS connection.
 + To "login" use an existing customer profile ID or create a new one (http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile)
-+ Payment forms are shown in the same page and Shipping forms are handled in a separate  modal popup. Any of the types can be choosen to display the forms.
-+ 
++ Payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. Any of the types can be chosen to display the forms.
+
   
 ## Examples Included
 
@@ -35,25 +35,25 @@ Accept.js is a new integration option which allows you to leverage the full powe
 The sample application shows how to:  
 1.  Incorporate the Accept.js library into your existing payment flow (Home page, PAY button)  
 
+
 ### Accept Hosted
-Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  More details will be posted shortly on developer.authorize.net.  
+Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.
 
 ![Accept Hosted Screenshot](screenshots/accept-hosted.png "Screenshots showing Accept Hosted.")
   
-  
-The sample application shows how to:    
+The sample application shows how to:
 1.  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)  
 2.  Incorporate Accept Hosted into your existing payment flow (Home page, Hosted Pay button)  
 3.  Display a custom receipt using the transaction response.  
   
 
 ### Apple Pay On The Web
-Authorize.Net supports Apple Pay on the Web in addition to our inapp Apple Pay Support.  
+Authorize.Net supports Apple Pay on the Web in addition to our in-app Apple Pay Support.  
 
 ![Apple Pay Screenshot](screenshots/apple-pay.png "Screenshots showing Apple Pay on the Web.")
 
 In this sample we demonstrate how to:  
-   
+
 1.  Integrate with the ApplePay.js library  
 2.  Validate your merchant identity from your server.  
 3.  Complete the transaction by passing the Apple Pay payment data in the Authorize.Net createTransaction API.  

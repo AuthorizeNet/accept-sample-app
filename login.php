@@ -33,7 +33,7 @@
 			header('Location: '.$newURL);
 		}
 		else{
-			setcookie("temp_cpid",$_POST['form-username'], time() + (86400*7), "/");
+			setcookie("temp_cpid",$_POST['form-username'], 0, "/");
 			header('Location: '.$newURL);
 		}
 	}
