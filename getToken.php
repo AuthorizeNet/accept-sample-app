@@ -16,7 +16,7 @@ $xmlStr = <<<XML
 <setting><settingName>hostedProfileIFrameCommunicatorUrl</settingName></setting>
 <setting><settingName>hostedProfileReturnUrlText</settingName><settingValue>Back to Confirmation Page</settingValue></setting>
 <setting><settingName>hostedProfilePageBorderVisible</settingName><settingValue>false</settingValue></setting>
-<setting><settingName>hostedProfileBillingAddressOptions</settingName><settingValue>showNone</settingValue></setting>
+<setting><settingName>hostedProfileBillingAddressOptions</settingName><settingValue>showBillingAddress</settingValue></setting>
 <!--<setting><settingName>hostedProfileManageOptions</settingName><settingValue>showPayment</settingValue></setting> -->
 </hostedProfileSettings>
 </getHostedProfilePageRequest>
