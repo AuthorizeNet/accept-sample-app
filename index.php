@@ -210,7 +210,7 @@
 										$('#HostedPayment').attr('src','about:blank');
 										$("#HPModal").modal('toggle');
 										var transResponse = JSON.parse(params['response']);
-										$("#HPConfirmation p").html("<strong><b> Success.. !! </b></strong> <br><br> Your payment of <b>$"+transResponse.totalAmount+"</b> for <b>"+transResponse.orderDescription+"</b> has been Processed Successfully on <b>"+transResponse.dateTime+"</b>.<br><br>Generated Order Invoice Number is :  <b>"+transResponse.orderInvoiceNumber+"  "+transResponse.responseCode+"</b><br><br> Happy Shopping with us ..");
+										$("#HPConfirmation p").html("<strong><b> Success.. !! </b></strong> <br><br> Your payment of <b>$"+transResponse.totalAmount+"</b> for <b>"+transResponse.orderDescription+"</b> has been Processed Successfully on <b>"+transResponse.dateTime+"</b>.<br><br>Generated Order Invoice Number is :  <b>"+transResponse.orderInvoiceNumber+"</b><br><br> Happy Shopping with us ..");
 										$("#HPConfirmation p b").css({"font-size":"22px", "color":"green"});
 										$("#HPConfirmation").modal("toggle");
 		}
