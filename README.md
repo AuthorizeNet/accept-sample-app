@@ -13,6 +13,7 @@ SetEnv TRANSACTION_KEY your_key
 ````
 For IIS, you could set these in FastCGI Settings -> Environment Variables
 
++ Update acceptJSCaller.js's function, acceptJSCaller(), with your authentication values (clientKey, apiLoginID)
 + Browse the application (**index.php**) over HTTPS connection.
 + To "login" use an existing customer profile ID or create a new one (http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile)
 + Payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. Any of the types can be chosen to display the forms.
