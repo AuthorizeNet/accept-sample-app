@@ -6,12 +6,12 @@ if (window.ApplePaySession) {
       	console.log("Apple Pay Payment Available");
       	$("#applePayButton").prop('disabled', false);
       }else{
-      	console.log("Apple pay is available but not activated yet");
+      	console.log("Apple Pay is available but not activated yet");
       }
 	}); 
 }
 else{
-	console.log("Apple pay not Available in this browser");
+	console.log("Apple Pay not available in this browser");
 }
 
 function createTransaction(dataObj) {

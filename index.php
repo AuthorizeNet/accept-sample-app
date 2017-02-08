@@ -1,6 +1,3 @@
-
-<!DOCTYPE html>
-<html lang="en">
 <?php
 	session_start();
 	include 'getToken.php';
@@ -14,6 +11,8 @@
     	$_SESSION["cpid_error"]='false';
     }
 ?>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -42,7 +41,7 @@
 	    #home { color:ivory; margin-left: 15%; margin-right: 15% }
 
 		@media (min-width: 768px) {
-	    	.navbar-centered .nav > li > a { width:12%; }
+	    	.navbar-centered .nav > li > a { width:21%; }
 	    	#home { font-size: 30px}
 	    }
 
@@ -345,9 +344,9 @@
 			<div class="container-fluid navbar-centered">
 				<ul class="nav navbar-nav" style="margin-top: 0px; margin-bottom:0px; margin-left:auto">
 					<li role="presentation"><a href="#home" data-toggle="tab">HOME</a></li>
-					<li role="presentation"><a href="#profile" data-toggle="tab">PROFILE</a></li>
-					<li role="presentation"><a href="#payment" data-toggle="tab">PAYMENT</a></li>
-					<li role="presentation"><a href="#shipping" data-toggle="tab">SHIPPING</a></li>
+					<li role="presentation"><a href="#profile" data-toggle="tab">MANAGE PROFILE</a></li>
+					<li role="presentation"><a href="#payment" data-toggle="tab">ADD/EDIT PAYMENT</a></li>
+					<li role="presentation"><a href="#shipping" data-toggle="tab">ADD/EDIT SHIPPING</a></li>
 				<!--	<li role="presentation"><a href="" onclick="logOut()" >LOGOUT</a></li> -->
 				</ul>
 			</div>
@@ -361,9 +360,12 @@
 		
 		<!-- <textarea><?php echo $xml->AsXML()?></textarea> -->
 		<div id="acceptJSPayDiv" style="position:absolute; bottom:15%; width: 100%; text-align:center">
-			<br/><br/><br/><p><button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-sm-offset-3 col-sm-2 col-xs-offset-3 col-xs-6" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay</button>
-			<button type="button" id="hostedPayButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="myModal">Hosted Pay</button></p><br>
-            <input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-sm-offset-1 col-sm-2 col-xs-offset-3 col-xs-6" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden></input></p><br>
+			<br/><br/><br/><p>
+			<button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (Accept.js)</button>
+			<button type="button" id="hostedPayButton"   class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="myModal">Pay (Accept Hosted)
+			</button><!--</p><br>-->
+            <input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-2 col-xs-8" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden>
+			</input></p><br>
 <!--			<button type="button" id="logOutButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" onclick="logOut()">Logout</button></p><br> -->
             
 		</div>
@@ -372,7 +374,7 @@
 			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">Accept.js Example</h4>
+						<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
 					</div>
 					<div class="modal-body" id="acceptJSReceiptBody">
 					</div>
@@ -441,7 +443,7 @@
 		</div>
 		
 		<div id="addPayDiv" style="margin-left:5%">
-			<br><p><button type="button" id="addPaymentButton" class="btn btn-success btn-lg" style="margin: 5px">Add New Payment</button></p><br>
+			<br><p><button type="button" id="addPaymentButton" class="btn btn-primary btn-lg" style="margin: 5px">Add New Payment</button></p><br>
 		</div>
 
 		<div id="addShipDiv" style="margin-left:5%">
@@ -475,7 +477,7 @@
 
 		<div class="panel panel-info tab-pane center-block" id="payment" style="width:90%">
 			<div class="panel-heading">
-				<h2 class="panel-title text-center"><b>Payment Profiles</b></h2>
+				<h2 class="panel-title text-center"><b>Edit Payment Profiles (Using Accept Customer)</b></h2>
 			</div>
 			<div class="panel-body">
 			<div class="row">
@@ -499,7 +501,7 @@
 
 		<div class="panel panel-info tab-pane center-block" id="shipping" style="width:90%">
 			<div class="panel-heading">
-				<h3 class="panel-title text-center"><b>Shipping Addresses</b></h3>
+				<h3 class="panel-title text-center"><b>Edit Shipping Profiles (Using Accept Customer)</b></h3>
 			</div>
 			<div class="panel-body">
 				<div class="row">
@@ -544,7 +546,7 @@
 		    <div class="modal-content">
 		      <div class="modal-header">
 		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-		        <h4 class="modal-title" id="myModalLabel" style="font-weight: bold">Make Payment</h4>
+				<h4 class="modal-title" id="myModalLabel" style="font-weight: bold">ACCEPT HOSTED PAYMENT FORM EXAMPLE</h4>
 		      </div>
 		      <div class="modal-body" >
 					<iframe id="HostedPayment" class="embed-responsive-item" width="100%" name="HostedPayment" frameborder="0" scrolling="no"></iframe>

@@ -109,7 +109,7 @@ $xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'
 $commUrl = json_encode(array('url' => thisPageURL()."iCommunicator.html" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[0]->addChild('settingValue',$commUrl);
 
-$retUrl = json_encode(array("showReceipt" => false ,'url' => thisPageURL()."return.html","urlText"=>"Continue to site", "cancelUrl" => curPageURL()."return.html", "cancelUrlText" => "Cancel" ),JSON_UNESCAPED_SLASHES);
+$retUrl = json_encode(array("showReceipt" => false ,'url' => thisPageURL()."return.html","urlText"=>"Continue to site", "cancelUrl" => thisPageURL()."return.html", "cancelUrlText" => "Cancel" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[2]->addChild('settingValue',$retUrl);
 
 $url = "https://apitest.authorize.net/xml/v1/request.api";

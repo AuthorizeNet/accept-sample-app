@@ -1,3 +1,22 @@
+<?php
+    session_start();
+    $newURL="index.php";
+	if(isset($_POST['submit'])) 
+	{
+		if(isset($_POST['cookieCheck'])){
+			setcookie("cpid",$_POST['form-username'], time() + (86400*7), "/");
+			header('Location: '.$newURL);
+		}
+		else{
+			setcookie("temp_cpid",$_POST['form-username'], 0, "/");
+			header('Location: '.$newURL);
+		}
+	}
+
+	if(isset($_COOKIE['cpid'])){
+		header('Location: '.$newURL);
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,26 +42,6 @@
     </head>
 
     <body>
-    <?php
-    session_start();
-    $newURL="index.php";
-	if(isset($_POST['submit'])) 
-	{
-		if(isset($_POST['cookieCheck'])){
-			setcookie("cpid",$_POST['form-username'], time() + (86400*7), "/");
-			header('Location: '.$newURL);
-		}
-		else{
-			setcookie("temp_cpid",$_POST['form-username'], 0, "/");
-			header('Location: '.$newURL);
-		}
-	}
-
-	if(isset($_COOKIE['cpid'])){
-		header('Location: '.$newURL);
-	}
-	?>
-
         <!-- Top content -->
         <div class="top-content">
         	
