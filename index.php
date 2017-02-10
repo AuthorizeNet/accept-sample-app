@@ -178,12 +178,12 @@
 			case "addShipping" 	: $frame = $("#add_shipping");break;
 			case "editPayment" 	: $frame = $("#edit_payment");break;
 			case "editShipping"	: $frame = $("#edit_shipping");break;
-			case "payment"		: $frame = $("#HostedPayment");break;
+			case "payment"		: $frame = $("#load_payment");break;
 		}
 
 		switch(params['action']){
 			case "resizeWindow" 	: 	if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
-										if( parentFrame== "payment" && parseInt(params['height'])<1350) params['height']=1350;
+										if( parentFrame== "payment" && parseInt(params['height'])<1000) params['height']=1000;
 										if(parentFrame=="addShipping" && $(window).width() > 1021) params['height']= 350;
 										$frame.outerHeight(parseInt(params['height']));
 										break;
