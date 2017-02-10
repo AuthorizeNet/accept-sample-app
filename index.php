@@ -183,6 +183,7 @@
 
 		switch(params['action']){
 			case "resizeWindow" 	: 	if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
+										if( parentFrame== "payment" && parseInt(params['height'])<1350) params['height']=1350;
 										if(parentFrame=="addShipping" && $(window).width() > 1021) params['height']= 350;
 										$frame.outerHeight(parseInt(params['height']));
 										break;
