@@ -59,11 +59,44 @@ The Accept Hosted page should appear in your iFrame like this:
       
 ## Step 3.  Listen for Accept Hosted Messages.  
   
-In this step we will demonstrate how to resize your container iFrame based on resize messages from the Accept Hosted form.
-To securely communicate between our Accept Hosted page and your 
+In this step we will demonstrate how to resize your container iFrame based on resize messages from the Accept Hosted form.  
+To securely communicate between our Accept Hosted page and your web page we need a communicator page which will be hosted on your site alongside your checkout/payment page.  For example, in this sample application see https://github.com/AuthorizeNet/accept-sample-app/blob/master/iCommunicator.html. You can use this same communicator page in your application.
 
-The
-
+Pass the URL of your communicator page when you request a token (Step 1 above). For example:
+  
+````xml
+		<setting>
+			<settingName>hostedPaymentIFrameCommunicatorUrl</settingName>
+			<settingValue>{"url":"https://www.mystore.com/checkout/iCommunicator.html"}</settingValue>
+		</setting>
+````
+  
+Once you have the communicator page in place, you can listen for the messages in your main page.  See index.php in our sample.  
+  
+An important message to receive is the **resizeWindow** message.  Because our Accept Hosted form is responsive we need to let your application know when the iFrame needs to be resized.  An example is when the form becomes single column, on a phone, therefore the height is increased and this height increase is passed on in a **ResizeWindow** message.  
+  
+In our sample below, you can see where the height parameter is checked and then the iFrame outerHeight is increased accordingly:  
+  
+````javascript
+	CommunicationHandler.onReceiveCommunication = function (argument) {
+		params = parseQueryString(argument.qstr)
+		parentFrame = argument.parent.split('/')[4];
+		console.log(params);
+		console.log(parentFrame);
+		//alert(params['height']);
+		$frame = null;
+		switch(parentFrame){
+			case "manage" 		: $frame = $("#load_profile");break;
+			case "payment"		: $frame = $("#load_payment");break;
+		}
+		switch(params['action']){
+			case "resizeWindow" : if( parentFrame== "manage" && parseInt(params['height'])<1150) params['height']=1150;
+					      if( parentFrame== "payment" && parseInt(params['height'])<1000) params['height']=1000;
+					      $frame.outerHeight(parseInt(params['height']));
+					      break;
+````
+  
+  
 ## Step 4.  Display a custom receipt using the transaction response message.  
   
 In this step we will receive the payment form response via the iFrameCommunicatorURL and use that response data to present a custom receipt
