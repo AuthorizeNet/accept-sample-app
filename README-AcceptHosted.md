@@ -1,6 +1,7 @@
 
 # Accept Hosted Step-by-Step
 Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  This example demonstrates using an embedded iFrame to display the page, but you could also use a lightbox style popup iFrame.  See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.  
+Remember all these steps are reflected in this sample app which you can set up and run yourself.
   
 
 ## Step 1. Create a Secure Form Token
@@ -99,5 +100,36 @@ In our sample below, you can see where the height parameter is checked and then 
   
 ## Step 4.  Display a custom receipt using the transaction response message.  
   
-In this step we will receive the payment form response via the iFrameCommunicatorURL and use that response data to present a custom receipt
-
+In this step we will receive the payment form response via the iFrameCommunicatorURL and use that response data to present a custom receipt.  
+  
+ Now that you have the communication all set up (Step 3) it is simple to receive the transactResponse message:  
+   
+ ````javascript
+ case "transactResponse": 	
+				$('#HostedPayment').attr('src','about:blank');
+				var transResponse = JSON.parse(params['response']);
+				$("#HPConfirmation p").html("<strong><b> Success.. !! </b></strong> <br><br> Your payment of <b>$"+transResponse.totalAmount+"</b> for <b>"+transResponse.orderDescription+"</b> has been Processed Successfully on <b>"+transResponse.dateTime+"</b>.<br><br>Generated Order Invoice Number is :  <b>"+transResponse.orderInvoiceNumber+"</b><br><br> Happy Shopping with us ..");
+				$("#HPConfirmation p b").css({"font-size":"22px", "color":"green"});
+				$("#HPConfirmation").modal("toggle");
+ ````
+   
+ In the sample app we've used the data to present a simple confirmation and receipt dialog:  
+   
+ ````html
+ <div class="modal fade" id="HPConfirmation" role="dialog">
+    <div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+       <div class="modal-content">
+          <div class="modal-header">
+	      <button id="closeAcceptConfirmationHeaderBtn" type="button" class="close" data-dismiss="modal">&times;</button>
+	      <h4 class="modal-title"><b>Payment Confirmation</b></h4>
+          </div>
+	  <div class="modal-body" style="background-color: antiquewhite">
+	       <p style="font-size: 16px; font-style: italic; padding:10px; color: #444; text-align: center"></p>
+	  </div>
+          <div class="modal-footer">
+	     <button id="closeAcceptConfirmationFooterBtn" type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+          </div>
+      </div> 
+ </div>
+ ````  
+ 
