@@ -38,13 +38,11 @@ The sample application shows how to:
 
 
 ### Accept Hosted
-Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  You can host this page in an embedded iFrame, lightbox style popup or a full page redirect.  See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.
+Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  We have a Step-by-Step guide to the sample implementation here : https://github.com/AuthorizeNet/accept-sample-app/blob/master/README-AcceptHosted.md
 
-![Accept Hosted Screenshot](screenshots/accept-hosted.png "Screenshots showing Accept Hosted.")
-  
 The sample application shows how to:
 1.  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)  
-2.  Incorporate Accept Hosted into your existing payment flow (Home page, Hosted Pay button)  
+2.  Incorporate Accept Hosted into your existing payment flow (Pay tab)  
 3.  Display a custom receipt using the transaction response.  
   
 
