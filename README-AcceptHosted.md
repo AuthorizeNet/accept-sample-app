@@ -2,7 +2,7 @@
 # Accept Hosted Step-by-Step
 Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  This example demonstrates using an embedded iFrame to display the page, but you could also use a lightbox style popup iFrame.  See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.
 
-![Accept Hosted Screenshot](screenshots/AcceptHosted-Tablet.png "Screenshots showing Accept Hosted.")
+![Accept Hosted Screenshot](screenshots/AcceptHosted-Tablet.PNG "Screenshots showing Accept Hosted.")
 
 ## Step 1. Create a Secure Form Token
 
