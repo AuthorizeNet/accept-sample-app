@@ -12,6 +12,9 @@ You can try out the call in our sandbox API Explorer here:  http://developer.aut
   
 In this Accept Sample application you can find the sample code in https://github.com/AuthorizeNet/accept-sample-app/blob/master/getHostedPaymentForm.php
   
+With this method you can (1) specify how you want the payment form to look and behave, e.g. if it shows the Billing Address, text on the buttons, etc and (2) provide any information you want to be prepopulated on the form or passed along with the payment.  See the **Requesting a Token** section on our Feature Details page: http://developer.authorize.net/api/reference/features/accept_hosted.html
+  
+  
 See below for an example of the output from getHostedPaymentPage method.  The important response data is the token element as you will use this for the next step:
   
 ````xml
@@ -54,7 +57,14 @@ The Accept Hosted page should appear in your iFrame like this:
   ![Accept Hosted Screenshot](screenshots/AcceptHosted-Tablet.PNG "Screenshots showing Accept Hosted.")
     
       
-## Step 3.  Display a custom receipt using the transaction response.  
+## Step 3.  Listen for Accept Hosted Messages.  
+  
+In this step we will demonstrate how to resize your container iFrame based on resize messages from the Accept Hosted form.
+To securely communicate between our Accept Hosted page and your 
+
+The
+
+## Step 4.  Display a custom receipt using the transaction response message.  
   
 In this step we will receive the payment form response via the iFrameCommunicatorURL and use that response data to present a custom receipt
 
