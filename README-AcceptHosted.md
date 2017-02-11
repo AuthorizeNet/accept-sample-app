@@ -6,7 +6,8 @@ Accept Hosted provides a fully hosted payment transaction solution, Authorize.Ne
 
 ## Step 1. Create a Secure Form Token
 
-In this step we will request an Accept Hosted form token using the Authorize.Net API, you can try out the call in our sandbox API Explorer here:  http://developer.authorize.net/api/reference/#payment-transactions-get-an-accept-payment-page   
+In this step we will request an Accept Hosted form token using the Authorize.Net API.  
+You can try out the call in our sandbox API Explorer here:  http://developer.authorize.net/api/reference/#payment-transactions-get-an-accept-payment-page   
   
 **NOTE: This should be a fully authenticated server-side call for your application, for example if you had a .NET application this call would be in the code-behind .cs files, for a mobile app this could be in your node.js backend, etc**  
   
@@ -31,8 +32,24 @@ See below for an example of the output from getHostedPaymentPage method.  The im
   
 ## Step 2. Incorporate Accept Hosted form into your payment flow.
 
-In this step we will embed the payment form in a web page and complete the payment transaction
-
+In this step we will embed the payment form in a web page using an iFrame and complete the payment transaction.  
+  
+See our sample code, https://github.com/AuthorizeNet/accept-sample-app/blob/master/index.php 
+  
+  Here's an example of the iFrame which will contain the Accept Hosted page:
+  ````html
+  <iframe id="load_payment" class="embed-responsive-item" name="load_payment" width="100%" height="650px" frameborder="0" scrolling="no" hidden="true">
+			</iframe>
+ ````
+  
+  You could then load the Accept Hosted from into your iFrame like this:
+  ````html
+  <form id="send_hptoken" action="https://test.authorize.net/payment/payment" method="post" target="load_payment" >
+				<input type="hidden" name="token" value="<?php echo $hostedPaymentResponse->token ?>" />
+			</form>
+  ````
+  **NOTE:  The token passed to Accept Hosted is generated in Step 1 above.**
+    
 
 ## Step 3.  Display a custom receipt using the transaction response.  
   
