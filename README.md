@@ -1,19 +1,19 @@
 # Accept Sample Application
-This application provides examples of how to use the Authorize.Net Accept products to integrate secure payment acceptance into your applications.
+This application provides examples of how to use the Authorize.Net Accept suite of tools to integrate secure payment acceptance into your applications.
 
 ![Accept Screenshots](screenshots/AcceptTrioScreenShots.png "Screenshots showing the Accept hosted forms.")
 
 ## How to Use the Sample App
-+ Clone or download this repo
-+ Host the sample app in any web server supporting PHP like IIS (with PHP) or XAMPP (Apache web server with PHP). __HTTPS (SSL) must be enabled for your website.__
-+ Set your authentication values by setting the ENVIRONMENT variables API_LOGIN_ID and TRANSACTION_KEY.  For example, in httpd.conf:
++ Clone or download this repository
++ Host the sample app in any web server supporting PHP, like IIS (with PHP) or XAMPP (Apache web server with PHP). __HTTPS (SSL) must be enabled for your website.__
++ Set the authentication credentials in the application so that it uses your Authorize.Net sandbox (test) account. If you haven't yet signed up for a sandbox account, you can create a sandbox account at our [Developer Center] (https://developer.authorize.net/hello_world/sandbox/). Set ENVIRONMENT variables for API_LOGIN_ID and TRANSACTION_KEY using the credentials for your Authorize.Net sandbox account.  For example, in httpd.conf, you would add the following lines:
 ````
 SetEnv API_LOGIN_ID your_id
 SetEnv TRANSACTION_KEY your_key
 ````
-For IIS, you could set these in FastCGI Settings -> Environment Variables
-
-+ Update acceptJSCaller.js's function, acceptJSCaller(), with your authentication values (clientKey, apiLoginID)
+For IIS, you could set these environment variables in FastCGI Settings -> Environment Variables
+To set the authentication credentials that Accept.js uses, edit the acceptJSCaller() function in acceptJSCaller.js to use your API Login ID and public client key. (clientKey, apiLoginID)
+Account --> Security Settings --> API Credentials & Keys
 + Browse the application (**index.php**) over HTTPS connection.
 + To "login" use an existing customer profile ID or create a new one (http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile)
 + Payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. Any of the types can be chosen to display the forms.
