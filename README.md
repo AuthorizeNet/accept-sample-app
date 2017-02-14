@@ -12,8 +12,7 @@ SetEnv API_LOGIN_ID your_id
 SetEnv TRANSACTION_KEY your_key
 ````
 For IIS, you could set these environment variables in FastCGI Settings -> Environment Variables
-To set the authentication credentials that Accept.js uses, edit the acceptJSCaller() function in acceptJSCaller.js to use your API Login ID and public client key. (clientKey, apiLoginID)
-Account --> Security Settings --> API Credentials & Keys
++ Set the authentication credentials that Accept.js uses. Edit the acceptJSCaller() function in acceptJSCaller.js to use your API Login ID and public client key. (clientKey, apiLoginID). A public Client Key can be created in the MINT Account --> Security Settings --> API Credentials & Keys
 + Browse the application (**index.php**) over HTTPS connection.
 + To "login" use an existing customer profile ID or create a new one (http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile)
 + Payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. Any of the types can be chosen to display the forms.
