@@ -102,7 +102,8 @@ $xmlStr = <<<XML
     </hostedPaymentSettings>
 </getHostedPaymentPageRequest>
 XML;
-$xml = new SimpleXMLElement($xmlStr);
+$xml = simplexml_load_string($xmlStr,'SimpleXMLElement', LIBXML_NOWARNING);
+// $xml = new SimpleXMLElement($xmlStr);
 $xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
 $xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
 
@@ -128,6 +129,8 @@ $url = "https://apitest.authorize.net/xml/v1/request.api";
         curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
         //curl_setopt($ch, CURLOPT_PROXY, 'userproxy.visa.com:80');
         $content = curl_exec($ch);
+        $content = str_replace('xmlns="AnetApi/xml/v1/schema/AnetApiSchema.xsd"', '', $content);
+
         $hostedPaymentResponse = new SimpleXMLElement($content);
         if (FALSE === $content)
         	throw new Exception(curl_error($ch), curl_errno($ch));
