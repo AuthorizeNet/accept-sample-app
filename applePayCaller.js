@@ -51,7 +51,7 @@ function applePayButtonClicked(){
 	  countryCode: 'US',
 	  currencyCode: 'USD',
 	  supportedNetworks: ['visa', 'masterCard', 'amex', 'discover'],
-	  merchantCapabilities: ['supports3DS','supportsCredit', 'supportsDebit'],
+	  merchantCapabilities: ['supports3DS','supportsCredit', 'supportsDebit'], // Make sure NOT to include supportsEMV here
 	  total: { label: 'Test Spices', amount: '15.00' },
 	}
 	
