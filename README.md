@@ -6,15 +6,15 @@ This application provides examples of how to use the Authorize.Net Accept suite 
 ## How to Use the Sample App
 + Clone or download this repository
 + Host the sample app in any web server supporting PHP, like IIS (with PHP) or XAMPP (Apache web server with PHP). __HTTPS (SSL) must be enabled for your website.__
-+ Set the authentication credentials in the application so that it uses your Authorize.Net sandbox (test) account. If you haven't yet signed up for a sandbox account, you can create a sandbox account at our [Developer Center] (https://developer.authorize.net/hello_world/sandbox/). Set ENVIRONMENT variables for API_LOGIN_ID and TRANSACTION_KEY using the credentials for your Authorize.Net sandbox account.  For example, in httpd.conf, you would add the following lines:
-````
-SetEnv API_LOGIN_ID your_id
-SetEnv TRANSACTION_KEY your_key
-````
-For IIS, you could set these environment variables in FastCGI Settings -> Environment Variables
++ Set the authentication credentials in the application so that it uses your Authorize.Net sandbox (test) account. If you haven't yet signed up for a sandbox account, you can create a sandbox account at our [Developer Center] (https://developer.authorize.net/hello_world/sandbox/). Set ENVIRONMENT variables for API_LOGIN_ID and TRANSACTION_KEY using the credentials for your Authorize.Net sandbox account. For example, in httpd.conf, you would add the following lines:
+
+        SetEnv API_LOGIN_ID your_id
+        SetEnv TRANSACTION_KEY your_key  
+
+  For IIS, you could set these environment variables in FastCGI Settings -> Environment Variables
 + Set the authentication credentials that Accept.js uses. Edit the acceptJSCaller() function in acceptJSCaller.js to use your API Login ID and Public Client Key for the values of authData.apiLoginID and authData.clientKey. A Public Client Key can be created by logging into the [Merchant Inteferface] (https://sandbox.authorize.net/) and navigating to Account --> Security Settings --> Manage Public Client Key.
 + Browse the application (**index.php**) over HTTPS connection.
-+ To "login" use an existing customer profile ID or create a new one (http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile)
++ To "login", use a customer profile ID that already exists within your account or create a new one (http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile).
 + Payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. Any of the types can be chosen to display the forms.
 
   
