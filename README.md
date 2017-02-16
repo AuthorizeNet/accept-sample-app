@@ -22,7 +22,7 @@ This application provides examples of how to use the Authorize.Net Accept suite 
 ## Examples Included
 
 ### Accept Customer
-Accept Customer is the new name for Hosted CIM, part of our [Customer Profiles API](http://developer.authorize.net/api/reference/features/customer_profiles.html)
+Accept Customer is the new name for Hosted CIM, part of our Customer Profiles API. See our [developer documentation](http://developer.authorize.net/api/reference/features/customer_profiles.html) for more details.
   
 The sample application shows how to:  
 
@@ -32,7 +32,7 @@ The sample application shows how to:
   
   
 ### Accept.js
-Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI compliance burden of credit card information hitting your servers.  See our [developer documentation](http://developer.authorize.net/api/reference/features/acceptjs.html) for more details.  
+Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI compliance burden of credit card information hitting your servers. See our [developer documentation](http://developer.authorize.net/api/reference/features/acceptjs.html) for more details.  
   
 The sample application shows how to:  
   
@@ -40,7 +40,7 @@ The sample application shows how to:
 
 
 ### Accept Hosted
-Accept Hosted provides a fully hosted payment transaction solution. Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  We have a Step-by-Step guide to the sample implementation here: [README-AcceptHosted.md](README-AcceptHosted.md)
+Accept Hosted provides a fully hosted payment transaction solution. Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  We have a Step-by-Step guide to the sample implementation here: [README-AcceptHosted.md](README-AcceptHosted.md). See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.
 
 The sample application shows how to:  
   
@@ -50,7 +50,7 @@ The sample application shows how to:
   
 
 ### Apple Pay On The Web
-Authorize.Net supports Apple Pay on the Web in addition to our in-app Apple Pay Support.  
+Authorize.Net supports Apple Pay on the Web in addition to our in-app Apple Pay Support. See our [developer documentation](http://developer.authorize.net/api/reference/features/in-app.html) for more details.   
 
 ![Apple Pay Screenshot](screenshots/apple-pay.png "Screenshots showing Apple Pay on the Web.")
 
