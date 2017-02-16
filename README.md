@@ -4,6 +4,7 @@ This application provides examples of how to use the Authorize.Net Accept suite 
 ![Accept Screenshots](screenshots/AcceptTrioScreenShots.png "Screenshots showing the Accept hosted forms.")
 
 ## How to Use the Sample App
+
 + Clone or download this repository
 + Host the sample app in any web server supporting PHP, like IIS (with PHP) or XAMPP (Apache web server with PHP). __HTTPS (SSL) must be enabled for your website.__
 + Set the authentication credentials in the application so that it uses your Authorize.Net sandbox (test) account. If you haven't yet signed up for a sandbox account, you can create a sandbox account at our [Developer Center] (https://developer.authorize.net/hello_world/sandbox/). Set ENVIRONMENT variables for API_LOGIN_ID and TRANSACTION_KEY using the credentials for your Authorize.Net sandbox account. For example, in httpd.conf, you would add the following lines:
@@ -24,24 +25,27 @@ This application provides examples of how to use the Authorize.Net Accept suite 
 Accept Customer is the new name for Hosted CIM, part of our [Customer Profiles API](http://developer.authorize.net/api/reference/features/customer_profiles.html)
   
 The sample application shows how to:  
-* Incorporate the Manage Customer hosted page into your application (Profiles tab).  
-* Embed the hosted "Add/Edit Payment" page into your application as an iFrame (Payments tab).  
-* Pop up the hosted "Add/Edit Shipping" page in a light-box mode (Shipping tab).  
+
+* Incorporate the Manage Customer hosted page into your application ("Profile" tab).  
+* Embed the hosted "Add/Edit Payment" page into your application as an iFrame ("Payment Methods" tab).  
+* Pop up the hosted "Add/Edit Shipping" page in a light-box mode ("Shipping" tab).  
   
   
 ### Accept.js
-Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI burden of credit card information hitting your servers.  See our [developer documentation](http://developer.authorize.net/api/reference/features/acceptjs.html) for more details.  
+Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI compliance burden of credit card information hitting your servers.  See our [developer documentation](http://developer.authorize.net/api/reference/features/acceptjs.html) for more details.  
   
 The sample application shows how to:  
-*  Incorporate the Accept.js library into your existing payment flow (Home page, PAY button)  
+  
+* Incorporate the Accept.js library into your existing payment flow ("Pay" tab --> "Pay (Accept.js)" button)  
 
 
 ### Accept Hosted
-Accept Hosted provides a fully hosted payment transaction solution, Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  We have a Step-by-Step guide to the sample implementation here : https://github.com/AuthorizeNet/accept-sample-app/blob/master/README-AcceptHosted.md
+Accept Hosted provides a fully hosted payment transaction solution. Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  We have a Step-by-Step guide to the sample implementation here: [README-AcceptHosted.md](README-AcceptHosted.md)
 
-The sample application shows how to:
-*  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm)  
-*  Incorporate Accept Hosted into your existing payment flow (Pay tab)  
+The sample application shows how to:  
+  
+*  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm).  
+*  Incorporate the Accept Hosted payment form into your existing payment flow ("Pay" tab).  
 *  Display a custom receipt using the transaction response.  
   
 
@@ -51,9 +55,10 @@ Authorize.Net supports Apple Pay on the Web in addition to our in-app Apple Pay 
 ![Apple Pay Screenshot](screenshots/apple-pay.png "Screenshots showing Apple Pay on the Web.")
 
 In this sample we demonstrate how to:  
-* Integrate with the ApplePay.js library  
+
+* Integrate with the ApplePay.js library.  
 * Validate your merchant identity from your server.  
 * Complete the transaction by passing the Apple Pay payment data in the Authorize.Net createTransaction API.  
 
-Please note that you will need to have a merchant ID set up with Apple as described in the Apple Pay documentation https://developer.apple.com/reference/applepayjs/
+Please note that you will need to have a merchant ID set up with Apple as described in their Apple Pay documentation: https://developer.apple.com/reference/applepayjs/
 
