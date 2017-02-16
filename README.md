@@ -27,7 +27,7 @@ Accept Customer is the new name for Hosted CIM, part of our Customer Profiles AP
 The sample application shows how to:  
 
 * Incorporate the Manage Customer hosted page into your application ("Profile" tab).  
-* Embed the hosted "Add/Edit Payment" page into your application as an iFrame ("Payment Methods" tab).  
+* Embed the hosted "Add/Edit Payment" page into your application as an iframe ("Payment Methods" tab).  
 * Pop up the hosted "Add/Edit Shipping" page in a light-box mode ("Shipping" tab).  
   
   
