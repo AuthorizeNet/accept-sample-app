@@ -8,14 +8,12 @@ $transRequestXmlStr=<<<XML
          <transactionType>authCaptureTransaction</transactionType>
          <amount>assignAMOUNT</amount>
          <currencyCode>USD</currencyCode>
-         <payment>
             <profile>
                <customerProfileId>assignCP</customerProfileId>
                <paymentProfile>
                   <paymentProfileId>assignCPP</paymentProfileId>
                </paymentProfile>
             </profile>
-         </payment>
       </transactionRequest>
 </createTransactionRequest>
 XML;
@@ -29,8 +27,8 @@ $transRequestXml->merchantAuthentication->addChild('name',$loginId);
 $transRequestXml->merchantAuthentication->addChild('transactionKey',$transactionKey);
 
 $transRequestXml->transactionRequest->amount=$_POST['amount'];
-$transRequestXml->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
-$transRequestXml->transactionRequest->payment->opaqueData->dataValue=$_POST['dataValue'];
+$transRequestXml->transactionRequest->profile->customerProfileId=$_POST['customerProfileId'];
+$transRequestXml->transactionRequest->profile->paymentProfile->paymentProfileId=$_POST['paymentProfileId'];
 
 $url="https://apitest.authorize.net/xml/v1/request.api";
 
