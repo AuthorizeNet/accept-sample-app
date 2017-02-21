@@ -378,7 +378,7 @@
 		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
 			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header" id="acceptJSReceiptHeader">
 						<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
 					</div>
 					<div class="modal-body" id="acceptJSReceiptBody">
