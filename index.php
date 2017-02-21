@@ -607,6 +607,10 @@
 		e.preventDefault();
 		applePayButtonClicked();
 	});
+	$('#profilePayButton').click(function(e){
+		e.preventDefault();
+		createProfileTransaction();
+	});
 	$('#closeAcceptConfirmationHeaderBtn').click(function(e){
 		refreshAcceptHosted();
 	});
