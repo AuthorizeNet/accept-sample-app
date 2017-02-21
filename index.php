@@ -143,6 +143,7 @@
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
 	<script src="applePayCaller.js"></script>
+	<script src="chargeProfile.js"></script>
 
 <script type="text/javascript">
 
@@ -377,7 +378,7 @@
 		<div id="acceptJSReceiptModal" class="modal fade" role="dialog">
 			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
 				<div class="modal-content">
-					<div class="modal-header">
+					<div class="modal-header" id="acceptJSReceiptHeader">
 						<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
 					</div>
 					<div class="modal-body" id="acceptJSReceiptBody">
@@ -544,14 +545,19 @@
 					<div id="acceptJSPayDiv" style="text-align:center">
 						<button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (Accept.js)</button>
 					</div>
-
+					<div id="profilePayDiv" style="text-align:center">
+						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px">Profile (Visa xxxx1111)</button>
+					</div>
+				</div>
+			        <div class="row">
+					
 					<div id="applePayDiv" style="text-align:center">
 						<input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-2 col-xs-8" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden>
 						</input>
 						<!--			<button type="button" id="logOutButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" onclick="logOut()">Logout</button></p><br> -->
 					</div>
-					<div id="profilePayDiv" style="text-align:center">
-						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Profile (Visa xxxx1111)</button>
+				        <div id="visaCheckoutDiv" style="text-align:center">
+						<img alt="Visa Checkout" class="v-button" role="button" src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png?cardBrands=VISA,MASTERCARD,DISCOVER,AMEX"/>
 					</div>
 				</div>
 			</div>
@@ -606,6 +612,10 @@
 	$('#applePayButton').click(function(e){
 		e.preventDefault();
 		applePayButtonClicked();
+	});
+	$('#profilePayButton').click(function(e){
+		e.preventDefault();
+		createProfileTransaction();
 	});
 	$('#closeAcceptConfirmationHeaderBtn').click(function(e){
 		refreshAcceptHosted();
