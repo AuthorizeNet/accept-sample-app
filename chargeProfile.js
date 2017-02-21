@@ -39,7 +39,7 @@ function showResult(msg)
 	$('#acceptJSReceiptModal').modal('show');
 }
 
-function createProfileTransaction(dataObj) {
+function createProfileTransaction() {
 	
 	$.ajax({
 		
