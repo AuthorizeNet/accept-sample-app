@@ -143,6 +143,7 @@
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
 	<script src="applePayCaller.js"></script>
+	<script src="chargeProfile.js"></script>
 
 <script type="text/javascript">
 
