@@ -551,8 +551,11 @@
 						</input>
 						<!--			<button type="button" id="logOutButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" onclick="logOut()">Logout</button></p><br> -->
 					</div>
+				        <div id="visaCheckoutDiv" style="text-align:center">
+						<img alt="Visa Checkout" class="v-button" role="button" src="https://sandbox.secure.checkout.visa.com/wallet-services-web/xo/button.png?cardBrands=VISA,MASTERCARD,DISCOVER,AMEX"/>
+					</div>
 					<div id="profilePayDiv" style="text-align:center">
-						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Profile (Visa xxxx1111)</button>
+						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px">Profile (Visa xxxx1111)</button>
 					</div>
 				</div>
 			</div>
