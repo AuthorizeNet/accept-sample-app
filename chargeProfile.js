@@ -43,7 +43,8 @@ function createProfileTransaction(dataObj) {
 	$.ajax({
 		
 		url: "createTransactionWithProfile.php",
-		data: {amount: Math.floor((Math.random() * 100) + 1), customerProfileId: dataObj.profileId, paymentProfileId: dataObj.paymentProfileId},
+		// These profiles IDs would NOT BE HARDCODED of course but rather taken from the logged in user
+		data: {amount: Math.floor((Math.random() * 100) + 1), customerProfileId: "1808251712", paymentProfileId: "1803116214"},
 		method: 'POST',
 		timeout: 5000
 		
