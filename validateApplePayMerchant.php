@@ -23,8 +23,11 @@ try{	//setting the curl parameters.
         curl_setopt($ch, CURLOPT_POSTFIELDS, $validationPayload);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+	// The following two curl SSL options are to "false" for ease of development/debug purposes only.
+	// Any code used in production should either remove these lines or set them to the appropriate
+	// values to properly use secure connections for PCI-DSS compliance.
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);	//for production, set value to true or 1
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);	//for production, set value to 2
 	curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 	curl_setopt($ch, CURLOPT_SSLCERT, './certs/apple-pay-test-cert.pem');
         curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $pemPwd);
