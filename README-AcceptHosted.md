@@ -1,21 +1,25 @@
 # Accept Hosted Step-by-Step
-Accept Hosted provides a fully hosted payment transaction solution. Authorize.Net takes care of the payment form, the transaction itself and (optionally) the receipt generation.  This example demonstrates using an embedded iframe to display the page, but you could also use a lightbox style popup iframe.  See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.  
-Remember all these steps are reflected in this sample app which you can set up and run yourself.
+Accept Hosted provides a fully hosted solution for processing payment transactions. Authorize.Net takes care of the payment form, the transaction itself, and the receipt generation (optional).  This example demonstrates using an embedded iframe to display the page, but you could also use a lightbox-style popup iframe.  See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.  
+These steps are reflected in this sample app, which you can set up and run yourself.
   
 
 ## Step 1. Request a Secure Form Token
 
 In this step we will request an Accept Hosted form token using the Authorize.Net API.  
-You can see the details of the API request and interactively try out the call in our sandbox API Explorer here:  http://developer.authorize.net/api/reference/#payment-transactions-get-an-accept-payment-page   
+You can see the details of the API request and interactively try out the call in our [sandbox API explorer] (http://developer.authorize.net/api/reference/#payment-transactions-get-an-accept-payment-page ).
   
-**NOTE: This should be a fully authenticated server-side call for your application. For example if you had a .NET application this call would be in the code-behind .cs files; for a mobile app this could be in your node.js backend, etc**  
+**NOTE: This should be a fully authenticated server-side call for your application. For example, if you had a .NET application this call would be in the code behind .cs files; for a mobile app this could be in your node.js backend, and so forth.**  
   
-In this Accept Sample application's respository you can find the sample code for this API request in [getHostedPaymentForm.php](getHostedPaymentForm.php).
+In this Accept sample application's respository you can find the sample code for this API request in [getHostedPaymentForm.php](getHostedPaymentForm.php).
   
-With this method you can (1) specify how you want the payment form to look and behave, e.g. if it shows the Billing Address, text on the buttons, etc and (2) provide any information you want to be prepopulated on the form or passed along with the payment.  See the **Requesting a Token** section on our Feature Details page: http://developer.authorize.net/api/reference/features/accept_hosted.html
+With this method you can do the following:
+
+ * Specify how you want the payment form to look and behave. For example, you can enable the billing address, configure the text on buttons, and so forth. 
+
+ * Provide any information you want to be prepopulated on the form or passed along with the payment. See the **Requesting a Token** section on our [Feature Details page] (http://developer.authorize.net/api/reference/features/accept_hosted.html).
   
   
-See below for an example of the response from the getHostedPaymentPage API request.  The important response data is the token element as you will use this for the next step:
+The code example below shows the response from the `getHostedPaymentPage` API request.  The important response data is the `token` element, which you will use this for the next step:
   
 ```xml
 <getHostedPaymentPageResponse>
@@ -32,7 +36,7 @@ See below for an example of the response from the getHostedPaymentPage API reque
 </getHostedPaymentPageResponse>
 ```
   
-## Step 2. Incorporate Accept Hosted form into your payment flow.
+## Step 2. Incorporate the Accept Hosted Form into Your Payment Flow
 
 In this step we will embed the payment form in a web page using an iframe and complete the payment transaction.  
   
@@ -60,11 +64,11 @@ The Accept Hosted page should appear in your iframe like this:
   ![Accept Hosted Screenshot](screenshots/AcceptHosted-Tablet.PNG "Screenshots showing Accept Hosted.")
     
       
-## Step 3.  Listen for Accept Hosted Messages.  
+## Step 3.  Listen for Accept Hosted Messages
   
 In this step we will demonstrate how to resize your container iframe based on resize messages from the Accept Hosted form.
 
-To securely communicate between our Accept Hosted form and your web page we need a communicator page which will be hosted on your site alongside your checkout/payment page. You can provide the URL of the communicator page in your token request, which will allow Authorize.Net to embed the communicator page in the payment form, and send javascript messaging through your communicator page to a listener script on your main page.
+To securely communicate between our Accept Hosted form and your web page, we need a communicator page which will be hosted on your site alongside your checkout/payment page. You can provide the URL of the communicator page in your token request, which will allow Authorize.Net to embed the communicator page in the payment form, and send JavaScript messaging through your communicator page to a listener script on your main page.
 
 For example, in this sample application, see the sample communicator page, [iCommunicator.html](iCommunicator.html). You can use this same communicator page in your application.
 
@@ -79,7 +83,7 @@ Pass the URL of your communicator page when you request a token (Step 1 above). 
   
 Once you have the communicator page in place, you can listen for the messages in your main page.  See [index.php](index.php) in our sample.
 
-An important message to receive is the **resizeWindow** message.  Because our Accept Hosted form is responsive we need to let your application know when the iframe needs to be resized. An example is when the form becomes single column on a phone. When that happens, the height is increased and this height increase is passed on in a **ResizeWindow** message.  
+An important message to receive is the `resizeWindow` message.  Because our Accept Hosted form is responsive, we need to let your application know when the iframe should be resized. For example, when the form becomes single column on a phone, the height is increased and this height increase is sent in a `ResizeWindow` message.  
   
 In our sample below, you can see where the height parameter is checked and then the iframe outerHeight is increased accordingly:  
   
@@ -103,11 +107,11 @@ In our sample below, you can see where the height parameter is checked and then 
 ```
   
   
-## Step 4.  Display a custom receipt using the transaction response message.  
+## Step 4.  Display a custom receipt Using the Transaction Response  
   
-In this step we will receive the payment form's response via the iFrameCommunicatorURL and use that response data to present a custom receipt.  
+In this step we will receive the payment form's response via the `iFrameCommunicatorURL` and use that response data to present a custom receipt.  
   
- Now that you have the communication all set up (Step 3) it is simple to receive the transactResponse message:  
+ Now that you have the communication set up (Step 3) it is simple to receive the `transactResponse` message:  
    
  ```javascript
  case "transactResponse": 	
