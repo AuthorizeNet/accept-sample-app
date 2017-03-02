@@ -82,7 +82,7 @@ function acceptJSCaller()
 {
 	var  secureData  =  {}  ,  authData  =  {}  ,  cardData  =  {};
 	cardData.cardNumber  =  document.getElementById('creditCardNumber').value;
-	//add cvv
+	cardData.cardCode = document.getElementById('cvv').value;
 	cardData.month  =  document.getElementById('expiryDateMM').value;
 	cardData.year  =  document.getElementById('expiryDateYY').value;
 	secureData.cardData  =  cardData;
