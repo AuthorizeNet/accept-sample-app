@@ -50,7 +50,7 @@ $url = "https://apitest.authorize.net/xml/v1/request.api";
         curl_setopt($ch, CURLOPT_POSTFIELDS, $xml->asXML());
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
-	// The following two curl SSL options are to "false" for ease of development/debug purposes only.
+	// The following two curl SSL options are set to "false" for ease of development/debug purposes only.
 	// Any code used in production should either remove these lines or set them to the appropriate
 	// values to properly use secure connections for PCI-DSS compliance.
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);	//for production, set value to true or 1
