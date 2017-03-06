@@ -350,7 +350,7 @@
 
      function onVisaCheckoutReady() {
      V.init({
-     apikey: "GY3CQNLRHKE63GWCVLHH13Ff12umyj4ZglGhGdCM6y6Liy0YE",
+     apikey: "7L4TQZKPHLJHK4IDAC2S13kDxvj2ltzjzBO1YUl1bBhD0vNqA",
      paymentRequest: {
       currencyCode: "USD",
       total : "16"
