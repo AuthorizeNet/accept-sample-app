@@ -139,11 +139,12 @@
 	<script src="scripts/bootstrap.min.js"></script>
 	<script src="scripts/jquery.cookie.js"></script>
 	
-	
+	<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script>
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
 	<script src="applePayCaller.js"></script>
 	<script src="chargeProfile.js"></script>
+	<script src="visaCheckoutTransaction.js"></script>
 
 <script type="text/javascript">
 
@@ -347,6 +348,53 @@
 	    window.location.href = 'login.php';
 	}
 
+     function onVisaCheckoutReady() {
+     V.init({
+     apikey: "GY3CQNLRHKE63GWCVLHH13Ff12umyj4ZglGhGdCM6y6Liy0YE",
+     paymentRequest: {
+      currencyCode: "USD",
+      total : "16"
+    },
+    settings: {
+      locale: "en_US",
+      countryCode: "US",
+      displayName: "...Corp",
+      logoUrl: "www.Some_Image_URL.gif",
+      websiteUrl: "www....Corp.com",
+      customerSupportUrl: "www....Corp.support.com",
+      shipping: {
+       acceptedRegions: ["US", "CA"],
+       collectShipping: "true"
+      },
+      payment: {
+       cardBrands: [
+        "VISA",
+        "MASTERCARD"],
+       acceptCanadianVisaDebit: "true"
+      },
+      review: {
+       message: "Merchant defined message",
+       buttonAction: "Continue"
+      },
+     dataLevel: "FULL"
+     }
+   }
+  );
+  V.on("payment.success", function(payment) {
+  	console.log("It worked - we will now make the payment with this secure Visa Checkout Blob");
+  	console.log(JSON.stringify(payment));
+  	createVCOTransaction(payment); }); 
+
+  V.on("payment.cancel", function(payment) {
+  	alert(JSON.stringify(payment)); 
+  	console.log("Someone cancelled!");
+  	console.log(JSON.stringify(payment));}); 
+  
+  V.on("payment.error", function(payment, error) {
+  	alert(JSON.stringify(error)); 
+  	console.log("Ooops!");
+  	console.log(JSON.stringify(payment)); }); 
+} 
 </script>
 
 </head>
