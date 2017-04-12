@@ -65,6 +65,32 @@ function createTransact(dataObj) {
 	
 }
 
+function authenticateConsumer(dataObj) {
+	
+	$.ajax({
+		
+		url: "transactionCaller.php",
+		data: {amount: document.getElementById('amount').value, dataDesc: dataObj.dataDescriptor, dataValue: dataObj.dataValue},
+		method: 'POST',
+		timeout: 5000
+		
+	}).done(function(data){
+		
+		console.log('Success');
+		
+	}).fail(function(){
+		
+		console.log('Error');
+		
+	}).always(function(textStatus){
+		
+		console.log(textStatus);
+		messageFunc(textStatus);
+		
+	})
+	
+}
+
 function  responseHandler(response) {
 	if (response.messages.resultCode === 'Error') {
 		for (var i = 0; i < response.messages.message.length; i++) {
@@ -74,11 +100,13 @@ function  responseHandler(response) {
 	} else {
 		console.log(response.opaqueData.dataDescriptor);
 		console.log(response.opaqueData.dataValue);
+
+
 		createTransact(response.opaqueData);
 	}
 }
 
-function acceptJSCaller()
+function payerAuthCaller()
 {
 	var  secureData  =  {}  ,  authData  =  {}  ,  cardData  =  {};
 	cardData.cardNumber  =  document.getElementById('creditCardNumber').value;

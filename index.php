@@ -140,10 +140,12 @@
 	<script src="scripts/jquery.cookie.js"></script>
 	
 	<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script>
+	<script src="https://includestest.ccdc02.com/cardinalcruise/v1/songbird.js"></script>
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
 	<script src="applePayCaller.js"></script>
 	<script src="chargeProfile.js"></script>
+	<script src="payerAuthCaller.js"></script>
 	<script src="visaCheckoutTransaction.js"></script>
 
 <script type="text/javascript">
@@ -481,12 +483,74 @@
 						<label for="amount">AMOUNT</label>
 							<input type="text" class="form-control" id="amount" placeholder="0.5"/>
 						</div>
+
 						
 					</div>
 						
 					<!--/form-->
 					<div style="text-align: center; margin-top: 20%;">
 						<button type="button" id="submitButton" class="btn btn-primary" style="width: 95%;">SUBMIT</button>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+		</div>
+
+				<!-- Modal -->
+		<div id="payerAuthPayModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+			<!-- Modal content-->
+			<div class="modal-content">
+				
+				<div class="modal-header">
+					<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
+				</div>
+				
+				<div class="modal-body" id="acceptJSPayBody">
+					<!--form role="form"-->
+
+						<div class="form-group col-xs-8">
+							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
+							<input type="tel" class="form-control" id="creditCardNumber" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
+						</div>
+						<div class="form-group col-xs-4">
+							<label for="cvv">CVV</label>
+							<input type="text" class="form-control" id="cvv" placeholder="123" autocomplete="off"/>
+						</div>
+
+						<!--div class="form-group col-xs-6 col-xs-offset-1" style="margin-bottom: 2px; border: 2px solid; border-color: #ccc; border-radius: 3px">
+							<span style="color: #999; font-weight: 550;">Expiry Date</span>
+						</div>
+						<div class="form-group col-xs-5" style="margin-bottom: 7px;">
+							<span style="opacity: 0">Filler</span>
+						</div-->
+	
+					<div>
+					
+						<div class="form-group col-xs-5">
+							<label for="expiryDateYY">EXP. DATE</label>
+							<input type="text" class="form-control" id="expiryDateYY" placeholder="YYYY"/>
+						</div>
+						
+						<div class="form-group col-xs-3">
+							<label for="expiryDateMM" style="opacity: 0">MONTH</label>
+							<input type="text" class="form-control" id="expiryDateMM" placeholder="MM"/>
+						</div>
+
+					
+						<div class="form-group col-xs-4">
+						<label for="amount">AMOUNT</label>
+							<input type="text" class="form-control" id="amount" placeholder="0.5"/>
+						</div>
+
+						
+					</div>
+						
+					<!--/form-->
+					<div style="text-align: center; margin-top: 20%;">
+						<button type="button" id="submitPAButton" class="btn btn-primary" style="width: 95%;">SUBMIT</button>
 					</div>
 					
 				</div>
@@ -596,6 +660,9 @@
 					<div id="profilePayDiv" style="text-align:center">
 						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px">Profile (Visa xxxx1111)</button>
 					</div>
+					<div id="payerAuthPayDiv" style="text-align:center">
+						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (3D-Secure)</button>
+					</div>
 				</div>
 			        <div class="row">
 					
@@ -653,9 +720,16 @@
 	$('#acceptJSPayButton').click(function(e){
 		e.preventDefault();
 	});
+	$('#payerAuthPayButton').click(function(e){
+		e.preventDefault();
+	});
 	$('#submitButton').click(function(e){
 		e.preventDefault();
 		acceptJSCaller();
+	});
+	$('#submitPAButton').click(function(e){
+		e.preventDefault();
+		payerAuthCaller();
 	});
 	$('#applePayButton').click(function(e){
 		e.preventDefault();
