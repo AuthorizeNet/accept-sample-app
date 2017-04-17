@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include 'getToken.php';
+	include 'generateCardinalJWT.php';
 	if ($response->messages->resultCode != "Ok") {
 			$_SESSION["cpid_error"]='true';
 			setcookie("cpid",'', time() -1, "/");
@@ -402,6 +403,9 @@
 </head>
 
 <body style=" background: url('scripts/background.png'); padding-top: 50px;">
+	
+	<input type='hidden' id='cardinalRequestJwt' value='<?php echo $cardinalRequestJwt; ?>'>
+	
 	<div class="container-fluid" style="width: 100%; margin: 0; padding:0">
 		
 		<div class="navbar navbar-inverse" role="navigation">
@@ -725,11 +729,11 @@
 	});
 	$('#submitButton').click(function(e){
 		e.preventDefault();
-		acceptJSCaller();
+		//acceptJSCaller();
+		payerAuthCaller();
 	});
 	$('#submitPAButton').click(function(e){
 		e.preventDefault();
-		payerAuthCaller();
 	});
 	$('#applePayButton').click(function(e){
 		e.preventDefault();
