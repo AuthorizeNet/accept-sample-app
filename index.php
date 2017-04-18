@@ -530,7 +530,7 @@
 
 						<div class="form-group col-xs-8">
 							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
-							<input type="tel" class="form-control" id="creditCardNumber" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
+							<input type="tel" class="form-control" id="creditCardNumberPA" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
 						</div>
 						<div class="form-group col-xs-4">
 							<label for="cvv">CVV</label>
@@ -548,12 +548,12 @@
 					
 						<div class="form-group col-xs-5">
 							<label for="expiryDateYY">EXP. DATE</label>
-							<input type="text" class="form-control" id="expiryDateYY" placeholder="YYYY" value="2021"/>
+							<input type="text" class="form-control" id="expiryDateYYPA" placeholder="YYYY"/>
 						</div>
 						
 						<div class="form-group col-xs-3">
 							<label for="expiryDateMM" style="opacity: 0">MONTH</label>
-							<input type="text" class="form-control" id="expiryDateMM" placeholder="MM" value="12"/>
+							<input type="text" class="form-control" id="expiryDateMMPA" placeholder="MM"/>
 						</div>
 
 					
