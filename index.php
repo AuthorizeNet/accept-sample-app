@@ -678,7 +678,7 @@
 						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px">Profile (Visa xxxx1111)</button>
 					</div>
 					<div id="payerAuthPayDiv" style="text-align:center">
-						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (3D-Secure)</button>
+						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#payerAuthPayModal">Pay (3D-Secure)</button>
 					</div>
 				</div>
 			        <div class="row">
