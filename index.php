@@ -441,6 +441,19 @@
 			</div>
 		</div>
 		
+	
+	       <div id="payerAuthReceiptModal" class="modal fade" role="dialog">
+			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+				<div class="modal-content">
+					<div class="modal-header" id="payerAuthReceiptHeader">
+						<h4 class="modal-title">3D-SECURE EXAMPLE</h4>
+					</div>
+					<div class="modal-body" id="payerAuthReceiptBody">
+					</div>
+				</div></div>
+			</div>
+		</div>
+	
 		<!-- Modal -->
 		<div id="acceptJSPayModal" class="modal fade" role="dialog">
 		<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
@@ -509,7 +522,7 @@
 			<div class="modal-content">
 				
 				<div class="modal-header">
-					<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
+					<h4 class="modal-title">3D-SECURE EXAMPLE</h4>
 				</div>
 				
 				<div class="modal-body" id="acceptJSPayBody">
