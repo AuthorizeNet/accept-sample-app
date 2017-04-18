@@ -548,12 +548,12 @@
 					
 						<div class="form-group col-xs-5">
 							<label for="expiryDateYY">EXP. DATE</label>
-							<input type="text" class="form-control" id="expiryDateYY" placeholder="YYYY"/>
+							<input type="text" class="form-control" id="expiryDateYY" placeholder="YYYY" value="2021"/>
 						</div>
 						
 						<div class="form-group col-xs-3">
 							<label for="expiryDateMM" style="opacity: 0">MONTH</label>
-							<input type="text" class="form-control" id="expiryDateMM" placeholder="MM"/>
+							<input type="text" class="form-control" id="expiryDateMM" placeholder="MM" value="12"/>
 						</div>
 
 					
