@@ -12,7 +12,7 @@ var payerAuthHtmlIds = {
       month: 'expiryDateMMPA'
     }
   },
-  amount: 'amount',
+  amount: 'amountPA',
   submitButton: 'submitButton'
 };
 
