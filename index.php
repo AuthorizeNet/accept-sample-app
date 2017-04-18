@@ -559,7 +559,7 @@
 					
 						<div class="form-group col-xs-4">
 						<label for="amount">AMOUNT</label>
-							<input type="text" class="form-control" id="amount" placeholder="0.5"/>
+							<input type="text" class="form-control" id="amountPA" placeholder="0.5"/>
 						</div>
 
 						
