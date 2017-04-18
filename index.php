@@ -729,11 +729,11 @@
 	});
 	$('#submitButton').click(function(e){
 		e.preventDefault();
-		//acceptJSCaller();
-		payerAuthCaller();
+		acceptJSCaller();
 	});
 	$('#submitPAButton').click(function(e){
 		e.preventDefault();
+		payerAuthCaller();
 	});
 	$('#applePayButton').click(function(e){
 		e.preventDefault();
