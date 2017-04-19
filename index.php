@@ -530,7 +530,7 @@
 
 						<div class="form-group col-xs-8">
 							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
-							<input type="tel" class="form-control" id="creditCardNumberPA" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
+							<input type="tel" class="form-control" id="creditCardNumberPA" placeholder="4000000000000002" value="4000000000000002" autocomplete="off"/>
 						</div>
 						<div class="form-group col-xs-4">
 							<label for="cvv">CVV</label>
