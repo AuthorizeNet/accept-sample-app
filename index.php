@@ -140,7 +140,7 @@
 	<script src="scripts/jquery.cookie.js"></script>
 	
 	<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script>
-	<script src="https://js.authorize.net/v1/Accept.js"></script>
+	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
 	<script src="applePayCaller.js"></script>
 	<script src="chargeProfile.js"></script>
