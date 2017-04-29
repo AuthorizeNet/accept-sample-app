@@ -6,13 +6,13 @@
  */
 var payerAuthHtmlIds = {
   card: {
-    number: 'creditCardNumber',
+    number: 'creditCardNumberPA',
     expiration: {
-      year: 'expiryDateYY',
-      month: 'expiryDateMM'
+      year: 'expiryDateYYPA',
+      month: 'expiryDateMMPA'
     }
   },
-  amount: 'amount',
+  amount: 'amountPA',
   submitButton: 'submitButton'
 };
 

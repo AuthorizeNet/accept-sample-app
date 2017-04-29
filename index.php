@@ -441,6 +441,19 @@
 			</div>
 		</div>
 		
+	
+	       <div id="payerAuthReceiptModal" class="modal fade" role="dialog">
+			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+				<div class="modal-content">
+					<div class="modal-header" id="payerAuthReceiptHeader">
+						<h4 class="modal-title">3D-SECURE EXAMPLE</h4>
+					</div>
+					<div class="modal-body" id="payerAuthReceiptBody">
+					</div>
+				</div></div>
+			</div>
+		</div>
+	
 		<!-- Modal -->
 		<div id="acceptJSPayModal" class="modal fade" role="dialog">
 		<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
@@ -509,7 +522,7 @@
 			<div class="modal-content">
 				
 				<div class="modal-header">
-					<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
+					<h4 class="modal-title">3D-SECURE EXAMPLE</h4>
 				</div>
 				
 				<div class="modal-body" id="acceptJSPayBody">
@@ -517,7 +530,7 @@
 
 						<div class="form-group col-xs-8">
 							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
-							<input type="tel" class="form-control" id="creditCardNumber" placeholder="4111111111111111" value="4111111111111111" autocomplete="off"/>
+							<input type="tel" class="form-control" id="creditCardNumberPA" placeholder="4000000000000002" value="4000000000000002" autocomplete="off"/>
 						</div>
 						<div class="form-group col-xs-4">
 							<label for="cvv">CVV</label>
@@ -535,18 +548,18 @@
 					
 						<div class="form-group col-xs-5">
 							<label for="expiryDateYY">EXP. DATE</label>
-							<input type="text" class="form-control" id="expiryDateYY" placeholder="YYYY"/>
+							<input type="text" class="form-control" id="expiryDateYYPA" placeholder="YYYY"/>
 						</div>
 						
 						<div class="form-group col-xs-3">
 							<label for="expiryDateMM" style="opacity: 0">MONTH</label>
-							<input type="text" class="form-control" id="expiryDateMM" placeholder="MM"/>
+							<input type="text" class="form-control" id="expiryDateMMPA" placeholder="MM"/>
 						</div>
 
 					
 						<div class="form-group col-xs-4">
 						<label for="amount">AMOUNT</label>
-							<input type="text" class="form-control" id="amount" placeholder="0.5"/>
+							<input type="text" class="form-control" id="amountPA" placeholder="0.5"/>
 						</div>
 
 						
@@ -665,7 +678,7 @@
 						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px">Profile (Visa xxxx1111)</button>
 					</div>
 					<div id="payerAuthPayDiv" style="text-align:center">
-						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (3D-Secure)</button>
+						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#payerAuthPayModal">Pay (3D-Secure)</button>
 					</div>
 				</div>
 			        <div class="row">
@@ -729,11 +742,11 @@
 	});
 	$('#submitButton').click(function(e){
 		e.preventDefault();
-		//acceptJSCaller();
-		payerAuthCaller();
+		acceptJSCaller();
 	});
 	$('#submitPAButton').click(function(e){
 		e.preventDefault();
+		payerAuthCaller();
 	});
 	$('#applePayButton').click(function(e){
 		e.preventDefault();
