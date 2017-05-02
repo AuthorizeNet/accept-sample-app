@@ -18,7 +18,7 @@ https://github.com/AuthorizeNet/accept-sample-app/blob/master/generateCardinalJW
       
 ## Step 3.  Start the Consumer Authentication Flow.
   
-  
+ ![3DS Screenshot](screenshots/3DS-Sample.PNG "Screenshot showing Consumer Authentication challenge.")
   
 ## Step 4.  Receive the response from Cardinal Cruise  
   
