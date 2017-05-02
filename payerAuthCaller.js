@@ -157,19 +157,19 @@ function payerAuthCaller() {
 
 
 
-function acceptJSCaller(orderData, paData)
+function acceptJSCaller(paData)
 {
 	console.warn('Entered acceptJSCaller');
                       
 	var  secureData  =  {}  ,  authData  =  {}  ,  cardData  =  {};
-	cardData.cardNumber  =  orderData.Consumer.Account.AccountNumber;
-	cardData.month  =  orderData.Consumer.Account.ExpirationMonth;
-	cardData.year  =  orderData.Consumer.Account.ExpirationYear;
+	cardData.cardNumber  =  document.getElementById(payerAuthHtmlIds.card.number).value;
+	cardData.month  =  document.getElementById(payerAuthHtmlIds.card.expiration.month).value;
+	cardData.year  =  document.getElementById(payerAuthHtmlIds.card.expiration.year).value;
 	secureData.cardData  =  cardData;
 	authData.clientKey  =  '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
 	authData.apiLoginID  =  '5KP3u95bQpv';
 	secureData.authData  =  authData;
-	console.warn('SecureData YOU WOULD NEVER LOG THIS: ', secureData);
+
 	Accept.dispatchData(secureData, responseHandler);
 
 	function  responseHandler(response) {
@@ -190,7 +190,7 @@ function acceptJSCaller(orderData, paData)
 		$.ajax({
 			
 			url: "transactionCaller.php",
-			data: {amount: orderData.OrderDetails.Amount, dataDesc: dataObj.dataDescriptor, dataValue: dataObj.dataValue, paIndicator: paData.ECIFlag, paValue: paData.CAVV},
+			data: {amount: document.getElementById(payerAuthHtmlIds.amount).value, dataDesc: dataObj.dataDescriptor, dataValue: dataObj.dataValue, paIndicator: paData.ECIFlag, paValue: paData.CAVV},
 			method: 'POST',
 			timeout: 5000
 			
