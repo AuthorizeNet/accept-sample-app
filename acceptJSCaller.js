@@ -86,8 +86,8 @@ function acceptJSCaller()
 	cardData.month  =  document.getElementById('expiryDateMM').value;
 	cardData.year  =  document.getElementById('expiryDateYY').value;
 	secureData.cardData  =  cardData;
-	authData.clientKey  =  '6jZy4G5vmCEat9G3xjtNguj7DLw5NhgS4PBr4KNp7tV2tXa34E3BkdG33dcX4S84';
-	authData.apiLoginID  =  '3e3b5H4YLP';
+	authData.clientKey  =  '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
+	authData.apiLoginID  =  '5KP3u95bQpv';
 	secureData.authData  =  authData;
 	Accept.dispatchData(secureData, 'responseHandler');
 }

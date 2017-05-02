@@ -33,7 +33,7 @@ function showResult(msg)
 	
 	//alert(message);
 	
-	$('#acceptJSReceiptHeader').html("<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>");
+	$('#acceptJSReceiptHeader').html("<h4 class='modal-title'>ACCEPT.JS EXAMPLE</h4>");
 	$('#acceptJSReceiptBody').html(message);
 	//jQuery.noConflict();
 	$('#acceptJSReceiptModal').modal('show');
