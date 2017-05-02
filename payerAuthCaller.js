@@ -169,7 +169,7 @@ function acceptJSCaller(orderData, paData)
 	authData.clientKey  =  '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
 	authData.apiLoginID  =  '5KP3u95bQpv';
 	secureData.authData  =  authData;
-	console.warn('SecureData YOU WOULD NEVER LOG THIS: 'secureData);
+	console.warn('SecureData YOU WOULD NEVER LOG THIS: ', secureData);
 	Accept.dispatchData(secureData, responseHandler);
 
 	function  responseHandler(response) {
