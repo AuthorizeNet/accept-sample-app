@@ -61,6 +61,7 @@ $(function () {
                       // Success indicates that we got back CCA values we can pass to the gateway
                       // No action indicates that everything worked, but there is no CCA values to worry about, so we can move on with the transaction
                       console.warn('The transaction was completed with no errors', responseData.Payment.ExtendedData);
+                      acceptJSCaller(data, responseData.Payment.ExtendedData);
                       break;
                     case "FAILURE":
                       // Failure indicates the authentication attempt failed
@@ -152,6 +153,62 @@ function payerAuthCaller() {
   } catch (error) {
     console.error('Error while trying to start CCA', error);
   }
+}
+
+
+
+function acceptJSCaller(orderData, paData)
+{
+	console.warn('Entered acceptJSCaller');
+                      
+	var  secureData  =  {}  ,  authData  =  {}  ,  cardData  =  {};
+	cardData.cardNumber  =  orderData.Consumer.Account.AccountNumber;
+	cardData.month  =  orderData.Consumer.Account.ExpirationMonth;
+	cardData.year  =  orderData.Consumer.Account.ExpirationYear;
+	secureData.cardData  =  cardData;
+	authData.clientKey  =  '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
+	authData.apiLoginID  =  '5KP3u95bQpv';
+	secureData.authData  =  authData;
+	console.warn('SecureData YOU WOULD NEVER LOG THIS: 'secureData);
+	Accept.dispatchData(secureData, responseHandler);
+
+	function  responseHandler(response) {
+	if (response.messages.resultCode === 'Error') {
+		for (var i = 0; i < response.messages.message.length; i++) {
+			console.log(response.messages.message[i].code + ':' + response.messages.message[i].text);
+		}
+		alert("acceptJS library error!")
+		} else {
+			console.log(response.opaqueData.dataDescriptor);
+			console.log(response.opaqueData.dataValue);
+			create3DSTransaction(response.opaqueData);
+		}
+	}
+
+	function create3DSTransaction(dataObj) {
+
+		$.ajax({
+			
+			url: "transactionCaller.php",
+			data: {amount: orderData.OrderDetails.Amount, dataDesc: dataObj.dataDescriptor, dataValue: dataObj.dataValue, paIndicator: paData.ECIFlag, paValue: paData.CAVV},
+			method: 'POST',
+			timeout: 5000
+			
+		}).done(function(data){
+			
+			console.log('Success');
+			
+		}).fail(function(){
+			
+			console.log('Error');
+			
+		}).always(function(textStatus){
+			
+			console.log(textStatus);
+			messageFunc(textStatus);
+			
+		})		
+	}
 }
 
 /**
