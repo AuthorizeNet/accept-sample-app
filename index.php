@@ -246,11 +246,11 @@
 		}
 
 		$("#iframe_holder iframe").hide();$("#payment").hide();$("#shipping").hide();
-		$("#home").hide();$("#digital").hide();$("#digitalPayDiv").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
+		$("#home").hide();$("#digital").hide();$("#digitalPayDiv").hide();$("#samplePayDiv").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
 		//$("body").css("background",""); $("body").css("background","url('scripts/background.png')");
 		switch(target){
 			case "#home" 		: $("#home").show();break;
-			case "#pay" 		: $("#pay").show();$("#digitalPayDiv").show();$("#load_payment").show();break;
+			case "#pay" 		: $("#pay").show();$("#digitalPayDiv").show();$("#samplePayDiv").show();$("#load_payment").show();break;
 			case "#profile" 	: $("#load_profile").show(); break;
 			case "#payment" 	: $("#payment").show(); $("#addPayDiv").show(); break;
 			case "#shipping" 	: $("#shipping").show(); $("#addShipDiv").show(); break;
@@ -665,7 +665,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-info tab-pane center-block" id="digitalPayDiv" style="width:90%">
+		<div class="panel panel-info tab-pane center-block" id="samplePayDiv" style="width:90%">
 			<div class="panel-heading">
 				<h3 class="panel-title text-center"><b>Additional Payment Examples</b></h3>
 			</div>
@@ -674,17 +674,20 @@
 					<div id="acceptJSPayDiv" style="text-align:center">
 						<button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (Accept.js)</button>
 					</div>
-					<div id="profilePayDiv" style="text-align:center">
-						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px">Profile (Visa xxxx1111)</button>
-					</div>
 					<div id="payerAuthPayDiv" style="text-align:center">
 						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#payerAuthPayModal">Pay (3D-Secure)</button>
 					</div>
 				</div>
-			        <div class="row">
-					
+			</div>
+		</div>
+		<div class="panel panel-info tab-pane center-block" id="digitalPayDiv" style="width:90%">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center"><b>Digital Payment Examples</b></h3>
+			</div>
+			<div class="panel-body">
+			    <div class="row">					
 					<div id="applePayDiv" style="text-align:center">
-						<input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-2 col-xs-8" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden>
+						<input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-2 col-xs-8" hidden>
 						</input>
 						<!--			<button type="button" id="logOutButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" onclick="logOut()">Logout</button></p><br> -->
 					</div>
