@@ -61,6 +61,7 @@ $(function () {
                       // Success indicates that we got back CCA values we can pass to the gateway
                       // No action indicates that everything worked, but there is no CCA values to worry about, so we can move on with the transaction
                       console.warn('The transaction was completed with no errors', responseData.Payment.ExtendedData);
+                      // CCA Succesful, now complete the transaction with Authorize.Net
                       acceptJSCaller(data, responseData.Payment.ExtendedData);
                       break;
                     case "FAILURE":
@@ -156,7 +157,12 @@ function payerAuthCaller() {
 }
 
 
-
+/**
+ * Accept.JS Caller
+ * 
+ * Here we pass the credit card fields off to Authorize.Net, using Accpet.js,
+ * so they never hit our server
+ */
 function acceptJSCaller(paData)
 {
 	console.warn('Entered acceptJSCaller');
@@ -185,6 +191,7 @@ function acceptJSCaller(paData)
 		}
 	}
 
+    // Call our sample backend with the Cardinal 3D-Secure values PLUS the Authorize.Net payment nonce
 	function create3DSTransaction(dataObj) {
 
 		$.ajax({
@@ -205,9 +212,50 @@ function acceptJSCaller(paData)
 		}).always(function(textStatus){
 			
 			console.log(textStatus);
-			messageFunc(textStatus);
+			showReceipt(textStatus);
 			
 		})		
+	}
+
+	function showReceipt(msg)
+	{
+		try{
+			responseObj=JSON.parse(msg);
+			if(responseObj.transactionResponse.responseCode=='1'){
+				message="Transaction Successful!<br>Transaction ID: "+responseObj.transactionResponse.transId;
+			}
+			else{
+				message="Transaction Unsuccessful.";//+responseObj.messages.message[0].text;
+				if(responseObj.transactionResponse.errors!=null)//to do: take care of errors[1] array being parsed into single object
+				{
+					message+=responseObj.transactionResponse.errors.error.errorText;
+				}
+				/*else if(responseObj.transactionResponse.errors[0]!=null)
+				{
+					for(i=0;i<responseObj.transactionResponse.errors.length;i++)
+					{
+						message+="<br>";
+						message+=responseObj.transactionResponse.errors[i].error.errorText;
+					}
+				}*/
+				if(responseObj.transactionResponse.transId!=null)
+				{
+					message+="<br>";
+					message+=("Transaction ID: "+responseObj.transactionResponse.transId)
+				}
+			}
+		}
+		catch(error){
+			console.log("Couldn't parse result string");
+			message="Error.";
+		}
+		
+		//alert(message);
+		
+		$('#payerAuthReceiptBody').html(message);
+		//jQuery.noConflict();
+		$('#payerAuthPayModal').modal('hide');
+		$('#payerAuthReceiptModal').modal('show');
 	}
 }
 

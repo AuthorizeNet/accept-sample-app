@@ -433,7 +433,7 @@
 			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
 				<div class="modal-content">
 					<div class="modal-header" id="acceptJSReceiptHeader">
-						<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
+						<h4 class="modal-title">ACCEPT.JS RECEIPT</h4>
 					</div>
 					<div class="modal-body" id="acceptJSReceiptBody">
 					</div>
@@ -446,7 +446,7 @@
 			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
 				<div class="modal-content">
 					<div class="modal-header" id="payerAuthReceiptHeader">
-						<h4 class="modal-title">3D-SECURE EXAMPLE</h4>
+						<h4 class="modal-title">3D-SECURE RECEIPT</h4>
 					</div>
 					<div class="modal-body" id="payerAuthReceiptBody">
 					</div>
