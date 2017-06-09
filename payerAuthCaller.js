@@ -163,7 +163,7 @@ function payerAuthCaller() {
  * Here we pass the credit card fields off to Authorize.Net, using Accpet.js,
  * so they never hit our server
  */
-function acceptJSCaller(paData)
+function acceptJSFromPACaller(paData)
 {
 	console.warn('Entered acceptJSCaller');
                       
