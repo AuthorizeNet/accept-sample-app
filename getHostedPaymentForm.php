@@ -104,8 +104,8 @@ $xmlStr = <<<XML
 XML;
 $xml = simplexml_load_string($xmlStr,'SimpleXMLElement', LIBXML_NOWARNING);
 // $xml = new SimpleXMLElement($xmlStr);
-$xml->merchantAuthentication->addChild('name',getenv('api_login_id'));
-$xml->merchantAuthentication->addChild('transactionKey',getenv('transaction_key'));
+$xml->merchantAuthentication->addChild('name',getenv('API_LOGIN_ID'));
+$xml->merchantAuthentication->addChild('transactionKey',getenv('TRANSACTION_KEY'));
 
 $commUrl = json_encode(array('url' => thisPageURL()."iCommunicator.html" ),JSON_UNESCAPED_SLASHES);
 $xml->hostedPaymentSettings->setting[0]->addChild('settingValue',$commUrl);

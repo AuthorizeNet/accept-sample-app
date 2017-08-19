@@ -1,4 +1,4 @@
-function showResult(msg)
+function messageFunc(msg)
 {
 	try{
 		responseObj=JSON.parse(msg);
@@ -33,19 +33,22 @@ function showResult(msg)
 	
 	//alert(message);
 	
-	$('#acceptJSReceiptHeader').html("<h4 class='modal-title'>ACCEPT.JS EXAMPLE</h4>");
 	$('#acceptJSReceiptBody').html(message);
 	//jQuery.noConflict();
+	$('#acceptJSPayModal').modal('hide');
 	$('#acceptJSReceiptModal').modal('show');
 }
 
-function createProfileTransaction() {
+function createVCOTransaction(dataObj) {
 	
 	$.ajax({
 		
-		url: "createTransactionWithProfile.php",
-		// These profiles IDs would NOT BE HARDCODED of course but rather taken from the logged in user
-		data: {amount: Math.floor((Math.random() * 100) + 1), customerProfileId: "1808251712", paymentProfileId: "1803116214"},
+		url: "transactionCaller.php",
+		data: {amount: Math.floor((Math.random() * 100) + 1), 
+			dataDesc: "COMMON.VCO.ONLINE.PAYMENT", 
+			dataValue: dataObj.encPaymentData, 
+			dataKey: dataObj.encKey,
+		    callId: dataObj.callid},
 		method: 'POST',
 		timeout: 5000
 		
@@ -60,10 +63,8 @@ function createProfileTransaction() {
 	}).always(function(textStatus){
 		
 		console.log(textStatus);
-		showResult(textStatus);
+		messageFunc(textStatus);
 		
 	})
 	
 }
-
-

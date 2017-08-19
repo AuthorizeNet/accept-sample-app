@@ -30,6 +30,18 @@ $transRequestXml->transactionRequest->amount=$_POST['amount'];
 $transRequestXml->transactionRequest->payment->opaqueData->dataDescriptor=$_POST['dataDesc'];
 $transRequestXml->transactionRequest->payment->opaqueData->dataValue=$_POST['dataValue'];
 
+if($_POST['dataDesc'] === 'COMMON.VCO.ONLINE.PAYMENT')
+{
+    $transRequestXml->transactionRequest->addChild('callId',$_POST['callId']);  
+}
+
+
+if(isset($_POST['paIndicator'])){
+    $transRequestXml->transactionRequest->addChild('cardholderAuthentication');
+    $transRequestXml->transactionRequest->addChild('authenticationIndicator',$_POST['paIndicator']);
+    $transRequestXml->transactionRequest->addChild('cardholderAuthenticationValue',$_POST['paValue']);
+}
+
 $url="https://apitest.authorize.net/xml/v1/request.api";
 
 //print_r($transRequestXml->asXML());

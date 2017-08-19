@@ -1,6 +1,7 @@
 <?php
 	session_start();
 	include 'getToken.php';
+	include 'generateCardinalJWT.php';
 	if ($response->messages->resultCode != "Ok") {
 			$_SESSION["cpid_error"]='true';
 			setcookie("cpid",'', time() -1, "/");
@@ -139,11 +140,14 @@
 	<script src="scripts/bootstrap.min.js"></script>
 	<script src="scripts/jquery.cookie.js"></script>
 	
-	
+	<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script>
+	<script src="https://includestest.ccdc02.com/cardinalcruise/v1/songbird.js"></script>
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
 	<script src="acceptJSCaller.js"></script>
 	<script src="applePayCaller.js"></script>
 	<script src="chargeProfile.js"></script>
+	<script src="payerAuthCaller.js"></script>
+	<script src="visaCheckoutTransaction.js"></script>
 
 <script type="text/javascript">
 
@@ -242,11 +246,11 @@
 		}
 
 		$("#iframe_holder iframe").hide();$("#payment").hide();$("#shipping").hide();
-		$("#home").hide();$("#digital").hide();$("#digitalPayDiv").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
+		$("#home").hide();$("#digital").hide();$("#digitalPayDiv").hide();$("#samplePayDiv").hide();$("#addPayDiv").hide(); $("#addShipDiv").hide();
 		//$("body").css("background",""); $("body").css("background","url('scripts/background.png')");
 		switch(target){
 			case "#home" 		: $("#home").show();break;
-			case "#pay" 		: $("#pay").show();$("#digitalPayDiv").show();$("#load_payment").show();break;
+			case "#pay" 		: $("#pay").show();$("#digitalPayDiv").show();$("#samplePayDiv").show();$("#load_payment").show();break;
 			case "#profile" 	: $("#load_profile").show(); break;
 			case "#payment" 	: $("#payment").show(); $("#addPayDiv").show(); break;
 			case "#shipping" 	: $("#shipping").show(); $("#addShipDiv").show(); break;
@@ -347,11 +351,61 @@
 	    window.location.href = 'login.php';
 	}
 
+     function onVisaCheckoutReady() {
+     V.init({
+     apikey: "7L4TQZKPHLJHK4IDAC2S13kDxvj2ltzjzBO1YUl1bBhD0vNqA",
+     paymentRequest: {
+      currencyCode: "USD",
+      total : "16"
+    },
+    settings: {
+      locale: "en_US",
+      countryCode: "US",
+      displayName: "...Corp",
+      logoUrl: "www.Some_Image_URL.gif",
+      websiteUrl: "www....Corp.com",
+      customerSupportUrl: "www....Corp.support.com",
+      shipping: {
+       acceptedRegions: ["US", "CA"],
+       collectShipping: "true"
+      },
+      payment: {
+       cardBrands: [
+        "VISA",
+        "MASTERCARD"],
+       acceptCanadianVisaDebit: "true"
+      },
+      review: {
+       message: "Merchant defined message",
+       buttonAction: "Continue"
+      },
+     dataLevel: "FULL"
+     }
+   }
+  );
+  V.on("payment.success", function(payment) {
+  	console.log("It worked - we will now make the payment with this secure Visa Checkout Blob");
+  	console.log(JSON.stringify(payment));
+  	createVCOTransaction(payment); }); 
+
+  V.on("payment.cancel", function(payment) {
+  	alert(JSON.stringify(payment)); 
+  	console.log("Someone cancelled!");
+  	console.log(JSON.stringify(payment));}); 
+  
+  V.on("payment.error", function(payment, error) {
+  	alert(JSON.stringify(error)); 
+  	console.log("Ooops!");
+  	console.log(JSON.stringify(payment)); }); 
+} 
 </script>
 
 </head>
 
 <body style=" background: url('scripts/background.png'); padding-top: 50px;">
+	
+	<input type='hidden' id='cardinalRequestJwt' value='<?php echo $cardinalRequestJwt; ?>'>
+	
 	<div class="container-fluid" style="width: 100%; margin: 0; padding:0">
 		
 		<div class="navbar navbar-inverse" role="navigation">
@@ -379,7 +433,7 @@
 			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
 				<div class="modal-content">
 					<div class="modal-header" id="acceptJSReceiptHeader">
-						<h4 class="modal-title">ACCEPT.JS EXAMPLE</h4>
+						<h4 class="modal-title">ACCEPT.JS RECEIPT</h4>
 					</div>
 					<div class="modal-body" id="acceptJSReceiptBody">
 					</div>
@@ -387,6 +441,19 @@
 			</div>
 		</div>
 		
+	
+	       <div id="payerAuthReceiptModal" class="modal fade" role="dialog">
+			<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+				<div class="modal-content">
+					<div class="modal-header" id="payerAuthReceiptHeader">
+						<h4 class="modal-title">3D-SECURE RECEIPT</h4>
+					</div>
+					<div class="modal-body" id="payerAuthReceiptBody">
+					</div>
+				</div></div>
+			</div>
+		</div>
+	
 		<!-- Modal -->
 		<div id="acceptJSPayModal" class="modal fade" role="dialog">
 		<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
@@ -433,12 +500,74 @@
 						<label for="amount">AMOUNT</label>
 							<input type="text" class="form-control" id="amount" placeholder="0.5"/>
 						</div>
+
 						
 					</div>
 						
 					<!--/form-->
 					<div style="text-align: center; margin-top: 20%;">
 						<button type="button" id="submitButton" class="btn btn-primary" style="width: 95%;">SUBMIT</button>
+					</div>
+					
+				</div>
+				
+			</div>
+		</div>
+		</div>
+
+				<!-- Modal -->
+		<div id="payerAuthPayModal" class="modal fade" role="dialog">
+		<div class="modal-dialog" style="display: inline-block; vertical-align: middle;">
+			<!-- Modal content-->
+			<div class="modal-content">
+				
+				<div class="modal-header">
+					<h4 class="modal-title">3D-SECURE EXAMPLE</h4>
+				</div>
+				
+				<div class="modal-body" id="acceptJSPayBody">
+					<!--form role="form"-->
+
+						<div class="form-group col-xs-8">
+							<label for="creditCardNumber">CREDIT CARD NUMBER</label>
+							<input type="tel" class="form-control" id="creditCardNumberPA" placeholder="4000000000000002" value="4000000000000002" autocomplete="off"/>
+						</div>
+						<div class="form-group col-xs-4">
+							<label for="cvv">CVV</label>
+							<input type="text" class="form-control" id="cvv" placeholder="123" autocomplete="off"/>
+						</div>
+
+						<!--div class="form-group col-xs-6 col-xs-offset-1" style="margin-bottom: 2px; border: 2px solid; border-color: #ccc; border-radius: 3px">
+							<span style="color: #999; font-weight: 550;">Expiry Date</span>
+						</div>
+						<div class="form-group col-xs-5" style="margin-bottom: 7px;">
+							<span style="opacity: 0">Filler</span>
+						</div-->
+	
+					<div>
+					
+						<div class="form-group col-xs-5">
+							<label for="expiryDateYY">EXP. DATE</label>
+							<input type="text" class="form-control" id="expiryDateYYPA" placeholder="YYYY"/>
+						</div>
+						
+						<div class="form-group col-xs-3">
+							<label for="expiryDateMM" style="opacity: 0">MONTH</label>
+							<input type="text" class="form-control" id="expiryDateMMPA" placeholder="MM"/>
+						</div>
+
+					
+						<div class="form-group col-xs-4">
+						<label for="amount">AMOUNT</label>
+							<input type="text" class="form-control" id="amountPA" placeholder="0.5"/>
+						</div>
+
+						
+					</div>
+						
+					<!--/form-->
+					<div style="text-align: center; margin-top: 20%;">
+						<button type="button" id="submitPAButton" class="btn btn-primary" style="width: 95%;">SUBMIT</button>
 					</div>
 					
 				</div>
@@ -536,7 +665,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-info tab-pane center-block" id="digitalPayDiv" style="width:90%">
+		<div class="panel panel-info tab-pane center-block" id="samplePayDiv" style="width:90%">
 			<div class="panel-heading">
 				<h3 class="panel-title text-center"><b>Additional Payment Examples</b></h3>
 			</div>
@@ -545,14 +674,20 @@
 					<div id="acceptJSPayDiv" style="text-align:center">
 						<button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (Accept.js)</button>
 					</div>
-					<div id="profilePayDiv" style="text-align:center">
-						<button type="button" id="profilePayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px">Profile (Visa xxxx1111)</button>
+					<div id="payerAuthPayDiv" style="text-align:center">
+						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#payerAuthPayModal">Pay (3D-Secure)</button>
 					</div>
 				</div>
-			        <div class="row">
-					
+			</div>
+		</div>
+		<div class="panel panel-info tab-pane center-block" id="digitalPayDiv" style="width:90%">
+			<div class="panel-heading">
+				<h3 class="panel-title text-center"><b>Digital Payment Examples</b></h3>
+			</div>
+			<div class="panel-body">
+			    <div class="row">					
 					<div id="applePayDiv" style="text-align:center">
-						<input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-2 col-xs-8" style="margin-top: 10px; margin-bottom: 10px; padding: 0px; min-height: 50px; max-height: 50px" hidden>
+						<input type="image" src="images\ApplePayLogo.png" id="applePayButton" class="btn btn-lg col-md-2 col-sm-offset-1 col-sm-3 col-xs-offset-2 col-xs-8" hidden>
 						</input>
 						<!--			<button type="button" id="logOutButton" class="btn btn-primary btn-lg col-sm-offset-2 col-sm-3 col-md-2 col-xs-offset-3 col-xs-6 " style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" onclick="logOut()">Logout</button></p><br> -->
 					</div>
@@ -605,9 +740,16 @@
 	$('#acceptJSPayButton').click(function(e){
 		e.preventDefault();
 	});
+	$('#payerAuthPayButton').click(function(e){
+		e.preventDefault();
+	});
 	$('#submitButton').click(function(e){
 		e.preventDefault();
 		acceptJSCaller();
+	});
+	$('#submitPAButton').click(function(e){
+		e.preventDefault();
+		payerAuthCaller();
 	});
 	$('#applePayButton').click(function(e){
 		e.preventDefault();

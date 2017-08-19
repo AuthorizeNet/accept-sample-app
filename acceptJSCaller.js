@@ -86,20 +86,21 @@ function acceptJSCaller()
 {
 	var  secureData  =  {}  ,  authData  =  {}  ,  cardData  =  {};
 	
-        // Extract the card number and expiration date.
+	// Extract the card number and expiration date.
 	cardData.cardNumber  =  document.getElementById('creditCardNumber').value;
+	cardData.cardCode = document.getElementById('cvv').value;
 	cardData.month  =  document.getElementById('expiryDateMM').value;
 	cardData.year  =  document.getElementById('expiryDateYY').value;
-	// Add CVV if necessary
 	secureData.cardData  =  cardData;
 
-        // The Authorize.Net Client Key is used in place of the traditional Transaction Key. The Transaction Key
-        // is a shared secret and must never be exposed. The Client Key is a public key suitable for use where
-        // someone outside the merchant might see it.
-	authData.clientKey  =  '6jZy4G5vmCEat9G3xjtNguj7DLw5NhgS4PBr4KNp7tV2tXa34E3BkdG33dcX4S84';
-	authData.apiLoginID  =  '3e3b5H4YLP';
+	// The Authorize.Net Client Key is used in place of the traditional Transaction Key. The Transaction Key
+	// is a shared secret and must never be exposed. The Client Key is a public key suitable for use where
+	// someone outside the merchant might see it.
+
+	authData.clientKey  =  '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
+	authData.apiLoginID  =  '5KP3u95bQpv';
 	secureData.authData  =  authData;
 	
-        // Pass the card number and expiration date to Accept.js for submission to Authorize.Net.
+    // Pass the card number and expiration date to Accept.js for submission to Authorize.Net.
 	Accept.dispatchData(secureData, 'responseHandler');
 }
