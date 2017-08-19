@@ -1,6 +1,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
  <title>IFrame Communicator</title>
+
+ <!--
+  To securely communicate between our Accept Hosted form and your web page,
+  we need a communicator page which will be hosted on your site alongside
+  your checkout/payment page. You can provide the URL of the communicator
+  page in your token request, which will allow Authorize.Net to embed the
+  communicator page in the payment form, and send JavaScript messaging through
+  your communicator page to a listener script on your main page.
+
+  This page contains a JavaScript that listens for events from the payment
+  form and passes them to an event listener in the main page.
+-->
+
+
  <script type="text/javascript">
 
  function callParentFunction(str) {
