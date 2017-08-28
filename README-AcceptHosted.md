@@ -70,14 +70,14 @@ In this step we will demonstrate how to resize your container iframe based on re
 
 To securely communicate between our Accept Hosted form and your web page, we need a communicator page which will be hosted on your site alongside your checkout/payment page. You can provide the URL of the communicator page in your token request, which will allow Authorize.Net to embed the communicator page in the payment form, and send JavaScript messaging through your communicator page to a listener script on your main page.
 
-For example, in this sample application, see the sample communicator page, [iCommunicator.html](iCommunicator.html). You can use this same communicator page in your application.
+For example, in this sample application, see the sample communicator page, [IFrameCommunicator.html](IFrameCommunicator.html). You can use this same communicator page in your application.
 
 Pass the URL of your communicator page when you request a token (Step 1 above). For example:
   
 ```xml
 		<setting>
 			<settingName>hostedPaymentIFrameCommunicatorUrl</settingName>
-			<settingValue>{"url":"https://www.mystore.com/checkout/iCommunicator.html"}</settingValue>
+			<settingValue>{"url":"https://www.mystore.com/checkout/IFrameCommunicator.html"}</settingValue>
 		</setting>
 ```
   
