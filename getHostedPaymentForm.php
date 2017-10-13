@@ -11,53 +11,12 @@ $xmlStr = <<<XML
             <invoiceNumber>INV-12345</invoiceNumber>
             <description>Product Description</description>
         </order>
-        <lineItems>
-            <lineItem>
-                <itemId>1</itemId>
-                <name>vase</name>
-                <description>Cannes logo </description>
-                <quantity>18</quantity>
-                <unitPrice>45.00</unitPrice>
-            </lineItem>
-        </lineItems>
-        <tax>
-            <amount>4.26</amount>
-            <name>level2 tax name</name>
-            <description>level2 tax</description>
-        </tax>
-        <duty>
-            <amount>8.55</amount>
-            <name>duty name</name>
-            <description>duty description</description>
-        </duty>
-        <shipping>
-            <amount>4.26</amount>
-            <name>level2 tax name</name>
-            <description>level2 tax</description>
-        </shipping>
         <poNumber>456654</poNumber>
         <customer>
             <id>99999456654</id>
             <email>my@email.com</email>
         </customer>
-        <billTo>
-            <firstName>Ellen</firstName>
-            <lastName>Johnson</lastName>
-            <company>Souveniropolis</company>
-            <address>14 Main Street</address>
-            <city>Pecan Springs</city>
-            <state>TX</state>
-            <zip>44628</zip>
-            <country>USA</country>
-            <phoneNumber>1231231234</phoneNumber>
-        </billTo>
         <customerIP>192.168.1.1</customerIP>
-    <userFields>
-          <userField>
-             <name>sessionID</name>
-             <value>ABC123</value>
-          </userField>
-        </userFields>
     </transactionRequest>
     <hostedPaymentSettings>
         <setting>
