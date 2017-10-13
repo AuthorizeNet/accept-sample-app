@@ -105,8 +105,8 @@ function acceptJSCaller()
 	// is a shared secret and must never be exposed. The Client Key is a public key suitable for use where
 	// someone outside the merchant might see it.
 
-	authData.clientKey  =  '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
-	authData.apiLoginID  =  '5KP3u95bQpv';
+	authData.clientKey  =  '6jZy4G5vmCEat9G3xjtNguj7DLw5NhgS4PBr4KNp7tV2tXa34E3BkdG33dcX4S84';
+	authData.apiLoginID  =  '3e3b5H4YLP';
 	secureData.authData  =  authData;
 	
     // Pass the card number and expiration date to Accept.js for submission to Authorize.Net.
