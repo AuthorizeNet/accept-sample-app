@@ -143,6 +143,7 @@
 	<script src="https://sandbox-assets.secure.checkout.visa.com/checkout-widget/resources/js/integration/v1/sdk.js"></script>
 	<script src="https://includestest.ccdc02.com/cardinalcruise/v1/songbird.js"></script>
 	<script src="https://jstest.authorize.net/v1/Accept.js"></script>
+	<script src="https://jstest.authorize.net/v3/acceptUI.js"></script>
 	<script src="acceptJSCaller.js"></script>
 	<script src="applePayCaller.js"></script>
 	<script src="chargeProfile.js"></script>
@@ -673,6 +674,18 @@
 				<div class="row">
 					<div id="acceptJSPayDiv" style="text-align:center">
 						<button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (Accept.js)</button>
+					</div>
+					<div id="acceptUIPayDiv" style="text-align:center">
+						<button class="AcceptUI btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" 
+							type="button" id="acceptUIPayButton"
+							data-billingAddressOptions='{"show":true, "required":true}' 
+							data-apiLoginID="5KP3u95bQpv" 
+							data-clientKey="5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY"
+            						data-acceptUIFormBtnTxt="Subscribe" 
+							data-acceptUIFormHeaderTxt="Payment Information" 
+							data-responseHandler="responseHandler">
+						Pay (Accept UI)
+            					</button>
 					</div>
 					<div id="payerAuthPayDiv" style="text-align:center">
 						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 20px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#payerAuthPayModal">Pay (3D-Secure)</button>
