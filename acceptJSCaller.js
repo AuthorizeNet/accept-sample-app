@@ -42,9 +42,15 @@ function messageFunc(msg)
 
 // Do an AJAX call to submit the transaction data and the payment none to a separate PHP page to do the actual transaction processing.
 function createTransact(dataObj) {
+	
 	// Set Amount for demo purposes if not set by callers form
 	myAmt = document.getElementById('amount').value;
+	if(!myAmt)
+	{
+		myAmt = Math.floor((Math.random() * 100) + 1);
+	}
 	console.log('Amount = '+myAmt);
+	
 	$.ajax({
 		
 		url: "transactionCaller.php",
