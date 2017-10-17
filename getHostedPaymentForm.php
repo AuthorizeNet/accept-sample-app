@@ -12,10 +12,6 @@ $xmlStr = <<<XML
             <description>Product Description</description>
         </order>
         <poNumber>456654</poNumber>
-        <customer>
-            <id>99999456654</id>
-            <email>my@email.com</email>
-        </customer>
         <customerIP>192.168.1.1</customerIP>
     </transactionRequest>
     <hostedPaymentSettings>
