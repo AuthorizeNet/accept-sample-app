@@ -675,7 +675,21 @@
 					<div id="acceptJSPayDiv" style="text-align:center">
 						<button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (Accept.js)</button>
 					</div>
-					
+					<div id="acceptUIPayDiv" style="text-align:center">
+						<button class="AcceptUI btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" 
+							type="button" id="acceptUIPayButton"
+							data-billingAddressOptions='{"show":true, "required":true}' 
+							data-apiLoginID="3e3b5H4YLP" 
+							data-clientKey="6jZy4G5vmCEat9G3xjtNguj7DLw5NhgS4PBr4KNp7tV2tXa34E3BkdG33dcX4S84"
+            						data-acceptUIFormBtnTxt="Subscribe" 
+							data-acceptUIFormHeaderTxt="Payment Information" 
+							data-responseHandler="responseHandler">
+						Pay (Accept UI)
+            					</button>
+					</div>
+					<div id="payerAuthPayDiv" style="text-align:center">
+						<button type="button" id="payerAuthPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#payerAuthPayModal">Pay (3D-Secure)</button>
+					</div>
 				</div>
 			</div>
 		</div>
