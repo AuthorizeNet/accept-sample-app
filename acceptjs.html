@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<!--
+	This file is a standalone HTML page demonstrating usage of the Authorize.net
+	Accept JavaScript library when integrated with your own payment form.
+
+	For complete documentation for the Accept JavaScript library, see
+	https://developer.authorize.net/api/reference/features/acceptjs.html
+-->
+
+<head>
+	<title>Sample form</title>
+</head>
+
+<body>
+
+<script type="text/javascript"
+	src="https://jstest.authorize.net/v1/Accept.js"
+	charset="utf-8">
+</script>
+
+<form id="paymentForm"
+	method="POST"
+	action="https://YourServer/PathToExistingPaymentProcessingScript" >
+	<input type="text" name="cardNumber" id="cardNumber" value="cardNumber"/> <br><br>
+	<input type="text" name="expMonth" id="expMonth" value="expMonth"/> <br><br>
+	<input type="text" name="expYear" id="expYear" value="expYear"/> <br><br>
+	<input type="text" name="cardCode" id="cardCode" value="cardCode"/> <br><br>
+	<input type="hidden" name="dataValue" id="dataValue" />
+	<input type="hidden" name="dataDescriptor" id="dataDescriptor" />
+	<button type="button" onclick="sendPaymentDataToAnet()">Pay</button>
+</form>
+
+<script type="text/javascript">
+
+function sendPaymentDataToAnet() {
+	var authData = {};
+		authData.clientKey = "YOUR PUBLIC CLIENT KEY";
+		authData.apiLoginId = "YOUR API LOGIN";
+
+	var cardData = {};
+		cardData.cardNumber = document.getElementById("cardNumber").value;
+		cardData.month = document.getElementById("expMonth").value;
+		cardData.year = document.getElementById("expYear").value;
+		cardData.cardCode = document.getElementById("cardCode").value;
+
+	var secureData = {};
+		secureData.authData = authData;
+		secureData.cardData = cardData;
+
+	Accept.dispatchData(secureData, responseHandler)
+	
+	function responseHandler(response) {
+		if (response.messages.resultCode === "Error") {
+			for (var i = 0; i < response.messages.message.length; i++) {
+				console.log(response.messages.message[i].code + ":" + response.messages.message[i].text);
+			}
+		}
+		else {
+			paymentFormUpdate(response.opaqueData);
+		}
+	}
+}
+
+function paymentFormUpdate(opaqueData) {
+	document.getElementById("dataDescriptor").value = opaqueData.dataDescriptor;
+	document.getElementById("dataValue").value = opaqueData.dataValue;
+	
+	// If using your own form to collect the sensitive data from the customer,
+	// blank out the fields before submitting them to your server.
+	document.getElementById("cardNumber").value = "";
+	document.getElementById("expMonth").value = "";
+	document.getElementById("expYear").value = "";
+	document.getElementById("cardCode").value = "";
+	
+	document.getElementById("paymentForm").submit();
+}
+</script>
+
+</body>
+</html>
