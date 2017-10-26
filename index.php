@@ -362,7 +362,7 @@
     settings: {
       locale: "en_US",
       countryCode: "US",
-      displayName: "...Corp",
+      displayName: "Accept Sample Site",
       logoUrl: "www.Some_Image_URL.gif",
       websiteUrl: "www....Corp.com",
       customerSupportUrl: "www....Corp.support.com",
