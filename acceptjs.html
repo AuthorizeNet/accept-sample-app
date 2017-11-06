@@ -51,6 +51,7 @@ function sendPaymentDataToAnet() {
 
     // If using banking information instead of card information,
     // build a bankData object instead of a cardData object.
+    //
     // var bankData = {};
     //     bankData.accountNumber = document.getElementById('accountNumber').value;
     //     bankData.routingNumber = document.getElementById('routingNumber').value;
@@ -62,6 +63,7 @@ function sendPaymentDataToAnet() {
         secureData.cardData = cardData;
         // If using banking information instead of card information,
         // send the bankData object instead of the cardData object.
+        //
         // secureData.bankData = bankData;
 
     Accept.dispatchData(secureData, responseHandler);
