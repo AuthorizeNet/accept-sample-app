@@ -38,10 +38,6 @@ $xmlStr = <<<XML
             <settingValue>{"show": false, "required":true}</settingValue>
         </setting>
         <setting>
-            <settingName>hostedPaymentBillingAddressOptions</settingName>
-            <settingValue>{"show": true, "required":true}</settingValue>
-        </setting>
-        <setting>
             <settingName>hostedPaymentSecurityOptions</settingName>
             <settingValue>{"captcha": false}</settingValue>
         </setting>
