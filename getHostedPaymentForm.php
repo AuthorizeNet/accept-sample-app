@@ -34,6 +34,10 @@ $xmlStr = <<<XML
             <settingValue>{"cardCodeRequired": true}</settingValue>
         </setting>
         <setting>
+            <settingName>hostedPaymentBillingAddressOptions</settingName>
+            <settingValue>{"show": true, "required":true}</settingValue>
+        </setting>
+        <setting>
             <settingName>hostedPaymentShippingAddressOptions</settingName>
             <settingValue>{"show": false, "required":false}</settingValue>
         </setting>
@@ -45,7 +49,6 @@ $xmlStr = <<<XML
             <settingName>hostedPaymentStyleOptions</settingName>
             <settingValue>{"bgColor": "green"}</settingValue>
         </setting>
-
         <setting>
             <settingName>hostedPaymentCustomerOptions</settingName>
             <settingValue>{"showEmail": true, "requiredEmail":true}</settingValue>
