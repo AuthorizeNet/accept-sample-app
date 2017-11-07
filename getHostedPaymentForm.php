@@ -35,7 +35,7 @@ $xmlStr = <<<XML
         </setting>
         <setting>
             <settingName>hostedPaymentShippingAddressOptions</settingName>
-            <settingValue>{"show": false, "required":true}</settingValue>
+            <settingValue>{"show": false, "required":false}</settingValue>
         </setting>
         <setting>
             <settingName>hostedPaymentSecurityOptions</settingName>
