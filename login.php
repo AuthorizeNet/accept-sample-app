@@ -55,14 +55,19 @@
                         	<div class="form-top">
                         		<div class="form-top-left">
                         			<h3>Login to the Accept Sample App</h3>
-                            		<p>Enter your Customer ID below</p>
+                            		<p>Enter your Customer ID below:</p>
+                                    <p style="font-size: 11px; line-height: 1.4; display: block;">
+                                    <i>Use a Customer Profile ID that already exists within your account,
+                                    or create a new ID by using the
+                                    <a href="http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile">
+                                    Create a Customer Profile API</a>.</i></p>
                         		</div>
                             </div>
                             <div class="form-bottom">
 			                    <form role="form" action="<?php echo htmlentities($_SERVER['PHP_SELF']); ?>" method="post" class="login-form">
 			                    	<div class="form-group">
 			                    		<label class="sr-only" for="form-username">Customer ID</label>
-			                        	<input type="text" name="form-username" placeholder="Customer ID .." class="form-username form-control" id="form-username">
+			                        	<input type="text" name="form-username" placeholder="Customer ID ..." class="form-username form-control" id="form-username">
 			                        	<input type="checkbox" name="cookieCheck" value=""><label>&nbsp; Remember Me</label><br><span style="color:red"><?php if($_SESSION["cpid_error"]=='true'){ echo "Customer Profile ID not Valid"; } ?></span>
 			                        </div>
 			                        <button type="submit" name="submit" class="btn">Sign in !</button>

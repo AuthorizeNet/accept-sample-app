@@ -20,7 +20,7 @@ The Accept sample application provides examples of how to use the Authorize.Net 
 
 + Browse the application (_index.php_) over HTTPS connection.
 
-+ To "log in", use a customer profile ID that already exists within your account or create a new one by using the [Create a Customer Profile API](http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile).
++ To "log in", use a customer profile ID that already exists within your account or create a new profile ID by using the [Create a Customer Profile API](http://developer.authorize.net/api/reference/index.html#customer-profiles-create-customer-profile).
 
 + In these examples, payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. However, any of the types of display can be chosen to display any type of form.
 
