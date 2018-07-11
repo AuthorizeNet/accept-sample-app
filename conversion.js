@@ -18,8 +18,13 @@ $(function () {
     // Make sure the Conversion namespace is available before we set anything up
     if ('Conversion' in window) {
 
-      // Documentation Step 2 - Optional configuration to enable logging to developer console
-      Conversion.configure({ logging: { level: 'verbose' } });
+      // Call API to register "START" and to issue the unique conversion token
+      
+      // If this token is never received by a payment API, this is abandonment
+      
+      // If this token is received by our payments API, then it will log the conversion, with the time difference. 
+      // EVerything else is an attribute of the payment transaction itself,
+      // e.g. was the authorization successful, was it held for fraud, what was the payment type
 
     } else {
       console.error('Conversion namespace is not available. Please check the script Url.');
