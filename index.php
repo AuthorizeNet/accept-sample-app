@@ -149,6 +149,7 @@
 	<script src="chargeProfile.js"></script>
 	<script src="payerAuthCaller.js"></script>
 	<script src="visaCheckoutTransaction.js"></script>
+	<script src="conversion.js"></script>
 
 <script type="text/javascript">
 
@@ -399,6 +400,17 @@
   	console.log("Ooops!");
   	console.log(JSON.stringify(payment)); }); 
 } 
+	
+function onConversionReady() {
+     C.init({
+     publicClientKey: "7L4TQZKPHLJHK4IDAC2S13kDxvj2ltzjzBO1YUl1bBhD0vNqA",
+     trackingPaymentMethods:[
+        "LegacyCheckout",
+        "ApplePay",
+        "VisaCheckout"]
+     }
+   }
+  );
 </script>
 
 </head>
