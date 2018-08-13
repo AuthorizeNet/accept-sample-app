@@ -26,10 +26,10 @@ The Accept sample application provides examples of how to use the Authorize.Net 
 
 ### Common issues during installation
 1.    **Error**: *Uncaught Error: Class 'SimpleXMLElement' not found in accept-sample-app/getToken.php:24*
-+ **Possible methods to resolve**
-+ Install simplexml package for your OS. Refer: http://stackoverflow.com/questions/35593521/php-7-simplexml
-+ **Related issue**
-+ https://github.com/AuthorizeNet/accept-sample-app/issues/25
++ **Possible methods to resolve** <br>
+        - Install simplexml package for your OS. Refer: http://stackoverflow.com/questions/35593521/php-7-simplexml
++ **Related issue** <br>
+        - https://github.com/AuthorizeNet/accept-sample-app/issues/25
 
 
 ## Included Examples
