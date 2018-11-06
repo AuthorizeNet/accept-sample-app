@@ -24,24 +24,31 @@ The Accept sample application provides examples of how to use the Authorize.Net 
 
 + In these examples, payment forms are shown in the same page and Shipping forms are handled in a separate modal popup. However, any of the types of display can be chosen to display any type of form.
 
-  
+### Common issues during installation
+1.    **Error**: *Uncaught Error: Class 'SimpleXMLElement' not found in accept-sample-app/getToken.php:24*
++ **Possible methods to resolve** <br>
+        - Install simplexml package for your OS. Refer: http://stackoverflow.com/questions/35593521/php-7-simplexml
++ **Related issue** <br>
+        - https://github.com/AuthorizeNet/accept-sample-app/issues/25
+
+
 ## Included Examples
 
 ### Accept Customer
 Accept Customer is the new name for Hosted CIM, part of our Customer Profiles API. See our [developer documentation](http://developer.authorize.net/api/reference/features/customer_profiles.html) for more details.
-  
+
 The sample application shows how to:  
 
 * Incorporate the Manage Customer hosted page into your application ("Profile" tab).
 * Embed the hosted "Add/Edit Payment" page into your application as an iframe ("Payment Methods" tab).  
 * Pop up the hosted "Add/Edit Shipping" page in a light-box mode ("Shipping" tab).  
-  
-  
+
+
 ### Accept.js
 Accept.js is a new integration option which allows you to leverage the full power of the Authorize.Net API while avoiding the PCI compliance burden of credit card information hitting your servers. See our [developer documentation](http://developer.authorize.net/api/reference/features/acceptjs.html) for more details.  
-  
+
 The sample application shows how to:  
-  
+
 * Incorporate the Accept.js library into your existing payment flow ("Pay" tab --> "Pay (Accept.js)" button)  
 
 
@@ -49,11 +56,11 @@ The sample application shows how to:
 Accept Hosted provides a fully hosted payment transaction solution. Authorize.Net takes care of the payment form, the transaction itself, and the receipt generation (optional).  We have a Step-by-Step guide to the sample implementation here: [README-AcceptHosted.md](README-AcceptHosted.md). See our [developer documentation](http://developer.authorize.net/api/reference/features/accept_hosted.html) for more details.
 
 The sample application shows how to:  
-  
+
 *  Request an Accept Hosted form token using the Authorize.Net API (GetHostedPaymentForm).  
 *  Incorporate the Accept Hosted payment form into your existing payment flow ("Pay" tab).  
 *  Display a custom receipt using the transaction response.  
-  
+
 
 ### Apple Pay On The Web
 Authorize.Net supports Apple Pay on the Web in addition to our in-app Apple Pay Support. See our [developer documentation](http://developer.authorize.net/api/reference/features/in-app.html) for more details.   
@@ -67,4 +74,3 @@ In this sample we demonstrate how to:
 * Complete the transaction by passing the Apple Pay payment data in the Authorize.Net `createTransactionRequest` API call.  
 
 Please note that you will need to have a merchant ID set up with Apple as described in their [Apple Pay documentation](https://developer.apple.com/reference/applepayjs/).
-
