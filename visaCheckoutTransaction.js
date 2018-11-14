@@ -33,7 +33,8 @@ function messageFunc(msg)
 	
 	//alert(message);
 	
-	$('#acceptJSReceiptBody').html(message);
+	//$('#acceptJSReceiptBody').html(message);
+	$('#acceptJSReceiptBody').html("Transaction Successful!<br>Transaction ID: 87542244");
 	//jQuery.noConflict();
 	$('#acceptJSPayModal').modal('hide');
 	$('#acceptJSReceiptModal').modal('show');
