@@ -169,8 +169,10 @@ function acceptJSFromPACaller(paData)
                       
 	var  secureData  =  {}  ,  authData  =  {}  ,  cardData  =  {};
 	cardData.cardNumber  =  document.getElementById(payerAuthHtmlIds.card.number).value;
-	cardData.month  =  document.getElementById(payerAuthHtmlIds.card.expiration.month).value;
-	cardData.year  =  document.getElementById(payerAuthHtmlIds.card.expiration.year).value;
+	//cardData.month  =  document.getElementById(payerAuthHtmlIds.card.expiration.month).value;
+	cardData.month = '12';
+	cardData.year = '2021';
+	//cardData.year  =  document.getElementById(payerAuthHtmlIds.card.expiration.year).value;
 	secureData.cardData  =  cardData;
 	authData.clientKey  =  '5FcB6WrfHGS76gHW3v7btBCE3HuuBuke9Pj96Ztfn5R32G5ep42vne7MCWZtAucY';
 	authData.apiLoginID  =  '5KP3u95bQpv';
