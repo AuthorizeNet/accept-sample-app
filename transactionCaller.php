@@ -38,7 +38,7 @@ if($_POST['dataDesc'] === 'COMMON.VCO.ONLINE.PAYMENT')
 
 if(isset($_POST['paIndicator'])){
     $transRequestXml->transactionRequest->addChild('cardholderAuthentication');
-    $transRequestXml->transactionRequest->addChild('authenticationIndicator',$_POST['paIndicator']);
+   // $transRequestXml->transactionRequest->addChild('authenticationIndicator',$_POST['paIndicator']);
     $transRequestXml->transactionRequest->addChild('cardholderAuthenticationValue',$_POST['paValue']);
 }
 
