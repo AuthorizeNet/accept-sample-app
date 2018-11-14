@@ -62,7 +62,7 @@ $(function () {
                       // No action indicates that everything worked, but there is no CCA values to worry about, so we can move on with the transaction
                       console.warn('The transaction was completed with no errors', responseData.Payment.ExtendedData);
                       // CCA Succesful, now complete the transaction with Authorize.Net
-                      acceptJSFromPACaller(data, responseData.Payment.ExtendedData);
+                      acceptJSFromPACaller(responseData.Payment.ExtendedData);
                       break;
                     case "FAILURE":
                       // Failure indicates the authentication attempt failed
