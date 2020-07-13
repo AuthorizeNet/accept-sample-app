@@ -45,9 +45,9 @@ function createVCOTransaction(dataObj) {
 	$.ajax({
 		
 		url: "transactionCaller.php",
-		data: {amount: Math.floor((Math.random() * 100) + 1), 
-			dataDesc: "COMMON.VCO.ONLINE.PAYMENT", 
-			dataValue: dataObj.encPaymentData, 
+		data: {amount: Math.floor((Math.random() * 100) + 1),
+			dataDesc: "COMMON.VCO.ONLINE.PAYMENT",
+			dataValue: dataObj.encPaymentData,
 			dataKey: dataObj.encKey,
 		    callId: dataObj.callid},
 		method: 'POST',

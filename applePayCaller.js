@@ -8,7 +8,7 @@ if (window.ApplePaySession) {
       }else{
       	console.log("Apple Pay is available but not activated yet");
       }
-	}); 
+	});
 }
 else{
 	console.log("Apple Pay not available in this browser");
@@ -63,7 +63,7 @@ function applePayButtonClicked(){
 		var promise = performValidation(event.validationURL);
 		promise.then(function (merchantSession) {
 			session.completeMerchantValidation(merchantSession);
-		}); 
+		});
 	}
 
 	function performValidation(valURL) {

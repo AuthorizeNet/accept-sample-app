@@ -1,7 +1,7 @@
 <?php
 
 // Validation URL is passed in the request
-// Sandbox is https://apple-pay-gateway-cert.apple.com/paymentservices/startSession 
+// Sandbox is https://apple-pay-gateway-cert.apple.com/paymentservices/startSession
 //$validationUrl=$_POST['validationUrl'];
 $validationUrl="https://apple-pay-gateway-cert.apple.com/paymentservices/startSession";
 
@@ -10,7 +10,7 @@ $domainName = getenv("DOMAIN_NAME");
 $merchantId = getenv("MERCHANT_ID");
 
 
-// JSON Payload 
+// JSON Payload
 $validationPayload = '{"merchantIdentifier": "merchant.authorize.net.test.dev15","domainName": "accept-sample.azurewebsites.net","displayName":"ApplePayDemoTestDev15"}';
 
 try{	//setting the curl parameters.
@@ -31,7 +31,7 @@ try{	//setting the curl parameters.
 	curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);
 	curl_setopt($ch, CURLOPT_SSLCERT, './certs/apple-pay-test-cert.pem');
         curl_setopt($ch, CURLOPT_SSLCERTPASSWD, $pemPwd);
-        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );        
+        curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false );
         $content = curl_exec($ch);
         if (FALSE === $content)
 	{

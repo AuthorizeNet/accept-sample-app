@@ -203,12 +203,12 @@
 											onLoad = true;
 										}
 										switch(parentFrame){
-										case "addPayment"   : $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break; 
+										case "addPayment"   : $("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit(); $("#add_payment").hide(); break;
 										case "addShipping"  : $("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit(); $("#add_shipping").hide(); $('#myModal').modal('toggle'); break;
 										case "manage"       : $("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit(); break;
-										case "editPayment"  : $("#payment").show(); $("#addPayDiv").show(); break; 
+										case "editPayment"  : $("#payment").show(); $("#addPayDiv").show(); break;
 										case "editShipping" : $('#myModal').modal('toggle'); $("#shipping").show(); $("#addShipDiv").show(); break;
-										case "payment"		: sessionStorage.removeItem("HPTokenTime"); $('#HostedPayment').attr('src','about:blank'); break; 
+										case "payment"		: sessionStorage.removeItem("HPTokenTime"); $('#HostedPayment').attr('src','about:blank'); break;
 										}
 						 				break;
 
@@ -229,7 +229,7 @@
 			onLoad = true;
 		}
 		if (onLoad) {
-			setTimeout(function(){ 
+			setTimeout(function(){
 				$("#send_token").attr({"action":baseUrl+"manage","target":"load_profile" }).submit();
 				$("#send_token").attr({"action":baseUrl+"addPayment","target":"add_payment"}).submit();
 				$("#send_token").attr({"action":baseUrl+"addShipping","target":"add_shipping"}).submit();
@@ -337,8 +337,8 @@
 		});
 
 		$(window).keydown(function(event) {
-		  if(event.ctrlKey && event.keyCode == 69) { 
-		  	event.preventDefault(); 
+		  if(event.ctrlKey && event.keyCode == 69) {
+		  	event.preventDefault();
 		    logOut();
 		  }
 		});
@@ -387,18 +387,18 @@
   V.on("payment.success", function(payment) {
   	console.log("It worked - we will now make the payment with this secure Visa Checkout Blob");
   	console.log(JSON.stringify(payment));
-  	createVCOTransaction(payment); }); 
+  	createVCOTransaction(payment); });
 
   V.on("payment.cancel", function(payment) {
-  	alert(JSON.stringify(payment)); 
+  	alert(JSON.stringify(payment));
   	console.log("Someone cancelled!");
-  	console.log(JSON.stringify(payment));}); 
-  
+  	console.log(JSON.stringify(payment));});
+
   V.on("payment.error", function(payment, error) {
-  	alert(JSON.stringify(error)); 
+  	alert(JSON.stringify(error));
   	console.log("Ooops!");
-  	console.log(JSON.stringify(payment)); }); 
-} 
+  	console.log(JSON.stringify(payment)); });
+}
 </script>
 
 </head>
@@ -676,13 +676,13 @@
 						<button type="button" id="acceptJSPayButton" class="btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" data-toggle="modal" data-target="#acceptJSPayModal">Pay (Accept.js)</button>
 					</div>
 					<div id="acceptUIPayDiv" style="text-align:center">
-						<button class="AcceptUI btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" 
+						<button class="AcceptUI btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px"
 							type="button" id="acceptUIPayButton"
-							data-billingAddressOptions='{"show":true, "required":true}' 
-							data-apiLoginID="3e3b5H4YLP" 
+							data-billingAddressOptions='{"show":true, "required":true}'
+							data-apiLoginID="3e3b5H4YLP"
 							data-clientKey="6jZy4G5vmCEat9G3xjtNguj7DLw5NhgS4PBr4KNp7tV2tXa34E3BkdG33dcX4S84"
-            						data-acceptUIFormBtnTxt="Subscribe" 
-							data-acceptUIFormHeaderTxt="Payment Information" 
+            						data-acceptUIFormBtnTxt="Subscribe"
+							data-acceptUIFormHeaderTxt="Payment Information"
 							data-responseHandler="responseHandler">
 						Pay (Accept UI)
             					</button>
@@ -723,7 +723,7 @@
 		      </div>
 		      <div class="modal-body">
 		          	<iframe id="add_shipping" class="embed-responsive-item" name="add_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true" ></iframe>
-					<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe> 
+					<iframe id="edit_shipping" class="embed-responsive-item" name="edit_shipping" width="100%"  frameborder="0" scrolling="no" hidden="true"></iframe>
 		      </div>
 		    </div>
 		  </div>
@@ -742,7 +742,7 @@
 		        <div class="modal-footer">
 		          <button id="closeAcceptConfirmationFooterBtn" type="button" class="btn btn-success" data-dismiss="modal">Close</button>
 		        </div>
-		      </div> 
+		      </div>
     		</div>
     	</div>
 

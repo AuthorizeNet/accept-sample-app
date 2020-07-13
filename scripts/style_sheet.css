@@ -75,7 +75,7 @@ img { max-width: 100%; }
     color: #fff;
     -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
 }
-.btn-link-2:hover, .btn-link-2:focus, 
+.btn-link-2:hover, .btn-link-2:focus,
 .btn-link-2:active, .btn-link-2:active:focus { outline: 0; opacity: 0.6; background: rgba(0, 0, 0, 0.3); color: #fff; }
 
 
@@ -100,7 +100,7 @@ img { max-width: 100%; }
 .top-content .description a {
 	color: #fff;
 }
-.top-content .description a:hover, 
+.top-content .description a:hover,
 .top-content .description a:focus { border-bottom: 1px dotted #fff; }
 
 .form-box {
