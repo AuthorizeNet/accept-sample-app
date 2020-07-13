@@ -1,7 +1,7 @@
 <?php
     session_start();
     $newURL="index.php";
-	if(isset($_POST['submit'])) 
+	if(isset($_POST['submit']))
 	{
 		if(isset($_POST['cookieCheck'])){
 			setcookie("cpid",$_POST['form-username'], time() + (86400*7), "/");
@@ -73,7 +73,7 @@
                     </div>
                 </div>
             </div>
-            
+
         </div>
 
     </body>

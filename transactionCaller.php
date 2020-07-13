@@ -32,7 +32,7 @@ $transRequestXml->transactionRequest->payment->opaqueData->dataValue=$_POST['dat
 
 if($_POST['dataDesc'] === 'COMMON.VCO.ONLINE.PAYMENT')
 {
-    $transRequestXml->transactionRequest->addChild('callId',$_POST['callId']);  
+    $transRequestXml->transactionRequest->addChild('callId',$_POST['callId']);
 }
 
 

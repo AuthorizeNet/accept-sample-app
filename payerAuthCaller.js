@@ -1,6 +1,6 @@
 /**
  * HTML Id's for payerAuthCaller() to pick values off the HTML page to send on the CCA start request
- * 
+ *
  * NOTE: The index.html file contains duplicate ID's for the card fields. It looks like the acceptJSModal html was duplicated and the field ID's for the HTML were never update.
  * We may need to adjust the Ids of the HTML for this to work properly
  */
@@ -18,7 +18,7 @@ var payerAuthHtmlIds = {
 
 /**
  * Initalize Songbird.js
- * 
+ *
  * When the page loads we should setup Songbird to that by the time the user tries to click the submit button we're already setup
  */
 $(function () {
@@ -105,7 +105,7 @@ $(function () {
 
 /**
  * Handler to trigger CCA
- * 
+ *
  * Here we collect any data we need to complete the CCA request to Cardinal and start authentication. We should not call 'Cardinal.start' if we do not have
  * all the required fields
  */
@@ -127,7 +127,7 @@ function payerAuthCaller() {
         if(cardExpYear.length === 4){
           cardExpYear = cardExpYear.substring(2,4);
         }
-        cardExpYear = parseInt(cardExpYear, 10);        
+        cardExpYear = parseInt(cardExpYear, 10);
       }
 
       // Assemble the order object from the input fields on the page.
@@ -159,14 +159,14 @@ function payerAuthCaller() {
 
 /**
  * Accept.JS Caller
- * 
+ *
  * Here we pass the credit card fields off to Authorize.Net, using Accpet.js,
  * so they never hit our server
  */
 function acceptJSFromPACaller(paData)
 {
 	console.warn('Entered acceptJSCaller');
-                      
+
 	var  secureData  =  {}  ,  authData  =  {}  ,  cardData  =  {};
 	cardData.cardNumber  =  document.getElementById(payerAuthHtmlIds.card.number).value;
 	//cardData.month  =  document.getElementById(payerAuthHtmlIds.card.expiration.month).value;
@@ -262,7 +262,7 @@ function acceptJSFromPACaller(paData)
 }
 
 /**
- * Simple helper for field verification before we start CCA. 
+ * Simple helper for field verification before we start CCA.
  * @param {string} fieldValue - The value to check for validity
  * @returns {boolean} is the field value valid to start CCA
  */

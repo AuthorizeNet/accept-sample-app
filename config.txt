@@ -1,6 +1,6 @@
 
 ; ** Make sure to add your API credentials as secure environment variables **
-; APPSETTING_api_login_id   
+; APPSETTING_api_login_id
 ; APPSETTING_transaction_key
 
 ; ** Enter The customer Profile To load details **

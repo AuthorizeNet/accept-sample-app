@@ -1,7 +1,7 @@
 
 /**
  * HTML Id's for conversion to pick values off the HTML page to send to the conversion tracker API
- * 
+ *
  */
 var conversionHtmlIds = {
   amount: 'amountPA',
@@ -10,7 +10,7 @@ var conversionHtmlIds = {
 
 /**
  * Initalize conversion.js
- * 
+ *
  * When the page loads we should
  */
 $(function () {

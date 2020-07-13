@@ -12,7 +12,7 @@ try{
 
 	if(isset($cardinalResponseJWT)) {
 		$decodedJwt = (array) JWT::decode($cardinalResponseJWT, getenv("CARDINAL_API_KEY"), true);
-		$jsonResponse = $decodedJwt['Payload']; 
+		$jsonResponse = $decodedJwt['Payload'];
 	} else {
 		$jsonResponse['ErrorDescription'] = 'Unable to locate the responseJwt in the POST Data.';
 	}
