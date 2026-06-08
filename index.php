@@ -1,5 +1,18 @@
 <?php
 	session_start();
+	
+	// Security: Verify user is authenticated via server-side session
+	if(!isset($_SESSION['authenticated_cpid'])){
+		// No valid session - redirect to login
+		header('Location: login.php');
+		exit;
+	}
+	
+	// Security: Generate CSRF token for form submissions
+	if(!isset($_SESSION['csrf_token'])){
+		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+	}
+	
 	include 'getToken.php';
 	include 'generateCardinalJWT.php';
 	if ($response->messages->resultCode != "Ok") {
@@ -406,6 +419,7 @@
 <body style=" background: url('scripts/background.png'); padding-top: 50px;">
 	
 	<input type='hidden' id='cardinalRequestJwt' value='<?php echo $cardinalRequestJwt; ?>'>
+	<input type='hidden' id='csrfToken' value='<?php echo $_SESSION['csrf_token']; ?>'>
 	
 	<div class="container-fluid" style="width: 100%; margin: 0; padding:0">
 		
@@ -629,11 +643,11 @@
 				<div class="col-sm-6 col-md-3 embed-responsive-item">
 					<div class="thumbnail">
 						<div class="caption">
-							<h4><?php echo isset($item->payment->creditCard) ? "Card &nbsp;&nbsp;: &nbsp;".$item->payment->creditCard->cardNumber : "Account : &nbsp;".$item->payment->bankAccount->accountNumber.", ".$item->payment->bankAccount->bankName ?></h4>
-							<h4>Name :&nbsp; <?php echo isset($item->payment->creditCard) ? $item->billTo->firstName." ". $item->billTo->lastName : $item->payment->bankAccount->nameOnAccount ?></h4>
-							<h5>Address : <?php echo $item->billTo->address ?> </h5>
-							<h5>City : <?php echo $item->billTo->city ?></h5>
-							<p align="right"><button class="btn btn-primary editPay" role="button" value="<?php echo $item->customerPaymentProfileId ?>" >Edit Details</button></p>
+						<h4><?php echo isset($item->payment->creditCard) ? "Card &nbsp;&nbsp;: &nbsp;".htmlspecialchars($item->payment->creditCard->cardNumber, ENT_QUOTES, 'UTF-8') : "Account : &nbsp;".htmlspecialchars($item->payment->bankAccount->accountNumber, ENT_QUOTES, 'UTF-8').", ".htmlspecialchars($item->payment->bankAccount->bankName, ENT_QUOTES, 'UTF-8') ?></h4>
+						<h4>Name :&nbsp; <?php echo isset($item->payment->creditCard) ? htmlspecialchars($item->billTo->firstName, ENT_QUOTES, 'UTF-8')." ".htmlspecialchars($item->billTo->lastName, ENT_QUOTES, 'UTF-8') : htmlspecialchars($item->payment->bankAccount->nameOnAccount, ENT_QUOTES, 'UTF-8') ?></h4>
+						<h5>Address : <?php echo htmlspecialchars($item->billTo->address, ENT_QUOTES, 'UTF-8') ?> </h5>
+						<h5>City : <?php echo htmlspecialchars($item->billTo->city, ENT_QUOTES, 'UTF-8') ?></h5>
+						<p align="right"><button class="btn btn-primary editPay" role="button" value="<?php echo htmlspecialchars($item->customerPaymentProfileId, ENT_QUOTES, 'UTF-8') ?>" >Edit Details</button></p>
 						</div>
 					</div>
 				</div>
@@ -653,11 +667,11 @@
 						<div class="col-sm-6 col-md-3 embed-responsive-item">
 							<div class="thumbnail">
 								<div class="caption">
-									<h4>Name &nbsp;  &nbsp;: &nbsp;<?php echo $item->firstName ?> <?php echo $item->lastName ?></h4>
-									<h4>Address : &nbsp;<?php echo $item->address ?> </h4>
-									<h5>City &nbsp;: &nbsp;<?php echo $item->city.", ".$item->state ?></h5>
-									<h5>Zip  &nbsp;: <?php echo $item->zip ?></h5>
-									<p align="right"><button class="btn btn-primary editShip" role="button" value="<?php echo $item->customerAddressId ?>" data-toggle="modal" data-target="#myModal" >Edit Details</button></p>
+								<h4>Name &nbsp;  &nbsp;: &nbsp;<?php echo htmlspecialchars($item->firstName, ENT_QUOTES, 'UTF-8') ?> <?php echo htmlspecialchars($item->lastName, ENT_QUOTES, 'UTF-8') ?></h4>
+								<h4>Address : &nbsp;<?php echo htmlspecialchars($item->address, ENT_QUOTES, 'UTF-8') ?> </h4>
+								<h5>City &nbsp;: &nbsp;<?php echo htmlspecialchars($item->city, ENT_QUOTES, 'UTF-8').", ".htmlspecialchars($item->state, ENT_QUOTES, 'UTF-8') ?></h5>
+								<h5>Zip  &nbsp;: <?php echo htmlspecialchars($item->zip, ENT_QUOTES, 'UTF-8') ?></h5>
+								<p align="right"><button class="btn btn-primary editShip" role="button" value="<?php echo htmlspecialchars($item->customerAddressId, ENT_QUOTES, 'UTF-8') ?>" data-toggle="modal" data-target="#myModal" >Edit Details</button></p>
 								</div>
 							</div>
 						</div>
@@ -679,8 +693,8 @@
 						<button class="AcceptUI btn btn-primary btn-lg col-md-3 col-sm-offset-1 col-sm-4 col-xs-offset-2 col-xs-8" style="font-weight: bolder; font-size: 24px; margin-top: 10px; margin-bottom: 10px" 
 							type="button" id="acceptUIPayButton"
 							data-billingAddressOptions='{"show":true, "required":true}' 
-							data-apiLoginID="3e3b5H4YLP" 
-							data-clientKey="6jZy4G5vmCEat9G3xjtNguj7DLw5NhgS4PBr4KNp7tV2tXa34E3BkdG33dcX4S84"
+							data-apiLoginID="[YOUR_API_LOGIN_ID]"
+							data-clientKey="[YOUR_PUBLIC_CLIENT_KEY]"
             						data-acceptUIFormBtnTxt="Subscribe" 
 							data-acceptUIFormHeaderTxt="Payment Information" 
 							data-responseHandler="responseHandler">

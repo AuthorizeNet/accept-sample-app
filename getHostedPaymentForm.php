@@ -79,11 +79,10 @@ try {   //setting the curl parameters.
     curl_setopt($ch, CURLOPT_POSTFIELDS, $xml->asXML());
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 300);
-    // The following two curl SSL options are set to "false" for ease of development/debug purposes only.
-    // Any code used in production should either remove these lines or set them to the appropriate
-    // values to properly use secure connections for PCI-DSS compliance.
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);    //for production, set value to true or 1
-    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);    //for production, set value to 2
+    // SSL certificate verification enabled for secure connections and PCI-DSS compliance
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);    //verify SSL certificate
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);    //verify certificate matches hostname
+    curl_setopt($ch, CURLOPT_SSLVERSION, CURL_SSLVERSION_TLSv1_2);    //enforce TLS 1.2 minimum
     curl_setopt($ch, CURLOPT_DNS_USE_GLOBAL_CACHE, false);
     //curl_setopt($ch, CURLOPT_PROXY, 'userproxy.visa.com:80');
     $content = curl_exec($ch);

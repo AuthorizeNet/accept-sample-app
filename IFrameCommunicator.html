@@ -1,8 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
- <title>IFrame Communicator</title>
+  <head>
+    <title>IFrame Communicator</title>
 
- <!--
+    <!--
   To securely communicate between our Accept Hosted form and your web page,
   we need a communicator page which will be hosted on your site alongside
   your checkout/payment page. You can provide the URL of the communicator
@@ -14,36 +14,52 @@
   form and passes them to an event listener in the main page.
 -->
 
+    <script type="text/javascript">
+      function callParentFunction(str) {
+        if (
+          str &&
+          str.length > 0 &&
+          window.parent &&
+          window.parent.parent &&
+          window.parent.parent.CommunicationHandler &&
+          window.parent.parent.CommunicationHandler.onReceiveCommunication
+        ) {
+          var referrer = document.referrer;
+          window.parent.parent.CommunicationHandler.onReceiveCommunication({
+            qstr: str,
+            parent: referrer,
+          });
+        }
+      }
 
- <script type="text/javascript">
+      function receiveMessage(event) {
+        // SAMPLE ONLY:
+        // Only accept messages from Authorize.Net's hosted payment form.
+        // In production, replace 'https://test.authorize.net' with
+        // 'https://accept.authorize.net' (or allow both if you support
+        // sandbox + production in the same codebase).
+        // This is the primary defense recommended by the postMessage security
+        // model and by Authorize.Net's Accept Hosted integration guide.
+        if (!event || !event.data) return;
+        if (
+          event.origin !== "https://test.authorize.net" &&
+          event.origin !== "https://accept.authorize.net"
+        ) {
+          return;
+        }
+        callParentFunction(event.data);
+      }
 
- function callParentFunction(str) {
-   if (str && str.length > 0 && window.parent && window.parent.parent 
-     && window.parent.parent.CommunicationHandler && window.parent.parent.CommunicationHandler.onReceiveCommunication)
-   {
-      var referrer = document.referrer;
-      window.parent.parent.CommunicationHandler.onReceiveCommunication({qstr : str , parent : referrer});
-   }
- }
- 
- function receiveMessage(event) {
-   if (event && event.data) {
-     callParentFunction(event.data);
-   }
- }
- 
- if (window.addEventListener) {
-   window.addEventListener("message", receiveMessage, false);
- } else if (window.attachEvent) {
-   window.attachEvent("onmessage", receiveMessage);
- }
- 
- if (window.location.hash && window.location.hash.length > 1) {
-   callParentFunction(window.location.hash.substring(1));
- }
+      if (window.addEventListener) {
+        window.addEventListener("message", receiveMessage, false);
+      } else if (window.attachEvent) {
+        window.attachEvent("onmessage", receiveMessage);
+      }
 
- </script>
- </head>
- <body>
- </body>
- </html>
+      if (window.location.hash && window.location.hash.length > 1) {
+        callParentFunction(window.location.hash.substring(1));
+      }
+    </script>
+  </head>
+  <body></body>
+</html>

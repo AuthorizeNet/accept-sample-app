@@ -1,20 +1,52 @@
 <?php
     session_start();
     $newURL="index.php";
+    
+    // Handle form submission
 	if(isset($_POST['submit'])) 
 	{
+		// SAMPLE ONLY:
+		// This "login" only binds an Authorize.Net Customer Profile ID into
+		// the session for the rest of the demo flow. It is NOT authentication.
+		// In a production application, replace this entire form with proper
+		// credentialed auth (password, SSO, OAuth, etc.). The pattern below
+		// shows the minimum input-validation shape (filter_input + format
+		// check) so the value stored in $_SESSION['authenticated_cpid'] is
+		// always a well-formed CPID.
+		$customerId = filter_input(INPUT_POST, 'form-username',
+			FILTER_VALIDATE_REGEXP, ['options' => ['regexp' => '/^\d{1,13}$/']]);
+		if (!$customerId) {
+			$_SESSION["cpid_error"] = 'true';
+			header('Location: login.php');
+			exit;
+		}
+
+		// Security: Regenerate session ID after authentication to prevent session fixation attacks
+		session_regenerate_id(true);
+
+		// Store the validated customer ID in server-side session
+		$_SESSION['authenticated_cpid'] = $customerId;
+
 		if(isset($_POST['cookieCheck'])){
-			setcookie("cpid",$_POST['form-username'], time() + (86400*7), "/");
-			header('Location: '.$newURL);
+			setcookie("cpid", $customerId, time() + (86400*7), "/");
 		}
 		else{
-			setcookie("temp_cpid",$_POST['form-username'], 0, "/");
-			header('Location: '.$newURL);
+			setcookie("temp_cpid", $customerId, 0, "/");
 		}
+		
+		header('Location: '.$newURL);
+		exit;
 	}
 
-	if(isset($_COOKIE['cpid'])){
+	// Check if user is authenticated via server-side session
+	if(isset($_SESSION['authenticated_cpid'])){
 		header('Location: '.$newURL);
+		exit;
+	}
+	
+	if(isset($_COOKIE['cpid']) && !isset($_SESSION['authenticated_cpid'])){
+		setcookie("cpid", "", time() - 3600, "/");
+		setcookie("temp_cpid", "", time() - 3600, "/");
 	}
 ?>
 <!DOCTYPE html>

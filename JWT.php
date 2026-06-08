@@ -46,7 +46,11 @@ class JWT
 			if (empty($header->alg)) {
 				throw new DomainException('Empty algorithm');
 			}
-			if ($sig != JWT::sign("$headb64.$bodyb64", $key, $header->alg)) {
+			// SAMPLE ONLY:
+			// Signature comparison MUST use hash_equals() for constant-time,
+			// type-safe comparison. Using == or != is vulnerable to PHP type
+			// juggling (CWE-697) and timing attacks (CWE-208).
+			if (!hash_equals(JWT::sign("$headb64.$bodyb64", $key, $header->alg), $sig)) {
 				throw new UnexpectedValueException('Signature verification failed');
 			}
 		}
